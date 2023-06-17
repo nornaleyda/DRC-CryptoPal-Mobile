@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projectbesquare/views/homepage.dart';
+import 'package:projectbesquare/views/home.dart';
 import 'package:projectbesquare/views/market.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
@@ -28,7 +28,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
         Navigator.pushReplacement(
           context,
           PageRouteBuilder(
-              pageBuilder: (context, anim1, anim2) => const MarketTrade(),
+              pageBuilder: (context, anim1, anim2) => const MarketPage(),
               transitionDuration: Duration.zero),
         );
       //   break;
@@ -54,12 +54,12 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       type: BottomNavigationBarType.fixed,
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Center(
-            child: Icon(Icons.home,
+            child: Icon(Icons.house,
                 size: widget.index == 0 ? 30 : 25,
                 color: widget.index == 0
                     ? const Color.fromARGB(255, 102, 42, 180)
@@ -68,28 +68,28 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
           label: widget.index == 0 ? 'Home' : '',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.paid,
+          icon: Icon(Icons.currency_exchange,
               size: widget.index == 1 ? 30 : 25,
               color: widget.index == 1
                   ? const Color.fromARGB(255, 102, 42, 180)
                   : Colors.grey),
-          label: widget.index == 1 ? 'Bets' : ' ',
+          label: widget.index == 1 ? 'Market' : ' ',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.emoji_events,
+          icon: Icon(Icons.newspaper,
               size: widget.index == 2 ? 30 : 25,
               color: widget.index == 2
                   ? const Color.fromARGB(255, 102, 42, 180)
                   : Colors.grey),
-          label: widget.index == 2 ? 'Standings' : ' ',
+          label: widget.index == 2 ? 'News' : ' ',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.analytics,
+          icon: Icon(Icons.star,
               size: widget.index == 3 ? 30 : 25,
               color: widget.index == 3
                   ? const Color.fromARGB(255, 102, 42, 180)
                   : Colors.grey),
-          label: widget.index == 3 ? 'Leaderboard' : ' ',
+          label: widget.index == 3 ? 'Test' : ' ',
         ),
       ],
       currentIndex: widget.index,

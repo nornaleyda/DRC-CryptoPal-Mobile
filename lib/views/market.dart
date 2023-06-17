@@ -1,56 +1,63 @@
 import 'package:flutter/material.dart';
-import '../widget/bottombar.dart';
+import '../api/market_api.dart';
+import '../widget/bottom_bar.dart';
+import '../widget/market_card.dart';
 
-class MarketTrade extends StatelessWidget {
-  const MarketTrade({Key? key}) : super(key: key);
+class MarketPage extends StatefulWidget {
+  const MarketPage({Key? key}) : super(key: key);
+
+  @override
+  State<MarketPage> createState() => _MarketPageState();
+}
+
+class _MarketPageState extends State<MarketPage> {
+  List<dynamic> crypto = [];
+  final ApiManager apiManager = ApiManager();
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCrypto();
+  }
 
   @override
   Widget build(BuildContext context) {
     int selectedIndex = 1;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Homepage'),
+        title: const Text('Market'),
         centerTitle: true,
       ),
-      body: ListView(
-        scrollDirection: Axis.vertical,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: Container(
-              height: 100,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(28),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(4, 4),
-                      blurRadius: 10,
-                      spreadRadius: 1,
-                    ),
-                    BoxShadow(
-                      color: Colors.white,
-                      offset: Offset(-4, -4),
-                      blurRadius: 10,
-                      spreadRadius: 1,
-                    )
-                  ]),
-              child: Row(
-                children: [
-                  SizedBox(
-                    height: 68,
-                    width: 68,
-                    child: Image.network(
-                        'https://resources.cryptocompare.com/asset-management/1/1659708726266.png'),
-                  )
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
       bottomNavigationBar: MyBottomNavigationBar(index: selectedIndex),
+      body: ListView.builder(
+        itemCount: crypto.length,
+        itemBuilder: (context, index) {
+          final currency = crypto[index];
+          final name = currency['CoinInfo']['FullName'];
+          final symbol = currency['CoinInfo']['Name'];
+          final price = currency['RAW']['USD']['PRICE'];
+          final change = currency['RAW']['USD']['CHANGE24HOUR'];
+          final changepercent = currency['RAW']['USD']['CHANGEPCT24HOUR'];
+
+          return MarketCard(
+            name: name,
+            symbol: symbol,
+            price: price,
+            change: change,
+            changepercent: changepercent,
+          );
+        },
+      ),
     );
+  }
+
+  void fetchCrypto() async {
+    print('fetchCrypto called');
+    final response = await apiManager.getCryptoData();
+    setState(() {
+      crypto = response['Data'];
+    });
+    print('fetchCrypto completed');
   }
 }
