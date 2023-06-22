@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import '../views/account.dart';
+import 'package:projectbesquare/views/news.dart';
+import 'package:projectbesquare/views/watchlist.dart';
 import '../views/home.dart';
 import '../views/market.dart';
 
@@ -27,7 +28,7 @@ class BottomNavigationBarCubit extends Cubit<int> {
         Navigator.pushReplacement(
           context,
           PageRouteBuilder(
-            pageBuilder: (context, anim1, anim2) => const UserAccount(),
+            pageBuilder: (context, anim1, anim2) => const CryptoNews(),
             transitionDuration: Duration.zero,
           ),
         );
@@ -45,7 +46,7 @@ class BottomNavigationBarCubit extends Cubit<int> {
         Navigator.pushReplacement(
           context,
           PageRouteBuilder(
-            pageBuilder: (context, anim1, anim2) => const UserAccount(),
+            pageBuilder: (context, anim1, anim2) => const WatchList(),
             transitionDuration: Duration.zero,
           ),
         );

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../api/market_api.dart';
-import '../widget/bottom_bar.dart';
+import '../body/market_body.dart';
+import '../cubit/bottom_navigation_cubit.dart.dart';
+import '../model/market_model.dart';
+import '../widget/bottom_navigation.dart';
 import '../widget/market_card.dart';
 
 class MarketPage extends StatefulWidget {
@@ -11,7 +15,7 @@ class MarketPage extends StatefulWidget {
 }
 
 class _MarketPageState extends State<MarketPage> {
-  List<dynamic> crypto = [];
+  List<CryptoItemModel> crypto = [];
   final ApiManager apiManager = ApiManager();
 
   @override
@@ -22,42 +26,51 @@ class _MarketPageState extends State<MarketPage> {
 
   @override
   Widget build(BuildContext context) {
-    int selectedIndex = 1;
+    return BlocProvider<BottomNavigationBarCubit>(
+        create: (context) => BottomNavigationBarCubit(2),
+        child: Scaffold(
+          appBar: AppBar(title: const Text('Market'), centerTitle: true),
+          body: ListView.builder(
+            itemCount: crypto.length,
+            itemBuilder: (context, index) {
+              final currency = crypto[index];
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Market'),
-        centerTitle: true,
-      ),
-      bottomNavigationBar: MyBottomNavigationBar(index: selectedIndex),
-      body: ListView.builder(
-        itemCount: crypto.length,
-        itemBuilder: (context, index) {
-          final currency = crypto[index];
-          final name = currency['CoinInfo']['FullName'];
-          final symbol = currency['CoinInfo']['Name'];
-          final price = currency['RAW']['USD']['PRICE'];
-          final change = currency['RAW']['USD']['CHANGE24HOUR'];
-          final changepercent = currency['RAW']['USD']['CHANGEPCT24HOUR'];
-
-          return MarketCard(
-            name: name,
-            symbol: symbol,
-            price: price,
-            change: change,
-            changepercent: changepercent,
-          );
-        },
-      ),
-    );
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CryptoDescr(
+                        currency: currency,
+                      ),
+                    ),
+                  );
+                },
+                child: MarketCard(
+                  name: currency.name,
+                  symbol: currency.symbol,
+                  price: currency.price,
+                  change: currency.change,
+                  percent: currency.percent,
+                  imageUrl: currency.imageUrl,
+                ),
+              );
+            },
+          ),
+          bottomNavigationBar: const BottomNavigation(),
+        ));
   }
 
-  void fetchCrypto() async {
+  Future<void> fetchCrypto() async {
     print('fetchCrypto called');
     final response = await apiManager.getCryptoData();
+
     setState(() {
-      crypto = response['Data'];
+      crypto = (response['Data'] as List<dynamic>)
+          .map((json) => CryptoItemModel.fromJson(json))
+          .toList();
     });
+
     print('fetchCrypto completed');
   }
 }

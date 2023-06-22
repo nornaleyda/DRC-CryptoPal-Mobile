@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 
 class MarketCard extends StatelessWidget {
-  const MarketCard({
-    super.key,
-    required this.name,
-    required this.symbol,
-    required this.price,
-    required this.change,
-    required this.changepercent,
-  });
+  const MarketCard(
+      {super.key,
+      required this.name,
+      required this.symbol,
+      required this.price,
+      required this.change,
+      required this.percent,
+      required this.imageUrl});
 
-  final String name;
-  final String symbol;
-  final num price;
-  final num change;
-  final num changepercent;
+  final String? name;
+  final String? symbol;
+  final num? price;
+  final num? change;
+  final num? percent;
+  final String? imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -71,8 +72,8 @@ class MarketCard extends StatelessWidget {
                 width: 68,
                 child: Padding(
                   padding: const EdgeInsets.all(18.0),
-                  child: Image.network(
-                      'https://resources.cryptocompare.com/asset-management/2/1659946678476.png'),
+                  child:
+                      Image.network('https://www.cryptocompare.com$imageUrl'),
                 ),
               ),
             ),
@@ -82,7 +83,7 @@ class MarketCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    name,
+                    name!,
                     style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 20,
@@ -90,7 +91,7 @@ class MarketCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    symbol,
+                    symbol!,
                     style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 18,
@@ -106,7 +107,7 @@ class MarketCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    price.toDouble().toStringAsFixed(2),
+                    price!.toDouble().toStringAsFixed(2),
                     style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 18,
@@ -114,20 +115,20 @@ class MarketCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    change.toDouble() < 0
-                        ? change.toDouble().toStringAsFixed(2)
-                        : '+${change.toDouble().toStringAsFixed(2)}',
-                    style: const TextStyle(
-                      color: Colors.green,
+                    change!.toDouble() < 0
+                        ? change!.toDouble().toStringAsFixed(2)
+                        : '+${change!.toDouble().toStringAsFixed(2)}',
+                    style: TextStyle(
+                      color: change!.toDouble() > 0 ? Colors.green : Colors.red,
                       fontSize: 18,
                     ),
                   ),
                   Text(
-                    changepercent.toDouble() < 0
-                        ? '${changepercent.toDouble().toStringAsFixed(2)}%'
-                        : '+${changepercent.toDouble().toStringAsFixed(2)}%',
-                    style: const TextStyle(
-                      color: Colors.green,
+                    percent!.toDouble() < 0
+                        ? '${percent!.toDouble().toStringAsFixed(2)}%'
+                        : '+${percent!.toDouble().toStringAsFixed(2)}%',
+                    style: TextStyle(
+                      color: percent!.toDouble() > 0 ? Colors.green : Colors.red,
                       fontSize: 18,
                     ),
                   ),
