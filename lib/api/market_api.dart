@@ -18,3 +18,21 @@ class ApiManager {
     }
   }
 }
+
+class ApiNews {
+  Future<Map<String, dynamic>> getNewsData() async {
+    const url = 'https://min-api.cryptocompare.com/data/v2/news/?lang=EN';
+    final uri = Uri.parse(url);
+    final response = await http.get(uri);
+
+    if (response.statusCode == 200) {
+      final body = response.body;
+      final decodedJson = jsonDecode(body);
+      return decodedJson;
+    } else {
+      throw Exception(
+          'Failed to fetch news data. Status code: ${response.statusCode}');
+    }
+  }
+}
+

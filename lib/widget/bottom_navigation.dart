@@ -47,7 +47,7 @@ class BottomNavigation extends StatelessWidget {
               BottomNavigationBarItem(
                 icon: Icon(Icons.star,
                     size: 25, color: index == 3 ? Colors.purple : Colors.grey),
-                label: 'Account',
+                label: 'Watchlist',
               ),
             ],
             currentIndex: index,
