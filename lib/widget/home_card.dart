@@ -1,53 +1,101 @@
 import 'package:flutter/material.dart';
 
 class HomeCard extends StatelessWidget {
-  const HomeCard({
-    super.key,
-    required this.name,
-  });
+  const HomeCard(
+      {super.key,
+      required this.name,
+      required this.symbol,
+      required this.imageUrl,
+      required this.price,
+      required this.change});
 
-  final String name;
+  final String? name;
+  final String? symbol;
+  final String? imageUrl;
+  final num? price;
+  final num? change;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          width: MediaQuery.of(context).size.width * 0.9,
-          height: 100,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.grey,
-                offset: Offset(4, 4),
-                blurRadius: 10,
-                spreadRadius: 1,
-              ),
-              BoxShadow(
-                color: Colors.white,
-                offset: Offset(-4, -4),
-                blurRadius: 10,
-                spreadRadius: 1,
-              )
-            ],
-          ),
-          child: Center(
-            child: Text(
-              name,
-              style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold),
+    return Padding(
+      padding: const EdgeInsets.all(0.0),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Colors.black,
+                      width: 1.0,
+                    ),
+                  ),
+                  child: Image.network(
+                    'https://www.cryptocompare.com$imageUrl',
+                    width: 50,
+                    height: 50,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ],
             ),
-          ),
+            const SizedBox(width: 20.0),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name!,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                    ),
+                  ),
+                  Text(
+                    symbol!,
+                    style: const TextStyle(
+                      color: Colors.grey,
+                      fontSize: 15,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 60.0),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  price!.toDouble().toStringAsFixed(2),
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                  ),
+                ),
+                Text(
+                  change!.toDouble() < 0
+                      ? change!.toDouble().toStringAsFixed(2)
+                      : '+${change!.toDouble().toStringAsFixed(2)}',
+                  style: TextStyle(
+                    color: change!.toDouble() > 0 ? Colors.green : Colors.red,
+                    fontSize: 18,
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
-        const SizedBox(
-          height: 120,
-        )
-      ],
+      ),
     );
   }
 }
