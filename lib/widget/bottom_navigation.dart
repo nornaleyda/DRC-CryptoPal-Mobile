@@ -14,11 +14,7 @@ class BottomNavigation extends StatelessWidget {
             border: Border(
               top: BorderSide(
                 color: Colors.grey.withOpacity(0.5),
-                width: 5.0,
-              ),
-              bottom: BorderSide(
-                color: Colors.grey.withOpacity(0.5),
-                width: 5.0,
+                width: 2.0,
               ),
             ),
           ),
@@ -29,29 +25,33 @@ class BottomNavigation extends StatelessWidget {
               BottomNavigationBarItem(
                 icon: Center(
                   child: Icon(Icons.house,
-                      size: 25,
-                      color: index == 0 ? Colors.purple : Colors.grey),
+                      size: 25, color: index == 0 ? Colors.pink : Colors.grey),
                 ),
-                label: 'Home',
+                label: '',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.newspaper,
-                    size: 25, color: index == 1 ? Colors.purple : Colors.grey),
-                label: 'News',
+                    size: 25, color: index == 1 ? Colors.pink : Colors.grey),
+                label: '',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.show_chart,
-                    size: 25, color: index == 2 ? Colors.purple : Colors.grey),
-                label: 'Markets',
+                    size: 25, color: index == 2 ? Colors.pink : Colors.grey),
+                label: '',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.star,
-                    size: 25, color: index == 3 ? Colors.purple : Colors.grey),
-                label: 'Watchlist',
+                    size: 25, color: index == 3 ? Colors.pink : Colors.grey),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.perm_identity,
+                    size: 25, color: index == 4 ? Colors.pink : Colors.grey),
+                label: '',
               ),
             ],
             currentIndex: index,
-            selectedItemColor: Colors.purple,
+            selectedItemColor: Colors.pink,
             unselectedItemColor: Colors.grey,
             onTap: (int tappedIndex) {
               context

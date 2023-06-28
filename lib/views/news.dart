@@ -67,11 +67,13 @@ class _CryptoNews extends State<CryptoNews> {
     print('news called');
     final response = await apiManager.getNewsData();
 
-    setState(() {
-      crypto = (response['Data'] as List<dynamic>)
-          .map((json) => NewsItemModel.fromJson(json))
-          .toList();
-    });
+    if (mounted) {
+      setState(() {
+        crypto = (response['Data'] as List<dynamic>)
+            .map((json) => NewsItemModel.fromJson(json))
+            .toList();
+      });
+    }
 
     print('news completed');
   }

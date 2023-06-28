@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:projectbesquare/views/profile.dart';
 import '../cubit/bottom_navigation_cubit.dart.dart';
+import '../model/market_model.dart';
 import '../widget/bottom_navigation.dart';
 import '../api/market_api.dart';
 import '../widget/home_card.dart';
@@ -10,10 +10,10 @@ class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePage();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePage extends State<HomePage> {
+class _HomePageState extends State<HomePage> {
   List<dynamic> crypto = [];
   final ApiManager apiManager = ApiManager();
 
@@ -26,59 +26,77 @@ class _HomePage extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<BottomNavigationBarCubit>(
-        create: (context) => BottomNavigationBarCubit(0),
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Homepage'),
-            centerTitle: true,
-            leading: IconButton(
-              icon: const Icon(Icons.account_circle),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) =>
-                        const UserAccount(),
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                      var begin = const Offset(-1.0, 0.0);
-                      var end = Offset.zero;
-                      var curve = Curves.ease;
-
-                      var tween = Tween(begin: begin, end: end)
-                          .chain(CurveTween(curve: curve));
-
-                      return SlideTransition(
-                        position: animation.drive(tween),
-                        child: child,
-                      );
-                    },
+      create: (context) => BottomNavigationBarCubit(0),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Homepage'),
+          centerTitle: true,
+        ),
+        backgroundColor: Colors.white,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text(
+                    'Welcome !',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
-                );
-              },
+                  Text(
+                    'Check out todays Top 6 currency !',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(fontSize: 15, color: Colors.pink),
+                  ),
+                ],
+              ),
             ),
-          ),
-          body: ListView.builder(
-            itemCount: crypto.length,
-            itemBuilder: (context, index) {
-              final currency = crypto[index];
-              final name = currency['CoinInfo']['FullName'];
+            Container(
+              margin: const EdgeInsets.all(18.0),
+              height: 500,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                elevation: 8,
+                shadowColor: Colors.grey,
+                child: ListView.builder(
+                  itemCount: crypto.length,
+                  itemBuilder: (context, index) {
+                    final currency = crypto[index];
 
-              return HomeCard(name: name);
-            },
-          ),
-          bottomNavigationBar: const BottomNavigation(),
-        ));
+                    return HomeCard(
+                      name: currency.name,
+                      symbol: currency.symbol,
+                      imageUrl: currency.imageUrl,
+                      price: currency.price,
+                      change: currency.change,
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+        bottomNavigationBar: const BottomNavigation(),
+      ),
+    );
   }
 
   Future<void> fetchCrypto() async {
     print('fetchCrypto home called');
-    final cryptoData = apiManager.getCryptoData(limit: 3);
+    final cryptoData = apiManager.getCryptoData(limit: 6);
     final response = await cryptoData;
 
     if (mounted) {
       setState(() {
-        crypto = response['Data'];
+        crypto = (response['Data'] as List<dynamic>)
+            .map((json) => CryptoItemModel.fromJson(json))
+            .toList();
       });
     }
 
