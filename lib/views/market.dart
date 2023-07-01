@@ -18,7 +18,7 @@ class _MarketPageState extends State<MarketPage> {
   TextEditingController searchController = TextEditingController();
   List<CryptoItemModel> crypto = [];
   List<CryptoItemModel> filteredCrypto = [];
-  bool isDescending = true; // Track the sorting order
+  bool isDescending = true;
 
   final ApiManager apiManager = ApiManager();
 
@@ -33,7 +33,10 @@ class _MarketPageState extends State<MarketPage> {
     return BlocProvider<BottomNavigationBarCubit>(
       create: (context) => BottomNavigationBarCubit(2),
       child: Scaffold(
-        appBar: AppBar(title: const Text('Market'), centerTitle: true),
+        appBar: AppBar(
+            backgroundColor: const Color(0xFF0D0D2B),
+            title: const Text('Market'),
+            centerTitle: true),
         backgroundColor: Colors.white,
         body: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -66,7 +69,7 @@ class _MarketPageState extends State<MarketPage> {
                   },
                   decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.grey[200],
+                      fillColor: const Color.fromARGB(255, 233, 231, 231),
                       labelText: 'Search currency',
                       labelStyle: const TextStyle(
                         color: Colors.blueGrey,
@@ -108,8 +111,9 @@ class _MarketPageState extends State<MarketPage> {
                         ),
                       ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            isDescending ? Colors.grey : Colors.pink,
+                        backgroundColor: isDescending
+                            ? const Color(0xFF979797)
+                            : Colors.pink,
                         foregroundColor: Colors.white,
                       ),
                     ),
@@ -129,8 +133,9 @@ class _MarketPageState extends State<MarketPage> {
                         ),
                       ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            isDescending ? Colors.pink : Colors.grey,
+                        backgroundColor: isDescending
+                            ? Colors.pink
+                            : const Color(0xFF979797),
                         foregroundColor: Colors.white,
                       ),
                     ),

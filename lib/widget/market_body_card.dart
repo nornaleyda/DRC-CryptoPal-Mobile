@@ -44,7 +44,7 @@ class CryptoCardBody extends StatelessWidget {
                     Text(
                       price!.toDouble().toStringAsFixed(2),
                       style: const TextStyle(
-                        color: Colors.grey,
+                        color: Color(0xFF979797),
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
@@ -54,8 +54,9 @@ class CryptoCardBody extends StatelessWidget {
                           ? change!.toDouble().toStringAsFixed(2)
                           : '+${change!.toDouble().toStringAsFixed(2)}',
                       style: TextStyle(
-                        color:
-                            change!.toDouble() > 0 ? Colors.green : Colors.red,
+                        color: change!.toDouble() > 0
+                            ? const Color(0xFF57992D)
+                            : Colors.red,
                         fontSize: 18,
                       ),
                     ),
