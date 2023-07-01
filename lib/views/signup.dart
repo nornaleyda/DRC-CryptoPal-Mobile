@@ -1,15 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:projectbesquare/views/home.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+import 'login.dart';
+
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpState extends State<SignUp> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -38,12 +39,12 @@ class _LoginState extends State<Login> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
                 Text(
-                  'Login',
+                  'Create Account',
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 10),
                 Text(
-                  'Login',
+                  'Create Account',
                   style: TextStyle(color: Color(0xFFBB0163)),
                 ),
               ],
@@ -77,9 +78,7 @@ class _LoginState extends State<Login> {
               ),
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
           Center(
             child: SizedBox(
               width: MediaQuery.of(context).size.width * .8,
@@ -114,13 +113,13 @@ class _LoginState extends State<Login> {
               height: 50,
               child: ElevatedButton(
                 onPressed: () {
-                  FirebaseAuth.instance.signInWithEmailAndPassword(
+                  FirebaseAuth.instance.createUserWithEmailAndPassword(
                     email: emailController.text.trim(),
                     password: passwordController.text.trim(),
                   );
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const HomePage()),
+                    MaterialPageRoute(builder: (context) => const Login()),
                   );
                 },
                 style: ButtonStyle(
@@ -132,7 +131,33 @@ class _LoginState extends State<Login> {
                   backgroundColor: MaterialStateProperty.all<Color>(
                       Color(0xFFBB0163)),
                 ),
-                child: const Text('Login'),
+                child: const Text('Create account'),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          Center(
+            child: TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Login()),
+                );
+              },
+              child: RichText(
+                text: const TextSpan(
+                  text: 'Already have an account? ',
+                  style: TextStyle(color: Colors.black),
+                  children: [
+                    TextSpan(
+                      text: 'Log in',
+                      style: TextStyle(
+                        color: Color(0xFFBB0163),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
