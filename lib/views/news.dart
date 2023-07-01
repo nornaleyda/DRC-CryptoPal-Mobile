@@ -30,6 +30,7 @@ class _CryptoNews extends State<CryptoNews> {
         create: (context) => BottomNavigationBarCubit(1),
         child: Scaffold(
           appBar: AppBar(
+            backgroundColor: const Color(0xFF0D0D2B),
             title: const Text('News'),
             centerTitle: true,
           ),

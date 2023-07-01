@@ -31,7 +31,7 @@ class MarketCard extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border(
                 top: BorderSide(
-                  color: Colors.grey.withOpacity(0.5),
+                  color: Color(0xFF979797).withOpacity(0.5),
                   width: 2.0,
                 ),
               ),
@@ -60,7 +60,7 @@ class MarketCard extends StatelessWidget {
                 Text(
                   symbol!,
                   style: const TextStyle(
-                    color: Colors.grey,
+                    color: Color(0xFF979797),
                     fontSize: 15,
                   ),
                 ),
@@ -85,7 +85,7 @@ class MarketCard extends StatelessWidget {
                 //       ? change!.toDouble().toStringAsFixed(2)
                 //       : '+${change!.toDouble().toStringAsFixed(2)}',
                 //   style: TextStyle(
-                //     color: change!.toDouble() > 0 ? Colors.green : Colors.red,
+                //     color: change!.toDouble() > 0 ? Color(0xFF57992D) : Colors.red,
                 //     fontSize: 15,
                 //   ),
                 // ),
@@ -94,7 +94,9 @@ class MarketCard extends StatelessWidget {
                       ? '${percent!.toDouble().toStringAsFixed(2)}%'
                       : '+${percent!.toDouble().toStringAsFixed(2)}%',
                   style: TextStyle(
-                    color: percent!.toDouble() > 0 ? Colors.green : Colors.red,
+                    color: percent!.toDouble() > 0
+                        ? Color(0xFF57992D)
+                        : Colors.red,
                     fontSize: 15,
                   ),
                 ),

@@ -13,7 +13,7 @@ class BottomNavigation extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border(
               top: BorderSide(
-                color: Colors.grey.withOpacity(0.5),
+                color: const Color(0xFF979797).withOpacity(0.5),
                 width: 2.0,
               ),
             ),
@@ -25,34 +25,40 @@ class BottomNavigation extends StatelessWidget {
               BottomNavigationBarItem(
                 icon: Center(
                   child: Icon(Icons.house,
-                      size: 25, color: index == 0 ? Colors.pink : Colors.grey),
+                      size: 25,
+                      color:
+                          index == 0 ? const Color(0xFFBB0163) : const Color(0xFF979797)),
                 ),
                 label: '',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.newspaper,
-                    size: 25, color: index == 1 ? Colors.pink : Colors.grey),
+                    size: 25,
+                    color: index == 1 ? const Color(0xFFBB0163) : const Color(0xFF979797)),
                 label: '',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.show_chart,
-                    size: 25, color: index == 2 ? Colors.pink : Colors.grey),
+                    size: 25,
+                    color: index == 2 ? const Color(0xFFBB0163) : const Color(0xFF979797)),
                 label: '',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.star,
-                    size: 25, color: index == 3 ? Colors.pink : Colors.grey),
+                    size: 25,
+                    color: index == 3 ? const Color(0xFFBB0163) : const Color(0xFF979797)),
                 label: '',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.perm_identity,
-                    size: 25, color: index == 4 ? Colors.pink : Colors.grey),
+                    size: 25,
+                    color: index == 4 ? const Color(0xFFBB0163) : const Color(0xFF979797)),
                 label: '',
               ),
             ],
             currentIndex: index,
-            selectedItemColor: Colors.pink,
-            unselectedItemColor: Colors.grey,
+            selectedItemColor: const Color(0xFFBB0163),
+            unselectedItemColor: const Color(0xFF979797),
             onTap: (int tappedIndex) {
               context
                   .read<BottomNavigationBarCubit>()

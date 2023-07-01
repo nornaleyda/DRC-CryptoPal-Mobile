@@ -11,17 +11,23 @@ class WatchList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<BottomNavigationBarCubit>(
         create: (context) => BottomNavigationBarCubit(3),
-        child:Scaffold(
-      appBar: AppBar(title: const Text('Description')),
-      body: ListView(
-        children: [
-          Column(
-            children: const [Text('oops.. you havent add anything to your watchlist')],
-          )
-        ],
-      ),
-                bottomNavigationBar: const BottomNavigation(),
-
-    ));
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            backgroundColor: const Color(0xFF0D0D2B),
+            title: const Text('Description'),
+            centerTitle: true,
+          ),
+          body: ListView(
+            children: [
+              Column(
+                children: const [
+                  Text('oops.. you havent add anything to your watchlist')
+                ],
+              )
+            ],
+          ),
+          bottomNavigationBar: const BottomNavigation(),
+        ));
   }
 }

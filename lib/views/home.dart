@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> {
       create: (context) => BottomNavigationBarCubit(0),
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: const Color(0xFF0D0D2B),
           title: const Text('Homepage'),
           centerTitle: true,
         ),
@@ -50,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                   Text(
                     'Check out todays Top 6 currency !',
                     textAlign: TextAlign.start,
-                    style: TextStyle(fontSize: 15, color: Colors.pink),
+                    style: TextStyle(fontSize: 15, color: Color(0xFFBB0163)),
                   ),
                 ],
               ),
@@ -63,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 elevation: 8,
-                shadowColor: Colors.grey,
+                shadowColor: const Color(0xFF979797),
                 child: ListView.builder(
                   itemCount: crypto.length,
                   itemBuilder: (context, index) {
