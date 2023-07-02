@@ -20,8 +20,12 @@ class ApiManager {
 }
 
 class ApiNews {
+  int currentPage = 1;
+  final String baseUrl =
+      'https://min-api.cryptocompare.com/data/v2/news/?lang=EN';
+
   Future<Map<String, dynamic>> getNewsData() async {
-    const url = 'https://min-api.cryptocompare.com/data/v2/news/?lang=EN';
+    final url = '$baseUrl&page=$currentPage';
     final uri = Uri.parse(url);
     final response = await http.get(uri);
 
@@ -34,5 +38,21 @@ class ApiNews {
           'Failed to fetch news data. Status code: ${response.statusCode}');
     }
   }
-}
 
+  Future<Map<String, dynamic>> getMoreNewsData() async {
+    currentPage++; 
+
+    final url = '$baseUrl&page=$currentPage';
+    final uri = Uri.parse(url);
+    final response = await http.get(uri);
+
+    if (response.statusCode == 200) {
+      final body = response.body;
+      final decodedJson = jsonDecode(body);
+      return decodedJson;
+    } else {
+      throw Exception(
+          'Failed to fetch more news data. Status code: ${response.statusCode}');
+    }
+  }
+}
