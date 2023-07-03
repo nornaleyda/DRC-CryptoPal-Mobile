@@ -15,7 +15,7 @@ class WatchList extends StatelessWidget {
           backgroundColor: Colors.white,
           appBar: AppBar(
             backgroundColor: const Color(0xFF0D0D2B),
-            title: const Text('Description'),
+            title: const Text('CryptoPal'),
             centerTitle: true,
           ),
           body: ListView(

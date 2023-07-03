@@ -10,7 +10,11 @@ class NewsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('News Api call')),
+      appBar: AppBar(
+        title: const Text('CryptoPal'),
+        centerTitle: true,
+        backgroundColor: const Color(0xFF0D0D2B),
+      ),
       body: ListView(
         children: [
           NewsCardBody(
@@ -18,6 +22,7 @@ class NewsBody extends StatelessWidget {
             source: news.source,
             image: news.imageUrl,
             body: news.body,
+            tags: news.tags,
           ),
         ],
       ),

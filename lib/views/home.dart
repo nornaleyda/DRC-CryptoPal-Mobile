@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projectbesquare/body/market_body.dart';
 import '../cubit/bottom_navigation_cubit.dart.dart';
 import '../model/market_model.dart';
 import '../widget/bottom_navigation.dart';
@@ -34,54 +35,80 @@ class _HomePageState extends State<HomePage> {
           centerTitle: true,
         ),
         backgroundColor: Colors.white,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    'Welcome !',
-                    textAlign: TextAlign.start,
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 18.0, left: 12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'Welcome !',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
-                  Text(
-                    'Check out todays Top 6 currency !',
-                    textAlign: TextAlign.start,
-                    style: TextStyle(fontSize: 15, color: Color(0xFFBB0163)),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.all(18.0),
-              height: 500,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0),
                 ),
-                elevation: 8,
-                shadowColor: const Color(0xFF979797),
-                child: ListView.builder(
-                  itemCount: crypto.length,
-                  itemBuilder: (context, index) {
-                    final currency = crypto[index];
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0, left: 12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'Check out todays Top 6 currency!',
+                        textAlign: TextAlign.start,
+                        style:
+                            TextStyle(fontSize: 15, color: Color(0xFFBB0163)),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.all(18.0),
+                  height: 500,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    elevation: 8,
+                    shadowColor: const Color(0xFF979797),
+                    child: ListView.builder(
+                      itemCount: crypto.length,
+                      itemBuilder: (context, index) {
+                        final currency = crypto[index];
 
-                    return HomeCard(
-                      name: currency.name,
-                      symbol: currency.symbol,
-                      imageUrl: currency.imageUrl,
-                      price: currency.price,
-                      change: currency.change,
-                    );
-                  },
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    CryptoDescr(currency: currency),
+                              ),
+                            );
+                          },
+                          child: HomeCard(
+                            name: currency.name,
+                            symbol: currency.symbol,
+                            imageUrl: currency.imageUrl,
+                            price: currency.price,
+                            change: currency.change,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
         bottomNavigationBar: const BottomNavigation(),
       ),

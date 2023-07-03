@@ -26,33 +26,42 @@ class BottomNavigation extends StatelessWidget {
                 icon: Center(
                   child: Icon(Icons.house,
                       size: 25,
-                      color:
-                          index == 0 ? const Color(0xFFBB0163) : const Color(0xFF979797)),
+                      color: index == 0
+                          ? const Color(0xFFBB0163)
+                          : const Color(0xFF979797)),
                 ),
                 label: '',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.newspaper,
                     size: 25,
-                    color: index == 1 ? const Color(0xFFBB0163) : const Color(0xFF979797)),
+                    color: index == 1
+                        ? const Color(0xFFBB0163)
+                        : const Color(0xFF979797)),
                 label: '',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.show_chart,
                     size: 25,
-                    color: index == 2 ? const Color(0xFFBB0163) : const Color(0xFF979797)),
+                    color: index == 2
+                        ? const Color(0xFFBB0163)
+                        : const Color(0xFF979797)),
                 label: '',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.star,
                     size: 25,
-                    color: index == 3 ? const Color(0xFFBB0163) : const Color(0xFF979797)),
+                    color: index == 3
+                        ? const Color(0xFFBB0163)
+                        : const Color(0xFF979797)),
                 label: '',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.perm_identity,
                     size: 25,
-                    color: index == 4 ? const Color(0xFFBB0163) : const Color(0xFF979797)),
+                    color: index == 4
+                        ? const Color(0xFFBB0163)
+                        : const Color(0xFF979797)),
                 label: '',
               ),
             ],

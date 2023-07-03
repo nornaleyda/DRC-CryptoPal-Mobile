@@ -6,6 +6,7 @@ import '../cubit/bottom_navigation_cubit.dart.dart';
 import '../model/market_model.dart';
 import '../widget/bottom_navigation.dart';
 import '../widget/market_card.dart';
+import '../widget/loading_bar.dart';
 
 class MarketPage extends StatefulWidget {
   const MarketPage({Key? key}) : super(key: key);
@@ -22,8 +23,16 @@ class _MarketPageState extends State<MarketPage> {
 
   final ApiManager apiManager = ApiManager();
 
+  late bool _isLoading;
+
   @override
   void initState() {
+    _isLoading = true;
+    Future.delayed(const Duration(seconds: 2), () {
+      setState(() {
+        _isLoading = false;
+      });
+    });
     super.initState();
     fetchCrypto();
   }
@@ -103,18 +112,18 @@ class _MarketPageState extends State<MarketPage> {
                           sortCrypto();
                         });
                       },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: isDescending
+                            ? const Color(0xFF979797)
+                            : Colors.pink,
+                        foregroundColor: Colors.white,
+                      ),
                       child: const Text(
                         'Highest',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: isDescending
-                            ? const Color(0xFF979797)
-                            : Colors.pink,
-                        foregroundColor: Colors.white,
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -125,6 +134,12 @@ class _MarketPageState extends State<MarketPage> {
                           sortCrypto();
                         });
                       },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: isDescending
+                            ? Colors.pink
+                            : const Color(0xFF979797),
+                        foregroundColor: Colors.white,
+                      ),
                       child: const Text(
                         'Lowest',
                         style: TextStyle(
@@ -132,45 +147,48 @@ class _MarketPageState extends State<MarketPage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: isDescending
-                            ? Colors.pink
-                            : const Color(0xFF979797),
-                        foregroundColor: Colors.white,
-                      ),
                     ),
                   ],
                 ),
               ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: filteredCrypto.length,
-                  itemBuilder: (context, index) {
-                    final currency = filteredCrypto[index];
+              _isLoading
+                  ? Expanded(
+                      child: ListView.separated(
+                          itemBuilder: ((context, index) =>
+                              const MarketCardLoading()),
+                          separatorBuilder: (context, index) => const SizedBox(
+                                height: 6.0,
+                              ),
+                          itemCount: 6))
+                  : Expanded(
+                      child: ListView.builder(
+                        itemCount: filteredCrypto.length,
+                        itemBuilder: (context, index) {
+                          final currency = filteredCrypto[index];
 
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CryptoDescr(
-                              currency: currency,
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CryptoDescr(
+                                    currency: currency,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: MarketCard(
+                              name: currency.name,
+                              symbol: currency.symbol,
+                              price: currency.price,
+                              change: currency.change,
+                              percent: currency.percent,
+                              imageUrl: currency.imageUrl,
                             ),
-                          ),
-                        );
-                      },
-                      child: MarketCard(
-                        name: currency.name,
-                        symbol: currency.symbol,
-                        price: currency.price,
-                        change: currency.change,
-                        percent: currency.percent,
-                        imageUrl: currency.imageUrl,
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
-              ),
+                    ),
             ],
           ),
         ),

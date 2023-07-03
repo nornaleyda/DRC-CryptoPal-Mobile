@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projectbesquare/views/login.dart';
-import 'package:projectbesquare/views/signup.dart';
+import 'package:projectbesquare/register/login.dart';
+import 'package:projectbesquare/register/signup.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({Key? key}) : super(key: key);
@@ -71,7 +71,7 @@ class OnboardingPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(25),
                         )),
                         backgroundColor: MaterialStateProperty.all<Color>(
-                            Color(0xFFBB0163)),
+                            const Color(0xFFBB0163)),
                       ),
                       child: const Text(
                         'Create account',

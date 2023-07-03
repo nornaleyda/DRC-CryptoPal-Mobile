@@ -5,6 +5,7 @@ class CryptoItemModel {
   num? change;
   num? percent;
   String? imageUrl;
+  String? marketCap;
 
   CryptoItemModel(
       {this.name,
@@ -12,7 +13,8 @@ class CryptoItemModel {
       this.price,
       this.change,
       this.percent,
-      this.imageUrl});
+      this.imageUrl,
+      this.marketCap});
 
   CryptoItemModel.fromJson(Map<String, dynamic> json) {
     name = json['CoinInfo']?['FullName'] ?? 'N/A';
@@ -21,6 +23,7 @@ class CryptoItemModel {
     change = json['RAW']?['USD']?['CHANGE24HOUR'] ?? 0.0;
     percent = json['RAW']?['USD']?['CHANGEPCT24HOUR'] ?? 0.0;
     imageUrl = json['CoinInfo']['ImageUrl'];
+    marketCap = json['DISPLAY']?['USD']?['MKTCAP'] ?? 'N/A';
   }
 
   Map<String, dynamic> toJson() {
@@ -32,6 +35,7 @@ class CryptoItemModel {
     data['RAW']['USD']['CHANGE24HOUR'] = change;
     data['RAW']['USD']['CHANGEPCT24HOUR'] = percent;
     data['CoinInfo']['ImageUrl'] = imageUrl;
+    data['CoinInfo']['USD']['MKTCAP'] = marketCap;
 
     return data;
   }
