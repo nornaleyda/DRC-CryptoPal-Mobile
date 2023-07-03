@@ -31,7 +31,7 @@ class MarketCard extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border(
                 top: BorderSide(
-                  color: Color(0xFF979797).withOpacity(0.5),
+                  color: const Color(0xFF979797).withOpacity(0.5),
                   width: 2.0,
                 ),
               ),
@@ -95,7 +95,7 @@ class MarketCard extends StatelessWidget {
                       : '+${percent!.toDouble().toStringAsFixed(2)}%',
                   style: TextStyle(
                     color: percent!.toDouble() > 0
-                        ? Color(0xFF57992D)
+                        ? const Color(0xFF57992D)
                         : Colors.red,
                     fontSize: 15,
                   ),

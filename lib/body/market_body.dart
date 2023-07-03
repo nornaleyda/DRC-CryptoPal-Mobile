@@ -19,7 +19,9 @@ class CryptoDescr extends StatelessWidget {
             imageUrl: currency.imageUrl,
             change: currency.change,
             price: currency.price,
-          )
+            marketCap: currency.marketCap,
+          ),
+          
         ],
       ),
     );

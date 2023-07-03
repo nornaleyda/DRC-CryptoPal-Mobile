@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projectbesquare/views/about.dart';
 import 'package:projectbesquare/views/help.dart';
-import 'package:projectbesquare/views/onboarding.dart';
 import '../cubit/bottom_navigation_cubit.dart.dart';
+import '../register/onboarding.dart';
 import '../widget/bottom_navigation.dart';
-import 'login.dart';
 
 class UserAccount extends StatelessWidget {
   const UserAccount({Key? key}) : super(key: key);

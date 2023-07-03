@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projectbesquare/register/onboarding.dart';
 import 'package:projectbesquare/views/home.dart';
-import 'package:projectbesquare/views/onboarding.dart';
 import 'cubit/bottom_navigation_cubit.dart.dart';
 import 'firebase_options.dart';
 
