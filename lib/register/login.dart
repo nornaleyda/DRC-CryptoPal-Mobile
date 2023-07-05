@@ -13,12 +13,37 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  String? errorMessage;
+  bool isPasswordVisible = false;
 
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  bool isLoginButtonEnabled() {
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+    return email.isNotEmpty && password.isNotEmpty;
+  }
+
+  void signInWithEmailAndPassword() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const HomePage()),
+      );
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        errorMessage = e.message;
+      });
+    }
   }
 
   @override
@@ -86,8 +111,9 @@ class _LoginState extends State<Login> {
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * .8,
                 height: 50,
-                child: TextField(
+                child: TextFormField(
                   controller: passwordController,
+                  obscureText: !isPasswordVisible,
                   style: const TextStyle(
                     fontSize: 15,
                     color: Colors.black,
@@ -105,26 +131,47 @@ class _LoginState extends State<Login> {
                       borderRadius: BorderRadius.circular(10),
                       borderSide: const BorderSide(color: Colors.white),
                     ),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        isPasswordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: Colors.grey,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          isPasswordVisible = !isPasswordVisible;
+                        });
+                      },
+                    ),
                   ),
                 ),
               ),
             ),
+            if (errorMessage != null) ...[
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.only(left: 50.0, right: 50.0),
+                child: Center(
+                  child: Text(
+                    errorMessage!,
+                    style: const TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ],
             const SizedBox(height: 50),
             Center(
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * .7,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {
-                    FirebaseAuth.instance.signInWithEmailAndPassword(
-                      email: emailController.text.trim(),
-                      password: passwordController.text.trim(),
-                    );
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const HomePage()),
-                    );
-                  },
+                  onPressed: isLoginButtonEnabled()
+                      ? signInWithEmailAndPassword
+                      : null,
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -132,7 +179,10 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     backgroundColor: MaterialStateProperty.all<Color>(
-                        const Color(0xFFBB0163)),
+                      isLoginButtonEnabled()
+                          ? const Color(0xFFBB0163)
+                          : Colors.grey,
+                    ),
                   ),
                   child: const Text('Login'),
                 ),
@@ -149,7 +199,7 @@ class _LoginState extends State<Login> {
                 },
                 child: RichText(
                   text: const TextSpan(
-                    text: 'Dont have an account? ',
+                    text: 'Don\'t have an account? ',
                     style: TextStyle(color: Colors.black),
                     children: [
                       TextSpan(

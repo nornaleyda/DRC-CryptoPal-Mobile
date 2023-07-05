@@ -55,8 +55,9 @@ class _CryptoNews extends State<CryptoNews> {
       create: (context) => BottomNavigationBarCubit(1),
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: const Color(0xFF0D0D2B),
-          title: const Text('News'),
+          title: const Text('CryptoPal'),
           centerTitle: true,
         ),
         body: RefreshIndicator(

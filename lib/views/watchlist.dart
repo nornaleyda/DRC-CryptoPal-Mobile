@@ -14,6 +14,7 @@ class WatchList extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             backgroundColor: const Color(0xFF0D0D2B),
             title: const Text('CryptoPal'),
             centerTitle: true,

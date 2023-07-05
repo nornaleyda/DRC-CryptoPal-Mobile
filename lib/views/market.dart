@@ -43,8 +43,9 @@ class _MarketPageState extends State<MarketPage> {
       create: (context) => BottomNavigationBarCubit(2),
       child: Scaffold(
         appBar: AppBar(
+            automaticallyImplyLeading: false,
             backgroundColor: const Color(0xFF0D0D2B),
-            title: const Text('Market'),
+            title: const Text('CryptoPal'),
             centerTitle: true),
         backgroundColor: Colors.white,
         body: Padding(

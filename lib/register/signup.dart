@@ -13,12 +13,71 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+  bool isPasswordVisible = false;
+  bool isConfirmPasswordVisible = false;
+
+  String? errorMessage;
 
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  bool isSignUpButtonEnabled() {
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+    final confirmPassword = confirmPasswordController.text.trim();
+    return email.isNotEmpty &&
+        password.isNotEmpty &&
+        password == confirmPassword;
+  }
+
+  void signUpWithEmailAndPassword() async {
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+    final confirmPassword = confirmPasswordController.text.trim();
+
+    if (password != confirmPassword) {
+      setState(() {
+        errorMessage = "Passwords do not match.";
+      });
+      return;
+    }
+
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Success'),
+            content: const Text('Registered successfully'),
+            actions: [
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Login()),
+                  );
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        errorMessage = e.message;
+      });
+    }
   }
 
   @override
@@ -86,6 +145,7 @@ class _SignUpState extends State<SignUp> {
                 height: 50,
                 child: TextField(
                   controller: passwordController,
+                  obscureText: !isPasswordVisible,
                   style: const TextStyle(
                     fontSize: 15,
                     color: Colors.black,
@@ -103,26 +163,91 @@ class _SignUpState extends State<SignUp> {
                       borderRadius: BorderRadius.circular(10),
                       borderSide: const BorderSide(color: Colors.white),
                     ),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        isPasswordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: Colors.grey,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          isPasswordVisible = !isPasswordVisible;
+                        });
+                      },
+                    ),
                   ),
                 ),
               ),
             ),
+            const SizedBox(
+              height: 20,
+            ),
+            Center(
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * .8,
+                height: 50,
+                child: TextField(
+                  controller: confirmPasswordController,
+                  obscureText: !isConfirmPasswordVisible,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: const Color.fromARGB(255, 236, 234, 234),
+                    labelText: 'Confirm Password',
+                    labelStyle: const TextStyle(color: Colors.black),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: Colors.white),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: Colors.white),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        isConfirmPasswordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: Colors.grey,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          isConfirmPasswordVisible = !isConfirmPasswordVisible;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            if (errorMessage != null) ...[
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.only(left: 50.0, right: 50.0),
+                child: Center(
+                  child: Text(
+                    errorMessage!,
+                    style: const TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ],
             const SizedBox(height: 50),
             Center(
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * .7,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {
-                    FirebaseAuth.instance.createUserWithEmailAndPassword(
-                      email: emailController.text.trim(),
-                      password: passwordController.text.trim(),
-                    );
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Login()),
-                    );
-                  },
+                  onPressed: isSignUpButtonEnabled()
+                      ? signUpWithEmailAndPassword
+                      : null,
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -130,7 +255,10 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     backgroundColor: MaterialStateProperty.all<Color>(
-                        const Color(0xFFBB0163)),
+                      isSignUpButtonEnabled()
+                          ? const Color(0xFFBB0163)
+                          : Colors.grey,
+                    ),
                   ),
                   child: const Text('Create account'),
                 ),
