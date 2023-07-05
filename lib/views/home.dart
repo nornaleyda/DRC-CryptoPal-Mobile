@@ -30,8 +30,9 @@ class _HomePageState extends State<HomePage> {
       create: (context) => BottomNavigationBarCubit(0),
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: const Color(0xFF0D0D2B),
-          title: const Text('Homepage'),
+          title: const Text('CryptoPal'),
           centerTitle: true,
         ),
         backgroundColor: Colors.white,

@@ -13,19 +13,22 @@ class UserAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final users = FirebaseAuth.instance.currentUser;
+    print('user: $users');
 
     return BlocProvider<BottomNavigationBarCubit>(
         create: (context) => BottomNavigationBarCubit(4),
         child: Scaffold(
           appBar: AppBar(
+              automaticallyImplyLeading: false,
               backgroundColor: const Color(0xFF0D0D2B),
-              title: const Text('Profile'),
+              title: const Text('CryptoPal'),
               centerTitle: true),
           backgroundColor: Colors.white,
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 15),
+              Text('data : $users'),
               Padding(
                 padding: const EdgeInsets.all(18.0),
                 child: Padding(
@@ -141,8 +144,8 @@ class UserAccount extends StatelessWidget {
                                     },
                                     child: const Text(
                                       'Cancel',
-                                      style: TextStyle(
-                                          color: Color(0xFFBB0163)),
+                                      style:
+                                          TextStyle(color: Color(0xFFBB0163)),
                                     ),
                                   ),
                                   TextButton(
@@ -157,8 +160,8 @@ class UserAccount extends StatelessWidget {
                                     },
                                     child: const Text(
                                       'Logout',
-                                      style: TextStyle(
-                                          color: Color(0xFFBB0163)),
+                                      style:
+                                          TextStyle(color: Color(0xFFBB0163)),
                                     ),
                                   ),
                                 ],
