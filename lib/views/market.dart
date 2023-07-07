@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../api/market_api.dart';
 import '../body/market_body.dart';
 import '../cubit/bottom_navigation_cubit.dart.dart';
@@ -64,6 +65,7 @@ class _MarketPageState extends State<MarketPage> {
                       style:
                           TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),
+                    
                   ],
                 ),
               ),
@@ -179,13 +181,13 @@ class _MarketPageState extends State<MarketPage> {
                               );
                             },
                             child: MarketCard(
-                              name: currency.name,
-                              symbol: currency.symbol,
-                              price: currency.price,
-                              change: currency.change,
-                              percent: currency.percent,
-                              imageUrl: currency.imageUrl,
-                            ),
+                                name: currency.name,
+                                symbol: currency.symbol,
+                                price: currency.price,
+                                change: currency.change,
+                                percent: currency.percent,
+                                imageUrl: currency.imageUrl,
+                                marketCap: currency.marketCap),
                           );
                         },
                       ),

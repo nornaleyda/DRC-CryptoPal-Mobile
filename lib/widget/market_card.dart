@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class MarketCard extends StatelessWidget {
-  const MarketCard(
-      {super.key,
-      required this.name,
-      required this.symbol,
-      required this.price,
-      required this.change,
-      required this.percent,
-      required this.imageUrl});
+  const MarketCard({
+    super.key,
+    required this.name,
+    required this.symbol,
+    required this.price,
+    required this.change,
+    required this.percent,
+    required this.imageUrl,
+    required this.marketCap,
+  });
 
   final String? name;
   final String? symbol;
@@ -16,6 +18,8 @@ class MarketCard extends StatelessWidget {
   final num? change;
   final num? percent;
   final String? imageUrl;
+  final String? marketCap;
+
 
   @override
   Widget build(BuildContext context) {
@@ -80,15 +84,6 @@ class MarketCard extends StatelessWidget {
                     fontSize: 15,
                   ),
                 ),
-                // Text(
-                //   change!.toDouble() < 0
-                //       ? change!.toDouble().toStringAsFixed(2)
-                //       : '+${change!.toDouble().toStringAsFixed(2)}',
-                //   style: TextStyle(
-                //     color: change!.toDouble() > 0 ? Color(0xFF57992D) : Colors.red,
-                //     fontSize: 15,
-                //   ),
-                // ),
                 Text(
                   percent!.toDouble() < 0
                       ? '${percent!.toDouble().toStringAsFixed(2)}%'

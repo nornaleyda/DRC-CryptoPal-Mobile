@@ -8,7 +8,8 @@ import '../register/onboarding.dart';
 import '../widget/bottom_navigation.dart';
 
 class UserAccount extends StatelessWidget {
-  const UserAccount({Key? key}) : super(key: key);
+  UserAccount({Key? key}) : super(key: key);
+  final emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -155,7 +156,10 @@ class UserAccount extends StatelessWidget {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const OnboardingPage()),
+                                                OnboardingPage(
+                                                  emailController:
+                                                      emailController,
+                                                )),
                                       );
                                     },
                                     child: const Text(

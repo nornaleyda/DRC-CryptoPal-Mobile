@@ -15,13 +15,13 @@ class CryptoDescr extends StatelessWidget {
       body: ListView(
         children: [
           CryptoCardBody(
-            name: currency.name,
-            imageUrl: currency.imageUrl,
-            change: currency.change,
-            price: currency.price,
-            marketCap: currency.marketCap,
-          ),
-          
+              name: currency.name,
+              imageUrl: currency.imageUrl,
+              change: currency.change,
+              price: currency.price,
+              marketCap: currency.marketCap,
+              percent: currency.percent,
+              symbol: currency.symbol),
         ],
       ),
     );

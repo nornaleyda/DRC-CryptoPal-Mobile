@@ -2,8 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projectbesquare/provider/watchlist_provider.dart';
 import 'package:projectbesquare/register/onboarding.dart';
 import 'package:projectbesquare/views/home.dart';
+import 'package:provider/provider.dart';
+
 import 'cubit/bottom_navigation_cubit.dart.dart';
 import 'firebase_options.dart';
 
@@ -12,7 +15,11 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  Provider.debugCheckInvalidValueType = null;
+  runApp(ChangeNotifierProvider<FavoriteProvider>(
+    create: (context) => FavoriteProvider(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -20,7 +27,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    final emailController = TextEditingController();
+
+    return ChangeNotifierProvider<FavoriteProvider>(
+      create: (context) => FavoriteProvider(),
+      child: BlocProvider(
         create: (context) => BottomNavigationBarCubit(0),
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -30,10 +41,12 @@ class MyApp extends StatelessWidget {
               if (snapshot.hasData) {
                 return const HomePage();
               } else {
-                return const OnboardingPage();
+                return OnboardingPage(emailController: emailController);
               }
             },
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
