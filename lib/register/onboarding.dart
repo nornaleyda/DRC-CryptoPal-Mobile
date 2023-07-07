@@ -3,7 +3,9 @@ import 'package:projectbesquare/register/login.dart';
 import 'package:projectbesquare/register/signup.dart';
 
 class OnboardingPage extends StatelessWidget {
-  const OnboardingPage({Key? key}) : super(key: key);
+  OnboardingPage({Key? key, required TextEditingController emailController})
+      : super(key: key);
+  final emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,9 @@ class OnboardingPage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const Login()),
+                              builder: (context) => Login(
+                                    emailController: emailController,
+                                  )),
                         );
                       },
                       style: ButtonStyle(

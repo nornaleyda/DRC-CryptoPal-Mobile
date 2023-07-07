@@ -65,7 +65,7 @@ class _SignUpState extends State<SignUp> {
                   Navigator.of(context).pop();
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const Login()),
+                    MaterialPageRoute(builder: (context) => Login(emailController: emailController,)),
                   );
                 },
               ),
@@ -270,7 +270,7 @@ class _SignUpState extends State<SignUp> {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const Login()),
+                    MaterialPageRoute(builder: (context) => Login(emailController: emailController,)),
                   );
                 },
                 child: RichText(

@@ -56,7 +56,7 @@ class BottomNavigationBarCubit extends Cubit<int> {
         Navigator.pushReplacement(
           context,
           PageRouteBuilder(
-            pageBuilder: (context, anim1, anim2) => const UserAccount(),
+            pageBuilder: (context, anim1, anim2) => UserAccount(),
             transitionDuration: Duration.zero,
           ),
         );

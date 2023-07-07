@@ -1,30 +1,31 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:projectbesquare/register/signup.dart';
 import 'package:projectbesquare/views/home.dart';
+import 'package:projectbesquare/register/database.dart';
 
 class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+  final TextEditingController emailController;
+
+  const Login({Key? key, required this.emailController}) : super(key: key);
 
   @override
   State<Login> createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
-  final emailController = TextEditingController();
   final passwordController = TextEditingController();
   String? errorMessage;
   bool isPasswordVisible = false;
 
   @override
   void dispose() {
-    emailController.dispose();
     passwordController.dispose();
     super.dispose();
   }
 
   bool isLoginButtonEnabled() {
-    final email = emailController.text.trim();
+    final email = widget.emailController.text.trim();
     final password = passwordController.text.trim();
     return email.isNotEmpty && password.isNotEmpty;
   }
@@ -32,7 +33,7 @@ class _LoginState extends State<Login> {
   void signInWithEmailAndPassword() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
+        email: widget.emailController.text.trim(),
         password: passwordController.text.trim(),
       );
       Navigator.push(
@@ -82,7 +83,7 @@ class _LoginState extends State<Login> {
                 width: MediaQuery.of(context).size.width * .8,
                 height: 50,
                 child: TextField(
-                  controller: emailController,
+                  controller: widget.emailController,
                   style: const TextStyle(
                     fontSize: 15,
                     color: Colors.black,

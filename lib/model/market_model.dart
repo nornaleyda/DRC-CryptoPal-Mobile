@@ -7,14 +7,15 @@ class CryptoItemModel {
   String? imageUrl;
   String? marketCap;
 
-  CryptoItemModel(
-      {this.name,
-      this.symbol,
-      this.price,
-      this.change,
-      this.percent,
-      this.imageUrl,
-      this.marketCap});
+  CryptoItemModel({
+    this.name,
+    this.symbol,
+    this.price,
+    this.change,
+    this.percent,
+    this.imageUrl,
+    this.marketCap,
+  });
 
   CryptoItemModel.fromJson(Map<String, dynamic> json) {
     name = json['CoinInfo']?['FullName'] ?? 'N/A';
@@ -29,14 +30,48 @@ class CryptoItemModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
 
-    data['CoinInfo']['FullName'] = name;
-    data['CoinInfo']['Name'] = symbol;
-    data['RAW']['USD']['PRICE'] = price;
-    data['RAW']['USD']['CHANGE24HOUR'] = change;
-    data['RAW']['USD']['CHANGEPCT24HOUR'] = percent;
-    data['CoinInfo']['ImageUrl'] = imageUrl;
-    data['CoinInfo']['USD']['MKTCAP'] = marketCap;
+    data['CoinInfo'] = {
+      'FullName': name,
+      'Name': symbol,
+      'ImageUrl': imageUrl,
+    };
+
+    data['RAW'] = {
+      'USD': {
+        'PRICE': price,
+        'CHANGE24HOUR': change,
+        'CHANGEPCT24HOUR': percent,
+      },
+    };
+
+    data['DISPLAY'] = {
+      'USD': {
+        'MKTCAP': marketCap,
+      },
+    };
 
     return data;
+  }
+
+  CryptoItemModel.fromMap(Map<String, dynamic> map) {
+    name = map['name'];
+    symbol = map['symbol'];
+    price = map['price'];
+    change = map['change'];
+    percent = map['percent'];
+    imageUrl = map['imageUrl'];
+    marketCap = map['marketCap'];
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'symbol': symbol,
+      'price': price,
+      'change': change,
+      'percent': percent,
+      'imageUrl': imageUrl,
+      'marketCap': marketCap,
+    };
   }
 }

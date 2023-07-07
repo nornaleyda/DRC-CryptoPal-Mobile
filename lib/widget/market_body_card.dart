@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../model/market_model.dart';
+import '../provider/watchlist_provider.dart';
 
 class CryptoCardBody extends StatelessWidget {
   const CryptoCardBody(
@@ -7,16 +11,29 @@ class CryptoCardBody extends StatelessWidget {
       required this.imageUrl,
       required this.price,
       required this.change,
-      required this.marketCap});
+      required this.marketCap,
+      required this.symbol,
+      required this.percent});
 
   final String? name;
   final String? imageUrl;
   final num? price;
   final num? change;
   final String? marketCap;
+  final String? symbol;
+  final num? percent;
 
   @override
   Widget build(BuildContext context) {
+    CryptoItemModel item = CryptoItemModel(
+        name: name,
+        symbol: symbol,
+        price: price,
+        change: change,
+        percent: percent,
+        imageUrl: imageUrl,
+        marketCap: marketCap);
+
     return Padding(
       padding: const EdgeInsets.all(18.0),
       child: Column(
@@ -78,9 +95,19 @@ class CryptoCardBody extends StatelessWidget {
               const SizedBox(width: 8.0),
               Column(
                 children: [
-                  IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.star_outline)
-                      ),
+                  Consumer<FavoriteProvider>(
+                    builder: (context, provider, _) {
+                      return IconButton(
+                        onPressed: () {
+                          Provider.of<FavoriteProvider>(context, listen: false)
+                              .toggleFavorite(item);
+                        },
+                        icon: provider.isExist(item)
+                            ? const Icon(Icons.star, color: Colors.yellow)
+                            : const Icon(Icons.star_outline),
+                      );
+                    },
+                  ),
                 ],
               )
             ],
