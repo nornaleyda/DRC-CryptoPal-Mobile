@@ -5,9 +5,12 @@ import '../api/market_api.dart';
 import '../body/market_body.dart';
 import '../cubit/bottom_navigation_cubit.dart.dart';
 import '../model/market_model.dart';
+import '../utils/filter_buttons.dart';
+import '../utils/search_field.dart';
 import '../widget/bottom_navigation.dart';
 import '../widget/market_card.dart';
 import '../widget/loading_bar.dart';
+import '../utils/crypto_utils.dart';
 
 class MarketPage extends StatefulWidget {
   const MarketPage({Key? key}) : super(key: key);
@@ -38,6 +41,36 @@ class _MarketPageState extends State<MarketPage> {
     fetchCrypto();
   }
 
+  SearchField _buildSearchField() {
+    return SearchField(
+      controller: searchController,
+      onChanged: (value) {
+        setState(() {
+          filteredCrypto = CryptoUtils.filterCrypto(crypto, value);
+          sortCrypto();
+        });
+      },
+    );
+  }
+
+  FilterButtons _buildFilterButtons() {
+    return FilterButtons(
+      isDescending: isDescending,
+      onHighestPressed: () {
+        setState(() {
+          isDescending = false;
+          sortCrypto();
+        });
+      },
+      onLowestPressed: () {
+        setState(() {
+          isDescending = true;
+          sortCrypto();
+        });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<BottomNavigationBarCubit>(
@@ -65,95 +98,13 @@ class _MarketPageState extends State<MarketPage> {
                       style:
                           TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),
-                    
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10, right: 10),
-                child: TextField(
-                  controller: searchController,
-                  onChanged: (value) {
-                    filterCrypto(value);
-                  },
-                  decoration: InputDecoration(
-                      filled: true,
-                      fillColor: const Color.fromARGB(255, 233, 231, 231),
-                      labelText: 'Search currency',
-                      labelStyle: const TextStyle(
-                        color: Colors.blueGrey,
-                      ),
-                      prefixIcon: const Icon(
-                        Icons.search,
-                        color: Colors.blueGrey,
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(color: Colors.white),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(color: Colors.white),
-                      )),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 12.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          isDescending = false;
-                          sortCrypto();
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: isDescending
-                            ? const Color(0xFF979797)
-                            : Colors.pink,
-                        foregroundColor: Colors.white,
-                      ),
-                      child: const Text(
-                        'Highest',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          isDescending = true;
-                          sortCrypto();
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: isDescending
-                            ? Colors.pink
-                            : const Color(0xFF979797),
-                        foregroundColor: Colors.white,
-                      ),
-                      child: const Text(
-                        'Lowest',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              const SizedBox(height: 20),
+              _buildSearchField(),
+              const SizedBox(height: 20),
+              _buildFilterButtons(),
               _isLoading
                   ? Expanded(
                       child: ListView.separated(
@@ -216,26 +167,7 @@ class _MarketPageState extends State<MarketPage> {
     print('fetchCrypto completed');
   }
 
-  void filterCrypto(String query) {
-    setState(() {
-      if (query.isEmpty) {
-        filteredCrypto = crypto;
-      } else {
-        filteredCrypto = crypto.where((currency) {
-          return currency.name!.toLowerCase().contains(query.toLowerCase());
-        }).toList();
-      }
-      sortCrypto();
-    });
-  }
-
   void sortCrypto() {
-    filteredCrypto.sort((a, b) {
-      if (isDescending) {
-        return b.price!.compareTo(a.price!);
-      } else {
-        return a.price!.compareTo(b.price!);
-      }
-    });
+    CryptoUtils.sortCrypto(filteredCrypto, isDescending);
   }
 }

@@ -11,7 +11,11 @@ class CryptoDescr extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Description')),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF0D0D2B),
+        title: const Text('Chart'),
+        centerTitle: true,
+      ),
       body: ListView(
         children: [
           CryptoCardBody(

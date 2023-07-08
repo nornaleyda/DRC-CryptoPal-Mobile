@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
           title: const Text('CryptoPal'),
           centerTitle: true,
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xFFF9FAFD),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(10.0),
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Container(
                   margin: const EdgeInsets.all(18.0),
-                  height: 500,
+                  height: 520,
                   child: Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
