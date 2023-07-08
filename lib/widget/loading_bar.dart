@@ -48,56 +48,65 @@ class MarketCardLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 15.0,
-        left: 10.0,
-        right: 10.0,
-      ),
-      child: Row(
-        children: [
-          const Padding(
-            padding: EdgeInsets.all(5.0),
-            child: LoadingBar(
-              height: 45,
-              width: 45,
-            ),
-          ),
-          const SizedBox(
-            width: 10.0,
-          ),
-          Expanded(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              LoadingBar(
-                width: 80,
-              ),
-              SizedBox(
-                height: 8.0,
-              ),
-              LoadingBar(
-                width: 50,
-              ),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Row(
+            children: [
+              Expanded(
+                child: Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            LoadingBar(
+                              height: 45,
+                              width: 45,
+                            ),
+                          ],
+                        )),
+                    Expanded(
+                        flex: 2,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            LoadingBar(
+                              width: 80,
+                            ),
+                            SizedBox(
+                              height: 8.0,
+                            ),
+                            LoadingBar(
+                              width: 50,
+                            ),
+                          ],
+                        )),
+                    Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: const [
+                            LoadingBar(
+                              width: 80,
+                            ),
+                            SizedBox(
+                              height: 8.0,
+                            ),
+                            LoadingBar(
+                              width: 50,
+                            ),
+                          ],
+                        )),
+                  ],
+                ),
+              )
             ],
-          )),
-          Expanded(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: const [
-              LoadingBar(
-                width: 80,
-              ),
-              SizedBox(
-                height: 8.0,
-              ),
-              LoadingBar(
-                width: 50,
-              ),
-            ],
-          )),
-        ],
-      ),
+          ),
+        )
+      ],
     );
   }
 }
