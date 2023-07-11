@@ -19,12 +19,12 @@ class _SignUpState extends State<SignUp> {
 
   String? errorMessage;
 
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   emailController.dispose();
+  //   passwordController.dispose();
+  //   super.dispose();
+  // }
 
   bool isSignUpButtonEnabled() {
     final email = emailController.text.trim();
@@ -65,7 +65,10 @@ class _SignUpState extends State<SignUp> {
                   Navigator.of(context).pop();
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => Login(emailController: emailController,)),
+                    MaterialPageRoute(
+                        builder: (context) => Login(
+                              emailController: emailController,
+                            )),
                   );
                 },
               ),
@@ -104,7 +107,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    'Create Account',
+                    'Starts your journey with us!',
                     style: TextStyle(color: Color(0xFFBB0163)),
                   ),
                 ],
@@ -270,7 +273,10 @@ class _SignUpState extends State<SignUp> {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => Login(emailController: emailController,)),
+                    MaterialPageRoute(
+                        builder: (context) => Login(
+                              emailController: emailController,
+                            )),
                   );
                 },
                 child: RichText(
