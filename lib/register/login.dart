@@ -1,8 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:projectbesquare/register/signup.dart';
 import 'package:projectbesquare/views/home.dart';
-import 'package:projectbesquare/register/database.dart';
 
 class Login extends StatefulWidget {
   final TextEditingController emailController;
@@ -14,6 +15,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
   String? errorMessage;
   bool isPasswordVisible = false;
@@ -47,6 +49,37 @@ class _LoginState extends State<Login> {
     }
   }
 
+  void resetPassword() async {
+    final email = widget.emailController.text.trim();
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Password Reset'),
+            content: const Text(
+                'A password reset link has been sent to your email.'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        errorMessage = e.message;
+      });
+    } catch (e) {
+      setState(() {
+        errorMessage = 'An error occurred while resetting your password.';
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +104,7 @@ class _LoginState extends State<Login> {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    'Login',
+                    'Starts your journey with us!',
                     style: TextStyle(color: Color(0xFFBB0163)),
                   ),
                 ],
@@ -132,19 +165,37 @@ class _LoginState extends State<Login> {
                       borderRadius: BorderRadius.circular(10),
                       borderSide: const BorderSide(color: Colors.white),
                     ),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        isPasswordVisible
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        color: Colors.grey,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          isPasswordVisible = !isPasswordVisible;
-                        });
-                      },
+                    suffixIcon: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            isPasswordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Colors.grey,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              isPasswordVisible = !isPasswordVisible;
+                            });
+                          },
+                        ),
+                      ],
                     ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 30.0),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: resetPassword,
+                  child: const Text(
+                    'Forgot Password?',
+                    style: TextStyle(color: Color(0xFFBB0163)),
                   ),
                 ),
               ),
