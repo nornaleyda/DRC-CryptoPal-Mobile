@@ -3,11 +3,12 @@ import 'package:provider/provider.dart';
 
 import 'package:intl/intl.dart';
 
+import '../api/chart_api.dart';
 import '../model/market_model.dart';
 import '../provider/watchlist_provider.dart';
 
-class CryptoCardBody extends StatelessWidget {
-  const CryptoCardBody({
+class CryptoCardBody extends StatefulWidget {
+  CryptoCardBody({
     Key? key,
     required this.name,
     required this.imageUrl,
@@ -16,6 +17,7 @@ class CryptoCardBody extends StatelessWidget {
     required this.marketCap,
     required this.symbol,
     required this.percent,
+    required this.cryptocurrencyName,
   }) : super(key: key);
 
   final String? name;
@@ -25,17 +27,38 @@ class CryptoCardBody extends StatelessWidget {
   final String? marketCap;
   final String? symbol;
   final num? percent;
+  final String cryptocurrencyName;
+
+  @override
+  _CryptoCardBodyState createState() => _CryptoCardBodyState();
+}
+
+class _CryptoCardBodyState extends State<CryptoCardBody> {
+  List<String> dropdownItems = ['USD', 'GBP', 'EUR'];
+  late String selectedCurrency;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedCurrency = 'USD';
+  }
+
+  void updateCurrency(String currency) {
+    setState(() {
+      selectedCurrency = currency;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     CryptoItemModel item = CryptoItemModel(
-      name: name,
-      symbol: symbol,
-      price: price,
-      change: change,
-      percent: percent,
-      imageUrl: imageUrl,
-      marketCap: marketCap,
+      name: widget.name,
+      symbol: widget.symbol,
+      price: widget.price,
+      change: widget.change,
+      percent: widget.percent,
+      imageUrl: widget.imageUrl,
+      marketCap: widget.marketCap,
     );
 
     return Column(
@@ -59,7 +82,7 @@ class CryptoCardBody extends StatelessWidget {
                                 SizedBox(
                                   width: 60,
                                   child: Image.network(
-                                    'https://www.cryptocompare.com$imageUrl',
+                                    'https://www.cryptocompare.com${widget.imageUrl}',
                                     width: 100,
                                   ),
                                 ),
@@ -72,14 +95,14 @@ class CryptoCardBody extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  symbol!,
+                                  widget.symbol!,
                                   style: const TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 Text(
-                                  name!,
+                                  widget.name!,
                                   style: const TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
@@ -140,7 +163,7 @@ class CryptoCardBody extends StatelessWidget {
                                 ),
                                 Text(
                                   NumberFormat('#,###.00')
-                                      .format(price!.toDouble()),
+                                      .format(widget.price!.toDouble()),
                                   style: const TextStyle(
                                     fontSize: 23,
                                   ),
@@ -156,11 +179,13 @@ class CryptoCardBody extends StatelessWidget {
                                 const Text('Value',
                                     style: TextStyle(color: Colors.grey)),
                                 Text(
-                                  change!.toDouble() < 0
-                                      ? change!.toDouble().toStringAsFixed(2)
-                                      : '+${change!.toDouble().toStringAsFixed(2)}',
+                                  widget.change!.toDouble() < 0
+                                      ? widget.change!
+                                          .toDouble()
+                                          .toStringAsFixed(2)
+                                      : '+${widget.change!.toDouble().toStringAsFixed(2)}',
                                   style: TextStyle(
-                                    color: change!.toDouble() > 0
+                                    color: widget.change!.toDouble() > 0
                                         ? const Color(0xFF57992D)
                                         : Colors.red,
                                     fontSize: 23,
@@ -211,7 +236,7 @@ class CryptoCardBody extends StatelessWidget {
                           ),
                         ],
                         onChanged: (value) {
-                          // dropdown value 
+                          // dropdown value
                         },
                         hint: const Padding(
                           padding: EdgeInsets.all(8.0),
@@ -221,23 +246,15 @@ class CryptoCardBody extends StatelessWidget {
                           ),
                         ),
                         isExpanded: false,
-                        underline:
-                            const SizedBox(),
+                        underline: const SizedBox(),
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 10.0),
-                Row(
-                  children: const [
-                    Text(
-                      'chart',
-                      style: TextStyle(
-                          fontSize: 16,
-                          letterSpacing: 1.2,
-                          color: Colors.white),
-                    ),
-                  ],
+                Chart(
+                  cryptocurrencyName: widget.symbol!,
+                  currency: selectedCurrency,
                 ),
               ],
             ),
