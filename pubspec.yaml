@@ -44,6 +44,8 @@ dependencies:
   cloud_firestore: ^4.8.2
   shared_preferences: ^2.2.0
   intl: ^0.18.1
+  syncfusion_flutter_charts: ^22.1.38
+  web_socket_channel: ^2.4.0
 
 dev_dependencies:
   flutter_test:
