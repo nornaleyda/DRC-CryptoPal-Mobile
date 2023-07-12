@@ -81,7 +81,10 @@ class _MarketPageState extends State<MarketPage> {
         appBar: AppBar(
             automaticallyImplyLeading: false,
             backgroundColor: const Color(0xFF0D0D2B),
-            title: const Text('CryptoPal'),
+            title: Image.asset(
+              'assets/light_logo.png',
+              width: 150.0,
+            ),
             centerTitle: true),
         backgroundColor: Colors.white,
         body: Padding(
@@ -130,10 +133,16 @@ class _MarketPageState extends State<MarketPage> {
                                   onTap: () {
                                     Navigator.push(
                                       context,
-                                      MaterialPageRoute(
-                                        builder: (context) => CryptoDescr(
+                                      PageRouteBuilder(
+                                        pageBuilder: (context, animation,
+                                                secondaryAnimation) =>
+                                            CryptoDescr(
                                           currency: currency,
                                         ),
+                                        transitionsBuilder: (context, animation,
+                                            secondaryAnimation, child) {
+                                          return child; // No animation, just return the child directly
+                                        },
                                       ),
                                     );
                                   },

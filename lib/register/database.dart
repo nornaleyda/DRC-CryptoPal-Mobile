@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MainActivity extends StatefulWidget {
+  const MainActivity({super.key});
+
   @override
   _MainActivityState createState() => _MainActivityState();
 }
@@ -18,7 +20,7 @@ class _MainActivityState extends State<MainActivity> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('User Data'),
+        title: const Text('User Data'),
       ),
       // body: Column(
       //   children: [

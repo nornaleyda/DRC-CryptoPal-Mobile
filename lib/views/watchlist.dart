@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +11,7 @@ import '../widget/market_card.dart';
 class WatchList extends StatefulWidget {
   const WatchList({Key? key}) : super(key: key);
 
+  @override
   _WatchListState createState() => _WatchListState();
 }
 
@@ -37,7 +37,10 @@ class _WatchListState extends State<WatchList> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: const Color(0xFF0D0D2B),
-          title: const Text('CryptoPal'),
+          title: Image.asset(
+            'assets/light_logo.png',
+            width: 150.0,
+          ),
           centerTitle: true,
         ),
         body: Padding(
@@ -46,9 +49,9 @@ class _WatchListState extends State<WatchList> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 18.0, left: 12.0),
+                padding: EdgeInsets.only(top: 18.0, left: 12.0),
                 child: Column(
-                  children: const [
+                  children: [
                     Text(
                       'Watchlist',
                       textAlign: TextAlign.start,
@@ -59,9 +62,9 @@ class _WatchListState extends State<WatchList> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 10.0, left: 12.0),
+                padding: EdgeInsets.only(top: 10.0, left: 12.0),
                 child: Column(
-                  children: const [
+                  children: [
                     Text(
                       'View your favorite coins here!',
                       style: TextStyle(fontSize: 15, color: Color(0xFFBB0163)),

@@ -19,13 +19,6 @@ class _SignUpState extends State<SignUp> {
 
   String? errorMessage;
 
-  // @override
-  // void dispose() {
-  //   emailController.dispose();
-  //   passwordController.dispose();
-  //   super.dispose();
-  // }
-
   bool isSignUpButtonEnabled() {
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
@@ -97,10 +90,10 @@ class _SignUpState extends State<SignUp> {
           children: [
             const SizedBox(height: 50),
             Padding(
-              padding: const EdgeInsets.only(left: 25.0),
+              padding: EdgeInsets.only(left: 25.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     'Create Account',
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),

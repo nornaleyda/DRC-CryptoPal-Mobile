@@ -57,7 +57,7 @@ class NewsCardBody extends StatelessWidget {
             height: 30,
           ),
           Container(
-            width: 300,
+            width: 200,
             height: 200,
             decoration: BoxDecoration(
               image: DecorationImage(
