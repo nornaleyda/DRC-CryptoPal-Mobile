@@ -5,7 +5,8 @@ class FilterButtons extends StatelessWidget {
   final VoidCallback onHighestPressed;
   final VoidCallback onLowestPressed;
 
-  const FilterButtons({super.key, 
+  const FilterButtons({
+    super.key,
     required this.isDescending,
     required this.onHighestPressed,
     required this.onLowestPressed,
@@ -26,7 +27,7 @@ class FilterButtons extends StatelessWidget {
               foregroundColor: Colors.white,
             ),
             child: const Text(
-              'Highest',
+              'Lowest',
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -42,7 +43,7 @@ class FilterButtons extends StatelessWidget {
               foregroundColor: Colors.white,
             ),
             child: const Text(
-              'Lowest',
+              'Highest',
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,

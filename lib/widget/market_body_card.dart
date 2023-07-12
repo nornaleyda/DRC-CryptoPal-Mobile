@@ -182,7 +182,7 @@ class CryptoCardBody extends StatelessWidget {
           height: 15.0,
         ),
         Container(
-          color: const Color(0xFFF9FAFD),
+          color: const Color(0xFF0D0D2B),
           child: Padding(
             padding: const EdgeInsets.all(18.0),
             child: Column(
@@ -209,18 +209,20 @@ class CryptoCardBody extends StatelessWidget {
                             value: 'Option 2',
                             child: Text('Option 2'),
                           ),
-                          // Add more DropdownMenuItem widgets as needed
                         ],
                         onChanged: (value) {
-                          // Handle dropdown value change here
+                          // dropdown value 
                         },
                         hint: const Padding(
                           padding: EdgeInsets.all(8.0),
-                          child: Text('option'),
+                          child: Text(
+                            'option',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
-                        isExpanded: false, // Adjust this as needed
+                        isExpanded: false,
                         underline:
-                            const SizedBox(), // Removes the default underline
+                            const SizedBox(),
                       ),
                     ),
                   ],
@@ -231,9 +233,9 @@ class CryptoCardBody extends StatelessWidget {
                     Text(
                       'chart',
                       style: TextStyle(
-                        fontSize: 16,
-                        letterSpacing: 1.2,
-                      ),
+                          fontSize: 16,
+                          letterSpacing: 1.2,
+                          color: Colors.white),
                     ),
                   ],
                 ),

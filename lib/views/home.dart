@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                   height: 520,
                   child: Card(
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
+                      borderRadius: BorderRadius.circular(20.0), 
                     ),
                     elevation: 8,
                     shadowColor: const Color(0xFF979797),

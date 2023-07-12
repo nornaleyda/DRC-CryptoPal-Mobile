@@ -33,9 +33,11 @@ class _MarketPageState extends State<MarketPage> {
   void initState() {
     _isLoading = true;
     Future.delayed(const Duration(seconds: 2), () {
-      setState(() {
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     });
     super.initState();
     fetchCrypto();
@@ -115,33 +117,37 @@ class _MarketPageState extends State<MarketPage> {
                               ),
                           itemCount: 6))
                   : Expanded(
-                      child: ListView.builder(
-                        itemCount: filteredCrypto.length,
-                        itemBuilder: (context, index) {
-                          final currency = filteredCrypto[index];
+                      child: filteredCrypto.isEmpty
+                          ? const Center(
+                              child: Text('No Result Found'),
+                            )
+                          : ListView.builder(
+                              itemCount: filteredCrypto.length,
+                              itemBuilder: (context, index) {
+                                final currency = filteredCrypto[index];
 
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => CryptoDescr(
-                                    currency: currency,
-                                  ),
-                                ),
-                              );
-                            },
-                            child: MarketCard(
-                                name: currency.name,
-                                symbol: currency.symbol,
-                                price: currency.price,
-                                change: currency.change,
-                                percent: currency.percent,
-                                imageUrl: currency.imageUrl,
-                                marketCap: currency.marketCap),
-                          );
-                        },
-                      ),
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => CryptoDescr(
+                                          currency: currency,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: MarketCard(
+                                      name: currency.name,
+                                      symbol: currency.symbol,
+                                      price: currency.price,
+                                      change: currency.change,
+                                      percent: currency.percent,
+                                      imageUrl: currency.imageUrl,
+                                      marketCap: currency.marketCap),
+                                );
+                              },
+                            ),
                     ),
             ],
           ),
