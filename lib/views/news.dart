@@ -26,9 +26,11 @@ class _CryptoNews extends State<CryptoNews> {
   void initState() {
     _isLoading = true;
     Future.delayed(const Duration(seconds: 2), () {
-      setState(() {
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     });
     super.initState();
     fetchNews();
@@ -158,10 +160,12 @@ class _CryptoNews extends State<CryptoNews> {
   Future<void> _loadMoreData() async {
     final additionalData = await apiManager.getMoreNewsData();
 
-    setState(() {
-      crypto.addAll((additionalData['Data'] as List<dynamic>)
-          .map((json) => NewsItemModel.fromJson(json))
-          .toList());
-    });
+    if (mounted) {
+      setState(() {
+        crypto.addAll((additionalData['Data'] as List<dynamic>)
+            .map((json) => NewsItemModel.fromJson(json))
+            .toList());
+      });
+    }
   }
 }

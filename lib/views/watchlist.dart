@@ -16,17 +16,15 @@ class WatchList extends StatefulWidget {
 }
 
 class _WatchListState extends State<WatchList> {
-  bool _isLoading = true;
-  bool _isError = false;
-
   @override
   void initState() {
     super.initState();
-    final favoriteProvider = Provider.of<FavoriteProvider>(context, listen: false);
+    final favoriteProvider =
+        Provider.of<FavoriteProvider>(context, listen: false);
     favoriteProvider.fetchFavorites().then((_) {
-      setState(() {
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {});
+      }
     });
   }
 
@@ -54,7 +52,8 @@ class _WatchListState extends State<WatchList> {
                     Text(
                       'Watchlist',
                       textAlign: TextAlign.start,
-                      style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
