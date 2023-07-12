@@ -8,7 +8,7 @@ import '../model/market_model.dart';
 import '../provider/watchlist_provider.dart';
 
 class CryptoCardBody extends StatefulWidget {
-  CryptoCardBody({
+  const CryptoCardBody({
     Key? key,
     required this.name,
     required this.imageUrl,
@@ -252,6 +252,17 @@ class _CryptoCardBodyState extends State<CryptoCardBody> {
                   ],
                 ),
                 const SizedBox(height: 10.0),
+                // Row(
+                //   children: const [
+                //     Text(
+                //       'chart',
+                //       style: TextStyle(
+                //           fontSize: 16,
+                //           letterSpacing: 1.2,
+                //           color: Colors.white),
+                //     ),
+                //   ],
+                // ),
                 Chart(
                   cryptocurrencyName: widget.symbol!,
                   currency: selectedCurrency,

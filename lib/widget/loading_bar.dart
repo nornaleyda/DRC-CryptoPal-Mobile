@@ -8,22 +8,22 @@ class NewsCardLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
+      padding: EdgeInsets.only(
         top: 10.0,
         left: 10.0,
         right: 10.0,
       ),
       child: Row(
         children: [
-          const LoadingBar(
+          LoadingBar(
             height: 120,
             width: 120,
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: 16),
           Expanded(
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               LoadingBar(),
               SizedBox(height: 8),
               LoadingBar(),
@@ -51,7 +51,7 @@ class MarketCardLoading extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: EdgeInsets.all(12.0),
           child: Row(
             children: [
               Expanded(
@@ -61,7 +61,7 @@ class MarketCardLoading extends StatelessWidget {
                         flex: 1,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children: [
                             LoadingBar(
                               height: 45,
                               width: 45,
@@ -72,7 +72,7 @@ class MarketCardLoading extends StatelessWidget {
                         flex: 2,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children: [
                             LoadingBar(
                               width: 80,
                             ),
@@ -88,7 +88,7 @@ class MarketCardLoading extends StatelessWidget {
                         flex: 1,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
-                          children: const [
+                          children: [
                             LoadingBar(
                               width: 80,
                             ),

@@ -49,11 +49,11 @@ class _HelpPageState extends State<HelpPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 18.0, left: 12.0),
+                padding: EdgeInsets.only(top: 18.0, left: 12.0),
                 child: Column(
                   children: [
                     Row(
-                      children: const [
+                      children: [
                         Text(
                           'FAQ',
                           textAlign: TextAlign.start,
@@ -63,7 +63,7 @@ class _HelpPageState extends State<HelpPage> {
                       ],
                     ),
                     Row(
-                      children: const [
+                      children: [
                         Text(
                           'Frequently Asked Questions',
                           style: TextStyle(color: Colors.pink),

@@ -94,10 +94,10 @@ class _LoginState extends State<Login> {
           children: [
             const SizedBox(height: 50),
             Padding(
-              padding: const EdgeInsets.only(left: 25.0),
+              padding: EdgeInsets.only(left: 25.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     'Login',
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),

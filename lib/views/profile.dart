@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projectbesquare/api/chart_api.dart';
 import 'package:projectbesquare/views/about.dart';
 import 'package:projectbesquare/views/help.dart';
 import '../cubit/bottom_navigation_cubit.dart.dart';
@@ -22,7 +23,10 @@ class UserAccount extends StatelessWidget {
           appBar: AppBar(
               automaticallyImplyLeading: false,
               backgroundColor: const Color(0xFF0D0D2B),
-              title: const Text('CryptoPal'),
+              title: Image.asset(
+                'assets/light_logo.png',
+                width: 150.0,
+              ),
               centerTitle: true),
           backgroundColor: Colors.white,
           body: Padding(
@@ -66,13 +70,13 @@ class UserAccount extends StatelessWidget {
                           Expanded(
                               flex: 1,
                               child: Column(
-                                children: const [Icon(Icons.info)],
+                                children: [Icon(Icons.info)],
                               )),
                           Expanded(
                               flex: 4,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
+                                children: [
                                   Text(
                                     'About',
                                     style: TextStyle(fontSize: 16),
@@ -83,7 +87,7 @@ class UserAccount extends StatelessWidget {
                               flex: 1,
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: const [Icon(Icons.navigate_next)])),
+                                  children: [Icon(Icons.navigate_next)])),
                         ],
                       ))
                     ],
@@ -122,13 +126,13 @@ class UserAccount extends StatelessWidget {
                           Expanded(
                               flex: 1,
                               child: Column(
-                                children: const [Icon(Icons.build_outlined)],
+                                children: [Icon(Icons.build_outlined)],
                               )),
                           Expanded(
                               flex: 4,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
+                                children: [
                                   Text(
                                     'Help',
                                     style: TextStyle(fontSize: 16),
@@ -139,7 +143,7 @@ class UserAccount extends StatelessWidget {
                               flex: 1,
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: const [Icon(Icons.navigate_next)])),
+                                  children: [Icon(Icons.navigate_next)])),
                         ],
                       ))
                     ],
@@ -196,13 +200,13 @@ class UserAccount extends StatelessWidget {
                           Expanded(
                               flex: 1,
                               child: Column(
-                                children: const [Icon(Icons.logout)],
+                                children: [Icon(Icons.logout)],
                               )),
                           Expanded(
                               flex: 4,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
+                                children: [
                                   Text(
                                     'Logout',
                                     style: TextStyle(fontSize: 16),
@@ -213,7 +217,7 @@ class UserAccount extends StatelessWidget {
                               flex: 1,
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: const [Icon(Icons.navigate_next)])),
+                                  children: [Icon(Icons.navigate_next)])),
                         ],
                       ))
                     ],

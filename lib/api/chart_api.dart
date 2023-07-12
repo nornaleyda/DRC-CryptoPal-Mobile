@@ -16,10 +16,10 @@ class Chart extends StatefulWidget {
       : super(key: key);
 
   @override
-  _ChartState createState() => _ChartState();
+  State<Chart> createState() => ChartState();
 }
 
-class _ChartState extends State<Chart> {
+class ChartState extends State<Chart> {
   late final IOWebSocketChannel channel;
   List<DataPoint> chartData = [];
   bool isSubscribed = false;

@@ -19,7 +19,7 @@ class AboutPage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [
+            children: [
               Text(
                 'CryptoPal',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),

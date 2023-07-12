@@ -59,7 +59,10 @@ class _CryptoNews extends State<CryptoNews> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: const Color(0xFF0D0D2B),
-          title: const Text('CryptoPal'),
+          title: Image.asset(
+            'assets/light_logo.png',
+            width: 150.0,
+          ),
           centerTitle: true,
         ),
         body: RefreshIndicator(
@@ -118,8 +121,14 @@ class _CryptoNews extends State<CryptoNews> {
                               onTap: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                    builder: (context) => NewsBody(news: news),
+                                  PageRouteBuilder(
+                                    pageBuilder: (context, animation,
+                                            secondaryAnimation) =>
+                                        NewsBody(news: news),
+                                    transitionsBuilder: (context, animation,
+                                        secondaryAnimation, child) {
+                                      return child;
+                                    },
                                   ),
                                 );
                               },
