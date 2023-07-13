@@ -1,4 +1,5 @@
-import '../model/market_model.dart';
+
+import 'package:projectbesquare/model/market_model.dart';
 
 bool showNotFoundText = false;
 

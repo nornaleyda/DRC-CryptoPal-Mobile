@@ -18,7 +18,6 @@ class NewsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        top: 10.0,
         left: 10.0,
         right: 10.0,
       ),
@@ -29,26 +28,44 @@ class NewsCard extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [Image.network(imageUrl!)],
+              children: [
+                Image.network(
+                  imageUrl!,
+                  width: 80,
+                )
+              ],
             ),
           ),
+          const SizedBox(
+            width: 10,
+          ),
           Flexible(
-            flex: 2,
+            flex: 4,
             child: Padding(
               padding: const EdgeInsets.all(18.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: Text(
-                      title!,
-                      style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold),
-                    ),
+                  Row(
+                    children: [
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              title!,
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              overflow: TextOverflow.visible,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 10.0,
@@ -59,7 +76,7 @@ class NewsCard extends StatelessWidget {
                         source!,
                         style: const TextStyle(
                           color: Color(0xFF979797),
-                          fontSize: 15,
+                          fontSize: 13,
                         ),
                       ),
                     ],

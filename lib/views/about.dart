@@ -14,29 +14,24 @@ class AboutPage extends StatelessWidget {
       body: ListView(
         children: [
           const SizedBox(
-            height: 30.0,
+            height: 60.0,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'CryptoPal',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
-              )
-            ],
+            children: [Image.asset('assets/about.png', height: 250)],
           ),
           const SizedBox(
             height: 10.0,
           ),
           Container(
             margin: const EdgeInsets.all(18.0),
-            height: 500,
+            height: 300,
             child: Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
               ),
-              elevation: 8,
+              elevation: 2,
               shadowColor: const Color(0xFF979797),
             ),
           ),

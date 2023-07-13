@@ -5,7 +5,7 @@ class MainActivity extends StatefulWidget {
   const MainActivity({super.key});
 
   @override
-  _MainActivityState createState() => _MainActivityState();
+  State<MainActivity> createState() => _MainActivityState();
 }
 
 class _MainActivityState extends State<MainActivity> {
@@ -22,26 +22,6 @@ class _MainActivityState extends State<MainActivity> {
       appBar: AppBar(
         title: const Text('User Data'),
       ),
-      // body: Column(
-      //   children: [
-      //     TextField(
-      //       controller: emailController,
-      //       decoration: InputDecoration(
-      //         labelText: 'Email',
-      //       ),
-      //     ),
-      //     TextField(
-      //       controller: favoriteController,
-      //       decoration: InputDecoration(
-      //         labelText: 'Favorite',
-      //       ),
-      //     ),
-      //     ElevatedButton(
-      //       onPressed: saveUserData,
-      //       child: Text('Save User Data'),
-      //     ),
-      //   ],
-      // ),
     );
   }
 
@@ -65,9 +45,3 @@ class _MainActivityState extends State<MainActivity> {
     });
   }
 }
-
-// void main() {
-//   runApp(MaterialApp(
-//     home: MainActivity(),
-//   ));
-// }

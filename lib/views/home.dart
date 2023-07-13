@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:projectbesquare/api/market_api.dart';
 import 'package:projectbesquare/body/market_body.dart';
-import '../cubit/bottom_navigation_cubit.dart.dart';
-import '../model/market_model.dart';
-import '../widget/bottom_navigation.dart';
-import '../api/market_api.dart';
-import '../widget/home_card.dart';
+import 'package:projectbesquare/cubit/bottom_navigation_cubit.dart.dart';
+import 'package:projectbesquare/model/market_model.dart';
+import 'package:projectbesquare/widget/bottom_navigation.dart';
+import 'package:projectbesquare/widget/home_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -34,7 +35,7 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: const Color(0xFF0D0D2B),
           title: Image.asset(
             'assets/light_logo.png',
-            width: 150.0,
+            width: 130.0,
           ),
           centerTitle: true,
         ),
@@ -52,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
                       Text(
-                        'Welcome !',
+                        'Welcome',
                         textAlign: TextAlign.start,
                         style: TextStyle(
                             fontSize: 30, fontWeight: FontWeight.bold),
@@ -81,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
-                    elevation: 8,
+                    elevation: 2,
                     shadowColor: const Color(0xFF979797),
                     child: ListView.builder(
                       itemCount: crypto.length,
@@ -100,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 transitionsBuilder: (context, animation,
                                     secondaryAnimation, child) {
-                                  return child; // No animation, just return the child directly
+                                  return child;
                                 },
                               ),
                             );

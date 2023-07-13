@@ -8,24 +8,18 @@ class NewsCardLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
-        top: 10.0,
-        left: 10.0,
-        right: 10.0,
-      ),
+      padding: const EdgeInsets.all(5.0),
       child: Row(
         children: [
-          LoadingBar(
-            height: 120,
-            width: 120,
+          const LoadingBar(
+            height: 80,
+            width: 80,
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Expanded(
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              LoadingBar(),
-              SizedBox(height: 8),
+            children: const [
               LoadingBar(),
               SizedBox(height: 8),
               LoadingBar(),
@@ -51,7 +45,7 @@ class MarketCardLoading extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(12.0),
           child: Row(
             children: [
               Expanded(
@@ -61,7 +55,7 @@ class MarketCardLoading extends StatelessWidget {
                         flex: 1,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+                          children: const [
                             LoadingBar(
                               height: 45,
                               width: 45,
@@ -72,7 +66,7 @@ class MarketCardLoading extends StatelessWidget {
                         flex: 2,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+                          children: const [
                             LoadingBar(
                               width: 80,
                             ),
@@ -88,7 +82,7 @@ class MarketCardLoading extends StatelessWidget {
                         flex: 1,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
+                          children: const [
                             LoadingBar(
                               width: 80,
                             ),

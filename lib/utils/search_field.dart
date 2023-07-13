@@ -4,7 +4,8 @@ class SearchField extends StatelessWidget {
   final TextEditingController controller;
   final ValueChanged<String> onChanged;
 
-  const SearchField({super.key, 
+  const SearchField({
+    super.key,
     required this.controller,
     required this.onChanged,
   });
@@ -18,7 +19,7 @@ class SearchField extends StatelessWidget {
         onChanged: onChanged,
         decoration: InputDecoration(
           filled: true,
-          fillColor: const Color.fromARGB(255, 233, 231, 231),
+          fillColor: Colors.white,
           labelText: 'Search currency',
           labelStyle: const TextStyle(
             color: Colors.blueGrey,
@@ -29,11 +30,11 @@ class SearchField extends StatelessWidget {
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
-            borderSide: const BorderSide(color: Colors.white),
+            borderSide: const BorderSide(color: Colors.grey),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
-            borderSide: const BorderSide(color: Colors.white),
+            borderSide: const BorderSide(color: Colors.grey),
           ),
         ),
       ),

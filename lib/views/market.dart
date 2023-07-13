@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../api/market_api.dart';
-import '../body/market_body.dart';
-import '../cubit/bottom_navigation_cubit.dart.dart';
-import '../model/market_model.dart';
-import '../utils/filter_buttons.dart';
-import '../utils/search_field.dart';
-import '../widget/bottom_navigation.dart';
-import '../widget/market_card.dart';
-import '../widget/loading_bar.dart';
-import '../utils/crypto_utils.dart';
+import 'package:projectbesquare/api/market_api.dart';
+import 'package:projectbesquare/body/market_body.dart';
+import 'package:projectbesquare/cubit/bottom_navigation_cubit.dart.dart';
+import 'package:projectbesquare/model/market_model.dart';
+import 'package:projectbesquare/utils/crypto_utils.dart';
+import 'package:projectbesquare/utils/filter_buttons.dart';
+import 'package:projectbesquare/utils/search_field.dart';
+import 'package:projectbesquare/widget/bottom_navigation.dart';
+import 'package:projectbesquare/widget/loading_bar.dart';
+import 'package:projectbesquare/widget/market_card.dart';
+
 
 class MarketPage extends StatefulWidget {
   const MarketPage({Key? key}) : super(key: key);
@@ -141,7 +142,7 @@ class _MarketPageState extends State<MarketPage> {
                                         ),
                                         transitionsBuilder: (context, animation,
                                             secondaryAnimation, child) {
-                                          return child; // No animation, just return the child directly
+                                          return child;
                                         },
                                       ),
                                     );

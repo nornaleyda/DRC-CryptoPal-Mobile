@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projectbesquare/body/market_body.dart';
+
+import 'package:projectbesquare/cubit/bottom_navigation_cubit.dart.dart';
+import 'package:projectbesquare/provider/watchlist_provider.dart';
+import 'package:projectbesquare/widget/bottom_navigation.dart';
+import 'package:projectbesquare/widget/market_card.dart';
 import 'package:provider/provider.dart';
 
-import '../body/market_body.dart';
-import '../cubit/bottom_navigation_cubit.dart.dart';
-import '../provider/watchlist_provider.dart';
-import '../widget/bottom_navigation.dart';
-import '../widget/market_card.dart';
 
 class WatchList extends StatefulWidget {
   const WatchList({Key? key}) : super(key: key);
 
   @override
-  _WatchListState createState() => _WatchListState();
+  State createState() => _WatchListState();
 }
 
 class _WatchListState extends State<WatchList> {
@@ -49,9 +50,9 @@ class _WatchListState extends State<WatchList> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 18.0, left: 12.0),
+                padding: const EdgeInsets.only(top: 18.0, left: 12.0),
                 child: Column(
-                  children: [
+                  children: const [
                     Text(
                       'Watchlist',
                       textAlign: TextAlign.start,
@@ -62,9 +63,9 @@ class _WatchListState extends State<WatchList> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 10.0, left: 12.0),
+                padding: const EdgeInsets.only(top: 10.0, left: 12.0),
                 child: Column(
-                  children: [
+                  children: const [
                     Text(
                       'View your favorite coins here!',
                       style: TextStyle(fontSize: 15, color: Color(0xFFBB0163)),
@@ -100,10 +101,16 @@ class _WatchListState extends State<WatchList> {
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) => CryptoDescr(
+                              PageRouteBuilder(
+                                pageBuilder:
+                                    (context, animation, secondaryAnimation) =>
+                                        CryptoDescr(
                                   currency: item,
                                 ),
+                                transitionsBuilder: (context, animation,
+                                    secondaryAnimation, child) {
+                                  return child;
+                                },
                               ),
                             );
                           },
