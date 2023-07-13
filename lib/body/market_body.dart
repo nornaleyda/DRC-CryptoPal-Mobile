@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:projectbesquare/model/market_model.dart';
+import 'package:projectbesquare/widget/market_body_card.dart';
 
-import '../model/market_model.dart';
-import '../widget/market_body_card.dart';
 
 class CryptoDescr extends StatelessWidget {
   final CryptoItemModel currency;

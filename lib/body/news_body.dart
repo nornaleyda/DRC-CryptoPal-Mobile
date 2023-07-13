@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../model/news_model.dart';
-import '../widget/news_body_card.dart';
+import 'package:projectbesquare/model/news_model.dart';
+import 'package:projectbesquare/widget/news_body_card.dart';
 
 class NewsBody extends StatelessWidget {
   final NewsItemModel news;

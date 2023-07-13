@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../cubit/bottom_navigation_cubit.dart.dart';
+import 'package:akar_icons_flutter/akar_icons_flutter.dart';
+
+import 'package:projectbesquare/cubit/bottom_navigation_cubit.dart.dart';
 
 class BottomNavigation extends StatelessWidget {
   const BottomNavigation({Key? key}) : super(key: key);
@@ -24,41 +26,43 @@ class BottomNavigation extends StatelessWidget {
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: Center(
-                  child: Icon(Icons.house,
-                      size: 25,
-                      color: index == 0
-                          ? const Color(0xFFBB0163)
-                          : const Color(0xFF979797)),
+                  child: Icon(
+                    AkarIcons.home,
+                    size: 23,
+                    color: index == 0
+                        ? const Color(0xFFBB0163)
+                        : const Color(0xFF979797),
+                  ),
                 ),
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.newspaper,
-                    size: 25,
+                icon: Icon(AkarIcons.newspaper,
+                    size: 23,
                     color: index == 1
                         ? const Color(0xFFBB0163)
                         : const Color(0xFF979797)),
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.show_chart,
-                    size: 25,
+                icon: Icon(AkarIcons.statistic_up,
+                    size: 23,
                     color: index == 2
                         ? const Color(0xFFBB0163)
                         : const Color(0xFF979797)),
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.star,
-                    size: 25,
+                icon: Icon(AkarIcons.star,
+                    size: 23,
                     color: index == 3
                         ? const Color(0xFFBB0163)
                         : const Color(0xFF979797)),
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.perm_identity,
-                    size: 25,
+                icon: Icon(AkarIcons.person,
+                    size: 23,
                     color: index == 4
                         ? const Color(0xFFBB0163)
                         : const Color(0xFF979797)),

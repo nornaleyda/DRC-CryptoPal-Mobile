@@ -1,11 +1,12 @@
+import 'package:akar_icons_flutter/akar_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'package:intl/intl.dart';
 
-import '../api/chart_api.dart';
-import '../model/market_model.dart';
-import '../provider/watchlist_provider.dart';
+import 'package:projectbesquare/api/chart_api.dart';
+import 'package:projectbesquare/model/market_model.dart';
+import 'package:projectbesquare/provider/watchlist_provider.dart';
+
 
 class CryptoCardBody extends StatefulWidget {
   const CryptoCardBody({
@@ -30,7 +31,7 @@ class CryptoCardBody extends StatefulWidget {
   final String cryptocurrencyName;
 
   @override
-  _CryptoCardBodyState createState() => _CryptoCardBodyState();
+  State<CryptoCardBody> createState() => _CryptoCardBodyState();
 }
 
 class _CryptoCardBodyState extends State<CryptoCardBody> {
@@ -119,16 +120,16 @@ class _CryptoCardBodyState extends State<CryptoCardBody> {
                                 Consumer<FavoriteProvider>(
                                   builder: (context, provider, _) {
                                     return IconButton(
-                                      iconSize: 35,
+                                      iconSize: 28,
                                       onPressed: () {
                                         Provider.of<FavoriteProvider>(context,
                                                 listen: false)
                                             .toggleFavorite(item);
                                       },
                                       icon: provider.isExist(item)
-                                          ? const Icon(Icons.star,
+                                          ? const Icon(AkarIcons.star,
                                               color: Colors.yellow)
-                                          : const Icon(Icons.star_outline,
+                                          : const Icon(AkarIcons.star,
                                               color: Colors.grey),
                                     );
                                   },
@@ -224,26 +225,25 @@ class _CryptoCardBodyState extends State<CryptoCardBody> {
                           width: 1.0,
                         ),
                       ),
-                      child: DropdownButton(
-                        items: const [
-                          DropdownMenuItem(
-                            value: 'Option 1',
-                            child: Text('Option 1'),
-                          ),
-                          DropdownMenuItem(
-                            value: 'Option 2',
-                            child: Text('Option 2'),
-                          ),
-                        ],
+                      child: DropdownButton<String>(
+                        items: dropdownItems.map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
                         onChanged: (value) {
-                          // dropdown value
+                          if (value != null) {
+                            setState(() {
+                              selectedCurrency = value;
+                            });
+                            updateCurrency(value);
+                          }
                         },
+                        value: selectedCurrency,
                         hint: const Padding(
                           padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            'option',
-                            style: TextStyle(color: Colors.white),
-                          ),
+                          child: Text('option'),
                         ),
                         isExpanded: false,
                         underline: const SizedBox(),
@@ -252,17 +252,6 @@ class _CryptoCardBodyState extends State<CryptoCardBody> {
                   ],
                 ),
                 const SizedBox(height: 10.0),
-                // Row(
-                //   children: const [
-                //     Text(
-                //       'chart',
-                //       style: TextStyle(
-                //           fontSize: 16,
-                //           letterSpacing: 1.2,
-                //           color: Colors.white),
-                //     ),
-                //   ],
-                // ),
                 Chart(
                   cryptocurrencyName: widget.symbol!,
                   currency: selectedCurrency,

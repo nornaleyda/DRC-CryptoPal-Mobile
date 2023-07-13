@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'login.dart';
+import 'package:projectbesquare/register/login.dart';
+
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -45,23 +46,33 @@ class _SignUpState extends State<SignUp> {
         email: email,
         password: password,
       );
+
+      User? user = FirebaseAuth.instance.currentUser;
+      await user?.sendEmailVerification();
+
+      // ignore: use_build_context_synchronously
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Success'),
-            content: const Text('Registered successfully'),
+            title: const Text(
+              'Success',
+              style: TextStyle(color: Colors.black),
+            ),
+            content: const Text(
+                'Registered successfully. Please check your email for verification.'),
             actions: [
               TextButton(
-                child: const Text('OK'),
+                child: const Text('OK', style: TextStyle(color: Colors.pink)),
                 onPressed: () {
                   Navigator.of(context).pop();
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Login(
-                              emailController: emailController,
-                            )),
+                      builder: (context) => Login(
+                        emailController: emailController,
+                      ),
+                    ),
                   );
                 },
               ),
@@ -90,10 +101,10 @@ class _SignUpState extends State<SignUp> {
           children: [
             const SizedBox(height: 50),
             Padding(
-              padding: EdgeInsets.only(left: 25.0),
+              padding: const EdgeInsets.only(left: 25.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: const [
                   Text(
                     'Create Account',
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
@@ -121,13 +132,13 @@ class _SignUpState extends State<SignUp> {
                     filled: true,
                     fillColor: const Color.fromARGB(255, 236, 234, 234),
                     labelText: 'Email',
-                    labelStyle: const TextStyle(color: Colors.black),
+                    labelStyle: const TextStyle(color: Colors.grey),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(15),
                       borderSide: const BorderSide(color: Colors.white),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(15),
                       borderSide: const BorderSide(color: Colors.white),
                     ),
                   ),
@@ -150,13 +161,13 @@ class _SignUpState extends State<SignUp> {
                     filled: true,
                     fillColor: const Color.fromARGB(255, 236, 234, 234),
                     labelText: 'Password',
-                    labelStyle: const TextStyle(color: Colors.black),
+                    labelStyle: const TextStyle(color: Colors.grey),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(15),
                       borderSide: const BorderSide(color: Colors.white),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(15),
                       borderSide: const BorderSide(color: Colors.white),
                     ),
                     suffixIcon: IconButton(
@@ -193,14 +204,14 @@ class _SignUpState extends State<SignUp> {
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: const Color.fromARGB(255, 236, 234, 234),
-                    labelText: 'Confirm Password',
-                    labelStyle: const TextStyle(color: Colors.black),
+                    labelText: 'Confirm password',
+                    labelStyle: const TextStyle(color: Colors.grey),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(15),
                       borderSide: const BorderSide(color: Colors.white),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(15),
                       borderSide: const BorderSide(color: Colors.white),
                     ),
                     suffixIcon: IconButton(
@@ -238,7 +249,7 @@ class _SignUpState extends State<SignUp> {
             const SizedBox(height: 50),
             Center(
               child: SizedBox(
-                width: MediaQuery.of(context).size.width * .7,
+                width: MediaQuery.of(context).size.width * .8,
                 height: 50,
                 child: ElevatedButton(
                   onPressed: isSignUpButtonEnabled()
@@ -253,10 +264,13 @@ class _SignUpState extends State<SignUp> {
                     backgroundColor: MaterialStateProperty.all<Color>(
                       isSignUpButtonEnabled()
                           ? const Color(0xFFBB0163)
-                          : Colors.grey,
+                          : const Color.fromARGB(41, 187, 1, 100),
                     ),
                   ),
-                  child: const Text('Create account'),
+                  child: const Text(
+                    'Create account',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
             ),
@@ -264,12 +278,18 @@ class _SignUpState extends State<SignUp> {
             Center(
               child: TextButton(
                 onPressed: () {
-                  Navigator.pushReplacement(
+                  Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => Login(
-                              emailController: emailController,
-                            )),
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          Login(
+                        emailController: emailController,
+                      ),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        return child;
+                      },
+                    ),
                   );
                 },
                 child: RichText(

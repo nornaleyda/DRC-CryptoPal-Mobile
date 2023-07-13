@@ -34,14 +34,45 @@ class _LoginState extends State<Login> {
 
   void signInWithEmailAndPassword() async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: widget.emailController.text.trim(),
-        password: passwordController.text.trim(),
+      final email = widget.emailController.text.trim();
+      final password = passwordController.text.trim();
+
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
       );
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
-      );
+
+      User? user = userCredential.user;
+
+      if (user != null) {
+        if (user.emailVerified) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+          );
+        } else {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text('Email Verification Required'),
+                content:
+                    const Text('Please verify your email before logging in.'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: const Text(
+                      'OK',
+                      style: TextStyle(color: Colors.pink),
+                    ),
+                  ),
+                ],
+              );
+            },
+          );
+        }
+      }
     } on FirebaseAuthException catch (e) {
       setState(() {
         errorMessage = e.message;
@@ -94,10 +125,10 @@ class _LoginState extends State<Login> {
           children: [
             const SizedBox(height: 50),
             Padding(
-              padding: EdgeInsets.only(left: 25.0),
+              padding: const EdgeInsets.only(left: 25.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: const [
                   Text(
                     'Login',
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
@@ -125,13 +156,13 @@ class _LoginState extends State<Login> {
                     filled: true,
                     fillColor: const Color.fromARGB(255, 236, 234, 234),
                     labelText: 'Email',
-                    labelStyle: const TextStyle(color: Colors.black),
+                    labelStyle: const TextStyle(color: Colors.grey),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(15),
                       borderSide: const BorderSide(color: Colors.white),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(15),
                       borderSide: const BorderSide(color: Colors.white),
                     ),
                   ),
@@ -156,13 +187,13 @@ class _LoginState extends State<Login> {
                     filled: true,
                     fillColor: const Color.fromARGB(255, 236, 234, 234),
                     labelText: 'Password',
-                    labelStyle: const TextStyle(color: Colors.black),
+                    labelStyle: const TextStyle(color: Colors.grey),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(15),
                       borderSide: const BorderSide(color: Colors.white),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(15),
                       borderSide: const BorderSide(color: Colors.white),
                     ),
                     suffixIcon: Row(
@@ -218,7 +249,7 @@ class _LoginState extends State<Login> {
             const SizedBox(height: 50),
             Center(
               child: SizedBox(
-                width: MediaQuery.of(context).size.width * .7,
+                width: MediaQuery.of(context).size.width * .8,
                 height: 50,
                 child: ElevatedButton(
                   onPressed: isLoginButtonEnabled()
@@ -231,12 +262,14 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     backgroundColor: MaterialStateProperty.all<Color>(
-                      isLoginButtonEnabled()
-                          ? const Color(0xFFBB0163)
-                          : Colors.grey,
-                    ),
+                        isLoginButtonEnabled()
+                            ? const Color(0xFFBB0163)
+                            : const Color.fromARGB(41, 187, 1, 100)),
                   ),
-                  child: const Text('Login'),
+                  child: const Text(
+                    'Log in',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
             ),
@@ -244,18 +277,25 @@ class _LoginState extends State<Login> {
             Center(
               child: TextButton(
                 onPressed: () {
-                  Navigator.pushReplacement(
+                  Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const SignUp()),
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          const SignUp(),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        return child;
+                      },
+                    ),
                   );
                 },
-                child: RichText(
+                 child: RichText(
                   text: const TextSpan(
                     text: 'Don\'t have an account? ',
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Colors.grey),
                     children: [
                       TextSpan(
-                        text: 'Sign up',
+                        text: 'Create account',
                         style: TextStyle(
                           color: Color(0xFFBB0163),
                           fontWeight: FontWeight.bold,

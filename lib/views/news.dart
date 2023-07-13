@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../api/market_api.dart';
-import '../body/news_body.dart';
-import '../cubit/bottom_navigation_cubit.dart.dart';
-import '../model/news_model.dart';
-import '../widget/bottom_navigation.dart';
-import '../widget/loading_bar.dart';
-import '../widget/news_card.dart';
+
+import 'package:projectbesquare/api/market_api.dart';
+import 'package:projectbesquare/body/news_body.dart';
+import 'package:projectbesquare/cubit/bottom_navigation_cubit.dart.dart';
+import 'package:projectbesquare/model/news_model.dart';
+import 'package:projectbesquare/widget/bottom_navigation.dart';
+import 'package:projectbesquare/widget/loading_bar.dart';
+import 'package:projectbesquare/widget/news_card.dart';
 
 class CryptoNews extends StatefulWidget {
   const CryptoNews({Key? key}) : super(key: key);
@@ -61,7 +62,7 @@ class _CryptoNews extends State<CryptoNews> {
           backgroundColor: const Color(0xFF0D0D2B),
           title: Image.asset(
             'assets/light_logo.png',
-            width: 150.0,
+            width: 130.0,
           ),
           centerTitle: true,
         ),
@@ -90,7 +91,7 @@ class _CryptoNews extends State<CryptoNews> {
                   child: Column(
                     children: const [
                       Text(
-                        'Read our crypto updates !',
+                        'Read our crypto updates!',
                         style:
                             TextStyle(fontSize: 15, color: Color(0xFFBB0163)),
                       ),
@@ -98,7 +99,7 @@ class _CryptoNews extends State<CryptoNews> {
                   ),
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 30.0,
                 ),
                 _isLoading
                     ? Expanded(
@@ -109,7 +110,7 @@ class _CryptoNews extends State<CryptoNews> {
                                 const SizedBox(
                                   height: 5,
                                 ),
-                            itemCount: 5))
+                            itemCount: 10))
                     : Expanded(
                         child: ListView.builder(
                           controller: _scrollController,

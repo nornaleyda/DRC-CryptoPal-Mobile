@@ -20,32 +20,38 @@ class FilterButtons extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           ElevatedButton(
-            onPressed: onHighestPressed,
+            onPressed: onLowestPressed,
             style: ElevatedButton.styleFrom(
-              backgroundColor:
-                  isDescending ? const Color(0xFF979797) : Colors.pink,
-              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25.0),
+                side: const BorderSide(color: Colors.pink),
+              ),
+              backgroundColor: isDescending ? Colors.pink : Colors.white,
+              foregroundColor: Colors.pink,
             ),
-            child: const Text(
-              'Lowest',
+            child: Text(
+              'Highest',
               style: TextStyle(
-                color: Colors.white,
+                color: isDescending ? Colors.white : Colors.pink,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
           const SizedBox(width: 10),
           ElevatedButton(
-            onPressed: onLowestPressed,
+            onPressed: onHighestPressed,
             style: ElevatedButton.styleFrom(
-              backgroundColor:
-                  isDescending ? Colors.pink : const Color(0xFF979797),
-              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25.0),
+                side: const BorderSide(color: Colors.pink),
+              ),
+              backgroundColor: isDescending ? Colors.white : Colors.pink,
+              foregroundColor: Colors.pink, 
             ),
-            child: const Text(
-              'Highest',
+            child: Text(
+              'Lowest',
               style: TextStyle(
-                color: Colors.white,
+                color: isDescending ? Colors.pink : Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),

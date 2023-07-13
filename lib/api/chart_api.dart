@@ -101,7 +101,6 @@ class ChartState extends State<Chart> {
                 final messageType = decodedMessage['TYPE'];
                 final currency = decodedMessage['TOSYMBOL'];
 
-                // print("Received from Cryptocompare: $message");
                 print("Received from Cryptocompare: $currency");
 
                 if (messageType == '2') {

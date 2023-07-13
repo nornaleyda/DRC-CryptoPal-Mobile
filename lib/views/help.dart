@@ -4,7 +4,7 @@ class HelpPage extends StatefulWidget {
   const HelpPage({Key? key}) : super(key: key);
 
   @override
-  _HelpPageState createState() => _HelpPageState();
+  State<HelpPage> createState() => _HelpPageState();
 }
 
 class _HelpPageState extends State<HelpPage> {
@@ -49,11 +49,11 @@ class _HelpPageState extends State<HelpPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 18.0, left: 12.0),
+                padding: const EdgeInsets.only(top: 18.0, left: 12.0),
                 child: Column(
                   children: [
                     Row(
-                      children: [
+                      children: const [
                         Text(
                           'FAQ',
                           textAlign: TextAlign.start,
@@ -63,7 +63,7 @@ class _HelpPageState extends State<HelpPage> {
                       ],
                     ),
                     Row(
-                      children: [
+                      children: const [
                         Text(
                           'Frequently Asked Questions',
                           style: TextStyle(color: Colors.pink),

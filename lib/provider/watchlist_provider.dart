@@ -16,7 +16,6 @@ class FavoriteProvider extends ChangeNotifier {
 
   Future<void> toggleFavorite(CryptoItemModel item) async {
     final user = FirebaseAuth.instance.currentUser;
-    // final isExist = _favoriteItems.contains(item);
     if (user == null) {
       print('User is not logged in.');
       return;
@@ -47,7 +46,7 @@ class FavoriteProvider extends ChangeNotifier {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) {
         print('User is not logged in.');
-         return;
+        return;
       }
 
       final userEmail = user.email;
@@ -69,7 +68,9 @@ class FavoriteProvider extends ChangeNotifier {
   }
 
   bool isExist(CryptoItemModel item) {
-    final isExist = _favoriteItems.contains(item);
+    final isExist = _favoriteItems.any(
+      (favItem) => favItem.name == item.name,
+    );
     return isExist;
   }
 
