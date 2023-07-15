@@ -163,7 +163,6 @@ class _CryptoNews extends State<CryptoNews> {
             .toList();
       });
     }
-
     print('news completed');
   }
 

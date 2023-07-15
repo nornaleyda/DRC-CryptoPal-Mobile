@@ -32,7 +32,7 @@ class AboutPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20.0),
               ),
               elevation: 2,
-              shadowColor: const Color(0xFF979797),
+              shadowColor: Colors.white,
             ),
           ),
         ],

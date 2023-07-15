@@ -48,6 +48,7 @@ dependencies:
   syncfusion_flutter_charts: ^22.1.38
   carousel_slider: ^4.2.1
   akar_icons_flutter: ^1.1.16
+  url_launcher: ^6.1.11
 
 dev_dependencies:
   flutter_test:

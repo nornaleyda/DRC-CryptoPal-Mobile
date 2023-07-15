@@ -11,7 +11,6 @@ import 'package:projectbesquare/register/onboarding.dart';
 import 'package:projectbesquare/splash_screen.dart';
 import 'package:projectbesquare/views/home.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(

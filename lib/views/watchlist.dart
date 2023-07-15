@@ -8,7 +8,6 @@ import 'package:projectbesquare/widget/bottom_navigation.dart';
 import 'package:projectbesquare/widget/market_card.dart';
 import 'package:provider/provider.dart';
 
-
 class WatchList extends StatefulWidget {
   const WatchList({Key? key}) : super(key: key);
 
@@ -40,7 +39,7 @@ class _WatchListState extends State<WatchList> {
           backgroundColor: const Color(0xFF0D0D2B),
           title: Image.asset(
             'assets/light_logo.png',
-            width: 150.0,
+            width: 130.0,
           ),
           centerTitle: true,
         ),
@@ -86,8 +85,11 @@ class _WatchListState extends State<WatchList> {
                         child: Padding(
                           padding: EdgeInsets.all(18.0),
                           child: Text(
-                            "Oops.. you have nothing on your watchlist",
-                            style: TextStyle(fontSize: 16),
+                            '- Add currency to watchlist -',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontStyle: FontStyle.italic,
+                                color: Colors.grey),
                           ),
                         ),
                       );

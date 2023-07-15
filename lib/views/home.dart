@@ -7,6 +7,7 @@ import 'package:projectbesquare/cubit/bottom_navigation_cubit.dart.dart';
 import 'package:projectbesquare/model/market_model.dart';
 import 'package:projectbesquare/widget/bottom_navigation.dart';
 import 'package:projectbesquare/widget/home_card.dart';
+import 'package:projectbesquare/widget/loading_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,8 +20,18 @@ class _HomePageState extends State<HomePage> {
   List<dynamic> crypto = [];
   final ApiManager apiManager = ApiManager();
 
+  late bool _isLoading;
+
   @override
   void initState() {
+    _isLoading = true;
+    Future.delayed(const Duration(seconds: 2), () {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    });
     super.initState();
     fetchCrypto();
   }
@@ -75,49 +86,72 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.all(18.0),
-                  height: 520,
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    elevation: 2,
-                    shadowColor: const Color(0xFF979797),
-                    child: ListView.builder(
-                      itemCount: crypto.length,
-                      itemBuilder: (context, index) {
-                        final currency = crypto[index];
-
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder:
-                                    (context, animation, secondaryAnimation) =>
-                                        CryptoDescr(
-                                  currency: currency,
-                                ),
-                                transitionsBuilder: (context, animation,
-                                    secondaryAnimation, child) {
-                                  return child;
-                                },
-                              ),
-                            );
-                          },
-                          child: HomeCard(
-                            name: currency.name,
-                            symbol: currency.symbol,
-                            imageUrl: currency.imageUrl,
-                            price: currency.price,
-                            change: currency.change,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+                const SizedBox(
+                  height: 30.0,
                 ),
+                _isLoading
+                    ? Container(
+                        margin: const EdgeInsets.all(18.0),
+                        height: 520,
+                        child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                            elevation: 2,
+                            shadowColor: const Color(0xFF979797),
+                            child: ListView.separated(
+                                itemBuilder: ((context, index) =>
+                                    const MarketCardLoading()),
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(
+                                      height: 6.0,
+                                    ),
+                                itemCount: 6)),
+                      )
+                    : Container(
+                        margin: const EdgeInsets.all(18.0),
+                        height: 520,
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          elevation: 2,
+                          shadowColor: const Color(0xFF979797),
+                          child: ListView.builder(
+                            itemCount: crypto.length,
+                            itemBuilder: (context, index) {
+                              final currency = crypto[index];
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    PageRouteBuilder(
+                                      pageBuilder: (context, animation,
+                                              secondaryAnimation) =>
+                                          CryptoDescr(
+                                        currency: currency,
+                                      ),
+                                      transitionsBuilder: (context, animation,
+                                          secondaryAnimation, child) {
+                                        return child;
+                                      },
+                                    ),
+                                  );
+                                },
+                                child: HomeCard(
+                                  name: currency.name,
+                                  symbol: currency.symbol,
+                                  imageUrl: currency.imageUrl,
+                                  price: currency.price,
+                                  change: currency.change,
+                                  percent: currency.percent,
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        // ),
+                      ),
               ],
             ),
           ),

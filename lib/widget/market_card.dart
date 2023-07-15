@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class MarketCard extends StatelessWidget {
   const MarketCard({
@@ -72,16 +73,14 @@ class MarketCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              price!.toDouble().toStringAsFixed(2),
+                              NumberFormat('#,###.00')
+                                  .format(price!.toDouble()),
                               style: const TextStyle(
-                                color: Colors.black,
                                 fontSize: 15,
                               ),
                             ),
                             Text(
-                              percent!.toDouble() < 0
-                                  ? '${percent!.toDouble().toStringAsFixed(2)}%'
-                                  : '+${percent!.toDouble().toStringAsFixed(2)}%',
+                              '${percent!.toDouble() < 0 ? '-' : '+'}${NumberFormat('#,##0.00').format(percent!.toDouble().abs())}',
                               style: TextStyle(
                                 color: percent!.toDouble() > 0
                                     ? const Color(0xFF57992D)

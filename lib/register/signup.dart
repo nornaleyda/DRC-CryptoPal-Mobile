@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:projectbesquare/register/login.dart';
 
-
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -55,6 +54,8 @@ class _SignUpState extends State<SignUp> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25.0)),
             title: const Text(
               'Success',
               style: TextStyle(color: Colors.black),
@@ -130,16 +131,16 @@ class _SignUpState extends State<SignUp> {
                   ),
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: const Color.fromARGB(255, 236, 234, 234),
+                    fillColor: Colors.white,
                     labelText: 'Email',
                     labelStyle: const TextStyle(color: Colors.grey),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.grey),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.grey),
                     ),
                   ),
                 ),
@@ -159,16 +160,16 @@ class _SignUpState extends State<SignUp> {
                   ),
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: const Color.fromARGB(255, 236, 234, 234),
+                    fillColor: Colors.white,
                     labelText: 'Password',
                     labelStyle: const TextStyle(color: Colors.grey),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.grey),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.grey),
                     ),
                     suffixIcon: IconButton(
                       icon: Icon(
@@ -203,16 +204,16 @@ class _SignUpState extends State<SignUp> {
                   ),
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: const Color.fromARGB(255, 236, 234, 234),
+                    fillColor: Colors.white,
                     labelText: 'Confirm password',
                     labelStyle: const TextStyle(color: Colors.grey),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.grey),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.grey),
                     ),
                     suffixIcon: IconButton(
                       icon: Icon(

@@ -56,6 +56,8 @@ class _LoginState extends State<Login> {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25.0)),
                 title: const Text('Email Verification Required'),
                 content:
                     const Text('Please verify your email before logging in.'),
@@ -154,16 +156,16 @@ class _LoginState extends State<Login> {
                   ),
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: const Color.fromARGB(255, 236, 234, 234),
+                    fillColor: Colors.white,
                     labelText: 'Email',
                     labelStyle: const TextStyle(color: Colors.grey),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.grey),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.grey),
                     ),
                   ),
                 ),
@@ -185,16 +187,16 @@ class _LoginState extends State<Login> {
                   ),
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: const Color.fromARGB(255, 236, 234, 234),
+                    fillColor: Colors.white,
                     labelText: 'Password',
                     labelStyle: const TextStyle(color: Colors.grey),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.grey),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.grey),
                     ),
                     suffixIcon: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -289,7 +291,7 @@ class _LoginState extends State<Login> {
                     ),
                   );
                 },
-                 child: RichText(
+                child: RichText(
                   text: const TextSpan(
                     text: 'Don\'t have an account? ',
                     style: TextStyle(color: Colors.grey),
