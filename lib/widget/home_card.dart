@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class HomeCard extends StatelessWidget {
-  const HomeCard(
-      {super.key,
-      required this.name,
-      required this.symbol,
-      required this.imageUrl,
-      required this.price,
-      required this.change});
-
   final String? name;
   final String? symbol;
   final String? imageUrl;
   final num? price;
   final num? change;
+  final num? percent;
+
+  const HomeCard({
+    super.key,
+    required this.name,
+    required this.symbol,
+    required this.imageUrl,
+    required this.price,
+    required this.change,
+    required this.percent,
+  });
+
 
   @override
   Widget build(BuildContext context) {
@@ -68,18 +73,15 @@ class HomeCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            price!.toDouble().toStringAsFixed(2),
+                            NumberFormat('#,##0.00').format(price!.toDouble()),
                             style: const TextStyle(
-                              color: Colors.black,
                               fontSize: 18,
                             ),
                           ),
                           Text(
-                            change!.toDouble() < 0
-                                ? change!.toDouble().toStringAsFixed(2)
-                                : '+${change!.toDouble().toStringAsFixed(2)}',
+                            '${percent!.toDouble() < 0 ? '-' : '+'}${NumberFormat('#,##0.00').format(percent!.toDouble().abs())}',
                             style: TextStyle(
-                              color: change!.toDouble() > 0
+                              color: percent!.toDouble() > 0
                                   ? const Color(0xFF57992D)
                                   : Colors.red,
                               fontSize: 18,

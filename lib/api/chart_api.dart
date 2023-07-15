@@ -85,7 +85,7 @@ class ChartState extends State<Chart> {
       padding: const EdgeInsets.all(16.0),
       child: Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(25.0),
         ),
         elevation: 4,
         child: Container(

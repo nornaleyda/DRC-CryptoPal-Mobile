@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projectbesquare/cubit/bottom_navigation_cubit.dart.dart';
 import 'package:projectbesquare/register/onboarding.dart';
 import 'package:projectbesquare/views/about.dart';
+import 'package:projectbesquare/views/description.dart';
 import 'package:projectbesquare/views/help.dart';
 import 'package:projectbesquare/widget/bottom_navigation.dart';
 
@@ -25,7 +26,7 @@ class UserAccount extends StatelessWidget {
               backgroundColor: const Color(0xFF0D0D2B),
               title: Image.asset(
                 'assets/light_logo.png',
-                width: 150.0,
+                width: 130.0,
               ),
               centerTitle: true),
           backgroundColor: Colors.white,
@@ -162,6 +163,8 @@ class UserAccount extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25.0)),
                           title: const Text('Logout Confirmation'),
                           content:
                               const Text('Are you sure you want to logout?'),

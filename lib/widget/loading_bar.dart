@@ -45,7 +45,7 @@ class MarketCardLoading extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 15.0, bottom: 6.0 ),
           child: Row(
             children: [
               Expanded(
@@ -57,8 +57,8 @@ class MarketCardLoading extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [
                             LoadingBar(
-                              height: 45,
-                              width: 45,
+                              height: 55,
+                              width: 55,
                             ),
                           ],
                         )),

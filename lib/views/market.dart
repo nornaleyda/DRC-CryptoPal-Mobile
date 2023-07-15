@@ -12,7 +12,6 @@ import 'package:projectbesquare/widget/bottom_navigation.dart';
 import 'package:projectbesquare/widget/loading_bar.dart';
 import 'package:projectbesquare/widget/market_card.dart';
 
-
 class MarketPage extends StatefulWidget {
   const MarketPage({Key? key}) : super(key: key);
 
@@ -84,7 +83,7 @@ class _MarketPageState extends State<MarketPage> {
             backgroundColor: const Color(0xFF0D0D2B),
             title: Image.asset(
               'assets/light_logo.png',
-              width: 150.0,
+              width: 130.0,
             ),
             centerTitle: true),
         backgroundColor: Colors.white,
@@ -119,11 +118,17 @@ class _MarketPageState extends State<MarketPage> {
                           separatorBuilder: (context, index) => const SizedBox(
                                 height: 6.0,
                               ),
-                          itemCount: 6))
+                          itemCount: 10))
                   : Expanded(
                       child: filteredCrypto.isEmpty
                           ? const Center(
-                              child: Text('No Result Found'),
+                              child: Text(
+                                '- No result found -',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontStyle: FontStyle.italic,
+                                    color: Colors.grey),
+                              ),
                             )
                           : ListView.builder(
                               itemCount: filteredCrypto.length,

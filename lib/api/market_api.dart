@@ -1,6 +1,24 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+class ApiAbout {
+  static Future<dynamic> fetchAbout(String cryptoName) async {
+    final apiUrl = Uri.parse(
+        'https://data-api.cryptocompare.com/asset/v1/data/by/symbol?asset_symbol=$cryptoName');
+
+    final response = await http.get(apiUrl);
+
+    if (response.statusCode == 200) {
+      final body = response.body;
+      final json = jsonDecode(body);
+      return json;
+    } else {
+      throw Exception(
+          'Failed to fetch crypto data. Status code: ${response.statusCode}');
+    }
+  }
+}
+
 class ApiManager {
   Future<Map<String, dynamic>> getCryptoData({int limit = 100}) async {
     final url =
@@ -40,7 +58,7 @@ class ApiNews {
   }
 
   Future<Map<String, dynamic>> getMoreNewsData() async {
-    currentPage++; 
+    currentPage++;
 
     final url = '$baseUrl&page=$currentPage';
     final uri = Uri.parse(url);
