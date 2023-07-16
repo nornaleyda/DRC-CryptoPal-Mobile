@@ -1,7 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:akar_icons_flutter/akar_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:projectbesquare/register/onboarding.dart';
 import 'package:projectbesquare/register/signup.dart';
 import 'package:projectbesquare/views/home.dart';
 
@@ -120,6 +122,29 @@ class _LoginState extends State<Login> {
         backgroundColor: const Color(0xFF0D0D2B),
         title: const Text('CryptoPal'),
         centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(
+            AkarIcons.chevron_left,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) =>
+                    OnboardingPage(emailController: emailController),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  return child;
+                },
+              ),
+              // MaterialPageRoute(
+              //   builder: (context) =>
+              //       OnboardingPage(emailController: emailController),
+              // ),
+            );
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -283,7 +308,7 @@ class _LoginState extends State<Login> {
                     context,
                     PageRouteBuilder(
                       pageBuilder: (context, animation, secondaryAnimation) =>
-                          const SignUp(),
+                          SignUp(),
                       transitionsBuilder:
                           (context, animation, secondaryAnimation, child) {
                         return child;

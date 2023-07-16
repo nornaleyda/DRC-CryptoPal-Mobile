@@ -19,7 +19,6 @@ class HomeCard extends StatelessWidget {
     required this.percent,
   });
 
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -75,16 +74,16 @@ class HomeCard extends StatelessWidget {
                           Text(
                             NumberFormat('#,##0.00').format(price!.toDouble()),
                             style: const TextStyle(
-                              fontSize: 18,
+                              fontSize: 17,
                             ),
                           ),
                           Text(
-                            '${percent!.toDouble() < 0 ? '-' : '+'}${NumberFormat('#,##0.00').format(percent!.toDouble().abs())}',
+                            '${percent!.toDouble() < 0 ? '-' : '+'}${NumberFormat('#,##0.00').format(percent!.toDouble().abs())}%',
                             style: TextStyle(
                               color: percent!.toDouble() > 0
                                   ? const Color(0xFF57992D)
                                   : Colors.red,
-                              fontSize: 18,
+                              fontSize: 17,
                             ),
                           ),
                         ],

@@ -1,7 +1,7 @@
+import 'package:akar_icons_flutter/akar_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:projectbesquare/model/market_model.dart';
 import 'package:projectbesquare/widget/market_body_card.dart';
-
 
 class CryptoDescr extends StatelessWidget {
   final CryptoItemModel currency;
@@ -12,9 +12,18 @@ class CryptoDescr extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF0D0D2B),
         title: const Text('Chart'),
         centerTitle: true,
+        backgroundColor: const Color(0xFF0D0D2B),
+        leading: IconButton(
+          icon: const Icon(
+            AkarIcons.chevron_left,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ),
       body: ListView(
         children: [
