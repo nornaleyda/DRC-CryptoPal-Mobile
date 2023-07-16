@@ -1,3 +1,4 @@
+import 'package:akar_icons_flutter/akar_icons_flutter.dart';
 import 'package:flutter/material.dart';
 
 class HelpPage extends StatefulWidget {
@@ -35,9 +36,18 @@ class _HelpPageState extends State<HelpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF0D0D2B),
-        centerTitle: true,
         title: const Text('Help'),
+        centerTitle: true,
+        backgroundColor: const Color(0xFF0D0D2B),
+        leading: IconButton(
+          icon: const Icon(
+            AkarIcons.chevron_left,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ),
       backgroundColor: const Color(0xFFF9FAFD),
       body: SingleChildScrollView(

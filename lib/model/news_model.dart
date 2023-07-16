@@ -22,9 +22,18 @@ class NewsItemModel {
     imageUrl = json['imageurl'];
     title = json['title'];
     body = json['body'];
-    tags = json['tags'];
+    tags = _extractFirstThreeTags(json['tags']);
     source = json['source_info']['name'];
     img = json['source_info']['img'];
+  }
+
+  String _extractFirstThreeTags(String? tags) {
+    if (tags == null) return '';
+
+    final List<String> tagList = tags.split('|');
+    final int endIndex = tagList.length > 3 ? 3 : tagList.length;
+
+    return tagList.sublist(0, endIndex).join('|');
   }
 
   Map<String, dynamic> toJson() {
@@ -35,8 +44,7 @@ class NewsItemModel {
     data['title'] = title;
     data['body'] = body;
     data['tags'] = tags;
-    data['source_info']['name'] = source;
-    data['source_info']['img'] = img;
+    data['source_info'] = {'name': source, 'img': img};
 
     return data;
   }

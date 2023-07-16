@@ -1,10 +1,14 @@
+import 'package:akar_icons_flutter/akar_icons_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:projectbesquare/register/login.dart';
 
+import 'onboarding.dart';
+
 class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+  SignUp({Key? key}) : super(key: key);
+  final emailController = TextEditingController();
 
   @override
   State<SignUp> createState() => _SignUpState();
@@ -95,6 +99,25 @@ class _SignUpState extends State<SignUp> {
         backgroundColor: const Color(0xFF0D0D2B),
         title: const Text('CryptoPal'),
         centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(
+            AkarIcons.chevron_left,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) =>
+                    OnboardingPage(emailController: emailController),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  return child;
+                },
+              ),
+            );
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(

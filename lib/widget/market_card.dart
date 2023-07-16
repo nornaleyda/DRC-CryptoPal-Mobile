@@ -73,14 +73,14 @@ class MarketCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              NumberFormat('#,###.00')
+                              NumberFormat('#,##0.00')
                                   .format(price!.toDouble()),
                               style: const TextStyle(
                                 fontSize: 15,
                               ),
                             ),
                             Text(
-                              '${percent!.toDouble() < 0 ? '-' : '+'}${NumberFormat('#,##0.00').format(percent!.toDouble().abs())}',
+                              '${percent!.toDouble() < 0 ? '-' : '+'}${NumberFormat('#,##0.00').format(percent!.toDouble().abs())}%',
                               style: TextStyle(
                                 color: percent!.toDouble() > 0
                                     ? const Color(0xFF57992D)
