@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projectbesquare/cubit/bottom_navigation_cubit.dart.dart';
 import 'package:projectbesquare/register/onboarding.dart';
 import 'package:projectbesquare/views/about.dart';
-import 'package:projectbesquare/views/description.dart';
 import 'package:projectbesquare/views/help.dart';
 import 'package:projectbesquare/widget/bottom_navigation.dart';
 
@@ -34,9 +33,19 @@ class UserAccount extends StatelessWidget {
             padding: const EdgeInsets.only(top: 50.0, right: 20.0, left: 20.0),
             child: Column(
               children: [
-                Text(
-                  'Email: $userEmail',
-                  style: const TextStyle(fontSize: 16),
+                Container(
+                  padding: EdgeInsets.all(15.0),
+                  decoration: BoxDecoration(
+                    color: Color(0xFFBB0163),
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  child: Text(
+                    ' $userEmail',
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
                 const SizedBox(
                   height: 40.0,

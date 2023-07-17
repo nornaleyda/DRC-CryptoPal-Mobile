@@ -67,6 +67,8 @@ class _CryptoNews extends State<CryptoNews> {
           centerTitle: true,
         ),
         body: RefreshIndicator(
+          color: const Color(0xFFBB0163),
+          backgroundColor: const Color(0xFFF9FAFD),
           onRefresh: fetchNews,
           child: Padding(
             padding: const EdgeInsets.all(10.0),
