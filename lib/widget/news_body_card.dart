@@ -26,7 +26,6 @@ class NewsCardBody extends StatelessWidget {
           children: [
             Text(
               title!,
-              textAlign: TextAlign.justify,
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
             const SizedBox(
@@ -36,6 +35,7 @@ class NewsCardBody extends StatelessWidget {
               width: 200,
               height: 200,
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30.0),
                 image: DecorationImage(
                   image: NetworkImage(image!),
                   fit: BoxFit.fill,

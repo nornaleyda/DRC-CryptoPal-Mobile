@@ -1,5 +1,8 @@
 import 'package:akar_icons_flutter/akar_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:projectbesquare/api/chart_api_EUR.dart';
+import 'package:projectbesquare/api/chart_api_GBP.dart';
+import 'package:projectbesquare/api/chart_api_USD.dart';
 import 'package:projectbesquare/views/description.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -35,18 +38,15 @@ class CryptoCardBody extends StatefulWidget {
 }
 
 class _CryptoCardBodyState extends State<CryptoCardBody> {
-  List<String> dropdownItems = ['USD', 'GBP', 'EUR'];
-  late String selectedCurrency;
+  bool showUSDChart = true;
+  bool showGBPChart = false;
+  bool showEURChart = false;
 
-  @override
-  void initState() {
-    super.initState();
-    selectedCurrency = 'USD';
-  }
-
-  void updateCurrency(String currency) {
+  void toggleChartVisibility(String currency) {
     setState(() {
-      selectedCurrency = currency;
+      showUSDChart = currency == 'USD';
+      showGBPChart = currency == 'GBP';
+      showEURChart = currency == 'EUR';
     });
   }
 
@@ -213,52 +213,103 @@ class _CryptoCardBodyState extends State<CryptoCardBody> {
                 children: [
                   Row(
                     children: [
-                      Container(
-                        width: 100.0,
-                        height: 25.0,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(20.0),
-                          ),
-                          border: Border.all(
-                            color: Colors.white,
-                            width: 1.0,
-                          ),
-                        ),
-                        child: DropdownButton<String>(
-                          items: dropdownItems.map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          onChanged: (value) {
-                            if (value != null) {
-                              setState(() {
-                                selectedCurrency = value;
-                              });
-                              updateCurrency(value);
-                            }
-                          },
-                          value: selectedCurrency,
-                          hint: const Text(
-                            'USD',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                      ElevatedButton(
+                        onPressed: () {
+                          toggleChartVisibility('USD');
+                        },
+                        style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
                             ),
                           ),
-                          isExpanded: true,
-                          underline: const SizedBox(),
+                          backgroundColor:
+                              MaterialStateProperty.resolveWith<Color>(
+                            (Set<MaterialState> states) {
+                              if (showUSDChart) {
+                                return const Color(0xFFBB0163);
+                              } else {
+                                return Colors.grey;
+                              }
+                            },
+                          ),
+                        ),
+                        child: const Text('USD'),
+                      ),
+                      const SizedBox(width: 20.0),
+                      ElevatedButton(
+                        onPressed: () {
+                          toggleChartVisibility('GBP');
+                        },
+                        style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                          ),
+                          backgroundColor:
+                              MaterialStateProperty.resolveWith<Color>(
+                            (Set<MaterialState> states) {
+                              if (showGBPChart) {
+                                return const Color(0xFFBB0163);
+                              } else {
+                                return Colors.grey;
+                              }
+                            },
+                          ),
+                        ),
+                        child: const Text(
+                          'GBP',
+                        ),
+                      ),
+                      const SizedBox(width: 20.0),
+                      ElevatedButton(
+                        onPressed: () {
+                          toggleChartVisibility('EUR');
+                        },
+                        style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                          ),
+                          backgroundColor:
+                              MaterialStateProperty.resolveWith<Color>(
+                            (Set<MaterialState> states) {
+                              if (showEURChart) {
+                                return const Color(0xFFBB0163);
+                              } else {
+                                return Colors.grey;
+                              }
+                            },
+                          ),
+                        ),
+                        child: const Text(
+                          'EUR',
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 10.0),
-                  Chart(
-                    cryptocurrencyName: widget.symbol!,
-                    currency: selectedCurrency,
+                  Visibility(
+                    visible: showUSDChart,
+                    child: ChartUSD(
+                      cryptocurrencyName: widget.symbol!,
+                    ),
+                  ),
+                  Visibility(
+                    visible: showGBPChart,
+                    child: ChartGBP(
+                      cryptocurrencyName: widget.symbol!,
+                    ),
+                  ),
+                  Visibility(
+                    visible: showEURChart,
+                    child: ChartEUR(
+                      cryptocurrencyName: widget.symbol!,
+                    ),
                   ),
                   CryptoAboutList(symbol: widget.symbol!),
                 ],

@@ -12,7 +12,7 @@ class NewsBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('CryptoPal'),
+        title: const Text('News'),
         centerTitle: true,
         backgroundColor: const Color(0xFF0D0D2B),
         leading: IconButton(
