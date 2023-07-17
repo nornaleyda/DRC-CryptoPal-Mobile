@@ -37,16 +37,18 @@ class _CryptoAboutListState extends State<CryptoAboutList> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 400,
-      child: ListView.builder(
-        itemCount: about.length,
-        itemBuilder: (context, index) {
-          final abouts = about[index];
-          return DescriptionCard(
-            symbol: abouts.symbol,
-            description: abouts.description,
-            website: abouts.website,
-          );
-        },
+      child: Column(
+        children: List.generate(
+          about.length,
+          (index) {
+            final abouts = about[index];
+            return DescriptionCard(
+              symbol: abouts.symbol,
+              description: abouts.description,
+              website: abouts.website,
+            );
+          },
+        ),
       ),
     );
   }

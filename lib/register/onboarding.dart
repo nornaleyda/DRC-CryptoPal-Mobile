@@ -39,7 +39,7 @@ class OnboardingPage extends StatelessWidget {
         .toList();
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFF9FAFD),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -56,80 +56,85 @@ class OnboardingPage extends StatelessWidget {
           const SizedBox(
             height: 80,
           ),
-          Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * .9,
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SignUp()),
-                        );
-                      },
-                      style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
-                        )),
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            const Color(0xFFBB0163)),
-                      ),
-                      child: const Text(
-                        'Create account',
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * .9,
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Login(
-                                    emailController: emailController,
-                                  )),
-                        );
-                      },
-                      style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
-                          side: const BorderSide(
-                              color: Color(0xFFBB0163), width: 2),
-                        )),
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.white),
-                      ),
-                      child: const Text(
-                        'Login',
-                        style: TextStyle(color: Colors.black),
+          Container(
+            color: Colors.white,
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 30.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * .9,
+                      height: 50,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SignUp()),
+                          );
+                        },
+                        style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
+                          )),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              const Color(0xFFBB0163)),
+                        ),
+                        child: const Text(
+                          'Create account',
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * .9,
+                      height: 50,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Login(
+                                      emailController: emailController,
+                                    )),
+                          );
+                        },
+                        style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            side: const BorderSide(
+                                color: Color(0xFFBB0163), width: 2),
+                          )),
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                        ),
+                        child: const Text(
+                          'Login',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
           const SizedBox(
-            height: 50,
+            height: 30,
           ),
         ],
       ),

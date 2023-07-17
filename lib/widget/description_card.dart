@@ -40,23 +40,9 @@ class DescriptionCard extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                symbol!,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: 20.0),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
                 description!,
                 textAlign: TextAlign.justify,
                 style: const TextStyle(fontSize: 15.0),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                website!,
               ),
               const SizedBox(
                 height: 20,
@@ -68,7 +54,7 @@ class DescriptionCard extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25),
                     ),
-                    backgroundColor: Colors.pink,
+                    backgroundColor: const Color(0xFFBB0163),
                   ),
                   child: const Text('Visit Homepage'),
                 ),
@@ -81,9 +67,9 @@ class DescriptionCard extends StatelessWidget {
   }
 
   Future<void> _launchUrl() async {
-    final Uri _url = Uri.parse(website!);
-    if (!await launchUrl(_url)) {
-      throw Exception('Could not launch $_url');
+    final Uri url = Uri.parse(website!);
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
     }
   }
 }

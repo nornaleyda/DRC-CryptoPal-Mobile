@@ -68,7 +68,7 @@ class _SignUpState extends State<SignUp> {
                 'Registered successfully. Please check your email for verification.'),
             actions: [
               TextButton(
-                child: const Text('OK', style: TextStyle(color: Colors.pink)),
+                child: const Text('OK', style: TextStyle(color: Color(0xFFBB0163))),
                 onPressed: () {
                   Navigator.of(context).pop();
                   Navigator.pushReplacement(
