@@ -116,21 +116,22 @@ class _CryptoCardBodyState extends State<CryptoCardBody> {
                             Expanded(
                               flex: 1,
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Consumer<FavoriteProvider>(
                                     builder: (context, provider, _) {
                                       return IconButton(
-                                        iconSize: 28,
+                                        iconSize: 35,
                                         onPressed: () {
                                           Provider.of<FavoriteProvider>(context,
                                                   listen: false)
                                               .toggleFavorite(item);
                                         },
                                         icon: provider.isExist(item)
-                                            ? const Icon(AkarIcons.star,
+                                            ? const Icon(Icons.star_rounded,
                                                 color: Colors.yellow)
-                                            : const Icon(AkarIcons.star,
+                                            : const Icon(
+                                                Icons.star_border_rounded,
                                                 color: Colors.grey),
                                       );
                                     },

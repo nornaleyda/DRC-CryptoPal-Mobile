@@ -11,24 +11,33 @@ class HelpPage extends StatefulWidget {
 class _HelpPageState extends State<HelpPage> {
   List<FAQItem> faqItems = [
     FAQItem(
-      question: 'FAQ 1',
-      answer: 'Answer 1',
+      question:
+          'What makes your cryptocurrency information hub suitable for beginners?',
+      answer:
+          'Discover the world of cryptocurrencies with ease! Our user-friendly hub is tailor-made for beginners. With a simple interface and clear explanations, young adults aged 18-29 can confidently explore and understand the basics of cryptocurrencies.',
     ),
     FAQItem(
-      question: 'FAQ 2',
-      answer: 'Answer 2',
+      question: 'How reliable is the live market data on your platform?',
+      answer:
+          'We source our live market data from the Crypto Compare API, a reputable and widely used cryptocurrency data provider. By leveraging this API, we ensure that the market data presented on our platform is accurate, up-to-date, and reliable. ',
     ),
     FAQItem(
-      question: 'FAQ 3',
-      answer: 'Answer 3',
+      question:
+          'Can I convert cryptocurrency values to traditional currencies on your platform?',
+      answer:
+          'Our cryptocurrency information hub features a currency converter. With this tool, you can easily convert cryptocurrency values to traditional currencies, allowing you to understand the monetary implications of different cryptocurrencies.',
     ),
     FAQItem(
-      question: 'FAQ 4',
-      answer: 'Answer 4',
+      question:
+          'How frequently is your platform updated with new cryptocurrencies?',
+      answer:
+          'Our team actively monitors the cryptocurrency landscape and adds new cryptocurrencies as they emerge and gain prominence. We ensure that our users can access a comprehensive list of existing cryptocurrencies, enabling them to explore more options. ',
     ),
     FAQItem(
-      question: 'FAQ 5',
-      answer: 'Answer 5',
+      question:
+          'Can I access your cryptocurrency information hub on both a website and a mobile app?',
+      answer:
+          'Absolutely! We understand the importance of accessibility and convenience. Our cryptocurrency information hub is available as a website and a mobile app. The website is the primary platform, offering a comprehensive and immersive experience.',
     ),
   ];
 
@@ -51,7 +60,6 @@ class _HelpPageState extends State<HelpPage> {
       ),
       backgroundColor: const Color(0xFFF9FAFD),
       body: SingleChildScrollView(
-        // Wrap the Column with SingleChildScrollView
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -76,7 +84,7 @@ class _HelpPageState extends State<HelpPage> {
                       children: const [
                         Text(
                           'Frequently Asked Questions',
-                          style: TextStyle(color: Colors.pink),
+                          style: TextStyle(color: Color(0xFFBB0163)),
                         )
                       ],
                     ),
@@ -85,7 +93,7 @@ class _HelpPageState extends State<HelpPage> {
               ),
               const SizedBox(height: 40),
               ListView.builder(
-                shrinkWrap: true, // Set shrinkWrap to true
+                shrinkWrap: true,
                 itemCount: faqItems.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
@@ -102,15 +110,18 @@ class _HelpPageState extends State<HelpPage> {
                             borderRadius: BorderRadius.circular(10.0),
                             color: Colors.white,
                           ),
-                          child: Text(
-                            faqItems[index].question,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              faqItems[index].question,
+                            ),
                           ),
                         ),
                         children: [
                           Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.pink),
+                                color: Color(0xFFBB0163)),
                             width: MediaQuery.of(context).size.width,
                             child: Padding(
                               padding:
@@ -119,6 +130,7 @@ class _HelpPageState extends State<HelpPage> {
                                 padding: const EdgeInsets.all(10.0),
                                 child: Text(
                                   faqItems[index].answer,
+                                  textAlign: TextAlign.justify,
                                   style: const TextStyle(color: Colors.white),
                                 ),
                               ),

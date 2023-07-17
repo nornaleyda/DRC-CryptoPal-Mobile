@@ -68,7 +68,7 @@ class _LoginState extends State<Login> {
                     onPressed: () => Navigator.of(context).pop(),
                     child: const Text(
                       'OK',
-                      style: TextStyle(color: Colors.pink),
+                      style: TextStyle(color: Color(0xFFBB0163)),
                     ),
                   ),
                 ],
@@ -138,10 +138,6 @@ class _LoginState extends State<Login> {
                   return child;
                 },
               ),
-              // MaterialPageRoute(
-              //   builder: (context) =>
-              //       OnboardingPage(emailController: emailController),
-              // ),
             );
           },
         ),

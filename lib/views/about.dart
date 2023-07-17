@@ -24,6 +24,21 @@ class AboutPage extends StatelessWidget {
       body: ListView(
         children: [
           const SizedBox(
+            height: 20.0,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Text(
+                'Who are we',
+                style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFFBB0163)),
+              ),
+            ],
+          ),
+          const SizedBox(
             height: 60.0,
           ),
           Row(
@@ -36,13 +51,18 @@ class AboutPage extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.all(18.0),
-            height: 300,
+            // height: 150,
             child: Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
               ),
               elevation: 2,
               shadowColor: Colors.white,
+              child: const Padding(
+                padding: EdgeInsets.all(18.0),
+                child: Text(
+                    'Join us today for a smooth cryptocurrency journey. With our minimalist UI, live market data, and currency converter, make informed decisions effortlessly.'),
+              ),
             ),
           ),
         ],

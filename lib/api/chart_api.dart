@@ -135,7 +135,7 @@ class ChartState extends State<Chart> {
                     xValueMapper: (DataPoint data, _) => data.x,
                     yValueMapper: (DataPoint data, _) => data.y,
                     markerSettings: const MarkerSettings(isVisible: true),
-                    color: Colors.pinkAccent,
+                    color: const Color(0xFFA155B9),
                   ),
                 ],
               );

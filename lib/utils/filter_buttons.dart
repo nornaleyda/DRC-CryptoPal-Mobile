@@ -24,15 +24,15 @@ class FilterButtons extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(25.0),
-                side: const BorderSide(color: Colors.pink),
+                side: const BorderSide(color: Color(0xFFBB0163)),
               ),
-              backgroundColor: isDescending ? Colors.pink : Colors.white,
-              foregroundColor: Colors.pink,
+              backgroundColor: isDescending ? Color(0xFFBB0163) : Colors.white,
+              foregroundColor: Color(0xFFBB0163),
             ),
             child: Text(
               'Highest',
               style: TextStyle(
-                color: isDescending ? Colors.white : Colors.pink,
+                color: isDescending ? Colors.white : Color(0xFFBB0163),
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -43,15 +43,15 @@ class FilterButtons extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(25.0),
-                side: const BorderSide(color: Colors.pink),
+                side: const BorderSide(color: Color(0xFFBB0163)),
               ),
-              backgroundColor: isDescending ? Colors.white : Colors.pink,
-              foregroundColor: Colors.pink, 
+              backgroundColor: isDescending ? Colors.white : Color(0xFFBB0163),
+              foregroundColor: Color(0xFFBB0163), 
             ),
             child: Text(
               'Lowest',
               style: TextStyle(
-                color: isDescending ? Colors.pink : Colors.white,
+                color: isDescending ? Color(0xFFBB0163) : Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
