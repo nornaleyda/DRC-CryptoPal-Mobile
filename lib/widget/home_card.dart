@@ -25,7 +25,7 @@ class HomeCard extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 10.0, right: 20.0, bottom: 15.0),
+          padding: const EdgeInsets.only(top: 10.0, right: 10.0, bottom: 15.0),
           child: Row(
             children: [
               Expanded(
@@ -68,7 +68,7 @@ class HomeCard extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      flex: 1,
+                      flex: 2,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [

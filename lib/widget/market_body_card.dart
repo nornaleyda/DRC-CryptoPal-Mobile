@@ -4,6 +4,7 @@ import 'package:projectbesquare/api/chart_api_EUR.dart';
 import 'package:projectbesquare/api/chart_api_GBP.dart';
 import 'package:projectbesquare/api/chart_api_USD.dart';
 import 'package:projectbesquare/views/description.dart';
+import 'package:projectbesquare/widget/loading_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
@@ -40,6 +41,21 @@ class _CryptoCardBodyState extends State<CryptoCardBody> {
   bool showUSDChart = true;
   bool showGBPChart = false;
   bool showEURChart = false;
+
+  late bool _isLoading;
+
+  @override
+  void initState() {
+    _isLoading = true;
+    Future.delayed(const Duration(seconds: 10), () {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    });
+    super.initState();
+  }
 
   void toggleChartVisibility(String currency) {
     setState(() {
@@ -312,7 +328,23 @@ class _CryptoCardBodyState extends State<CryptoCardBody> {
                       cryptocurrencyName: widget.symbol!,
                     ),
                   ),
-                  CryptoAboutList(symbol: widget.symbol!),
+                  _isLoading
+                      ? SizedBox(
+                          height: 200,
+                          child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              child: ListView.separated(
+                                  itemBuilder: ((context, index) =>
+                                      const DescriptionCardLoading()),
+                                  separatorBuilder: (context, index) =>
+                                      const SizedBox(
+                                        height: 6.0,
+                                      ),
+                                  itemCount: 1)),
+                        )
+                      : CryptoAboutList(symbol: widget.symbol!),
                 ],
               ),
             ),
