@@ -1,5 +1,44 @@
 import 'package:flutter/material.dart';
 
+class DescriptionCardLoading extends StatelessWidget {
+  const DescriptionCardLoading({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Row(
+        children: [
+          Expanded(
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              LoadingBar(
+                width: 80,
+              ),
+              SizedBox(height: 18),
+              LoadingBar(),
+              SizedBox(height: 8),
+              LoadingBar(),
+              SizedBox(height: 8),
+              LoadingBar(),
+              SizedBox(height: 8),
+              LoadingBar(),
+              SizedBox(height: 8),
+              LoadingBar(
+                width: 100,
+              ),
+              SizedBox(height: 8),
+            ],
+          ))
+        ],
+      ),
+    );
+  }
+}
+
 class NewsCardLoading extends StatelessWidget {
   const NewsCardLoading({
     super.key,
@@ -28,7 +67,7 @@ class NewsCardLoading extends StatelessWidget {
                 width: 80,
               ),
             ],
-          ))
+          )),
         ],
       ),
     );
@@ -45,7 +84,8 @@ class MarketCardLoading extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 15.0, bottom: 6.0 ),
+          padding: const EdgeInsets.only(
+              left: 12.0, right: 12.0, top: 15.0, bottom: 6.0),
           child: Row(
             children: [
               Expanded(

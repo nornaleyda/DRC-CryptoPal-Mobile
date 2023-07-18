@@ -35,7 +35,6 @@ class _CryptoAboutListState extends State<CryptoAboutList> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 280,
       child: Column(
         children: List.generate(
           about.length,

@@ -49,16 +49,20 @@ class DescriptionCard extends StatelessWidget {
                 height: 20,
               ),
               Center(
-                child: ElevatedButton(
-                  onPressed: _launchUrl,
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * .8,
+                  height: 40,
+                  child: ElevatedButton(
+                    onPressed: _launchUrl,
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      backgroundColor: const Color(0xFFBB0163),
                     ),
-                    backgroundColor: const Color(0xFFBB0163),
-                  ),
-                  child: const Text(
-                    'Visit Homepage',
+                    child: const Text(
+                      'Visit Homepage',
+                    ),
                   ),
                 ),
               ),
