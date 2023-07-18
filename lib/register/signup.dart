@@ -1,6 +1,7 @@
 import 'package:akar_icons_flutter/akar_icons_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:projectbesquare/register/login.dart';
 
@@ -68,7 +69,8 @@ class _SignUpState extends State<SignUp> {
                 'Registered successfully. Please check your email for verification.'),
             actions: [
               TextButton(
-                child: const Text('OK', style: TextStyle(color: Color(0xFFBB0163))),
+                child: const Text('OK',
+                    style: TextStyle(color: Color(0xFFBB0163))),
                 onPressed: () {
                   Navigator.of(context).pop();
                   Navigator.pushReplacement(
@@ -128,15 +130,15 @@ class _SignUpState extends State<SignUp> {
               padding: const EdgeInsets.only(left: 25.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     'Create Account',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    style: GoogleFonts.robotoSlab(
+                        fontSize: 40, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 10),
                   Text(
                     'Starts your journey with us!',
-                    style: TextStyle(color: Color(0xFFBB0163)),
+                    style: GoogleFonts.robotoSlab(color: const Color(0xFFBB0163)),
                   ),
                 ],
               ),

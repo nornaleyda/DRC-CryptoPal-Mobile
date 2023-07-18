@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:projectbesquare/api/market_api.dart';
 import 'package:projectbesquare/body/market_body.dart';
@@ -96,12 +97,12 @@ class _MarketPageState extends State<MarketPage> {
               Padding(
                 padding: const EdgeInsets.only(top: 18.0, left: 12.0),
                 child: Column(
-                  children: const [
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Text(
-                      'Markets',
-                      textAlign: TextAlign.start,
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                      'Market',
+                      style: GoogleFonts.robotoSlab(
+                          fontSize: 40, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -152,14 +153,17 @@ class _MarketPageState extends State<MarketPage> {
                                       ),
                                     );
                                   },
-                                  child: MarketCard(
-                                      name: currency.name,
-                                      symbol: currency.symbol,
-                                      price: currency.price,
-                                      change: currency.change,
-                                      percent: currency.percent,
-                                      imageUrl: currency.imageUrl,
-                                      marketCap: currency.marketCap),
+                                  child: Card(
+                                    elevation: 0,
+                                    child: MarketCard(
+                                        name: currency.name,
+                                        symbol: currency.symbol,
+                                        price: currency.price,
+                                        change: currency.change,
+                                        percent: currency.percent,
+                                        imageUrl: currency.imageUrl,
+                                        marketCap: currency.marketCap),
+                                  ),
                                 );
                               },
                             ),
@@ -173,7 +177,6 @@ class _MarketPageState extends State<MarketPage> {
   }
 
   Future<void> fetchCrypto() async {
-    print('fetchCrypto called');
     final response = await apiManager.getCryptoData();
 
     if (mounted) {
@@ -184,8 +187,6 @@ class _MarketPageState extends State<MarketPage> {
         filteredCrypto = crypto;
       });
     }
-
-    print('fetchCrypto completed');
   }
 
   void sortCrypto() {

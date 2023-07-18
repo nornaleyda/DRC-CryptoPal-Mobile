@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class NewsCard extends StatelessWidget {
   const NewsCard({
@@ -30,10 +31,15 @@ class NewsCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  color: Colors.white,
-                  child: Image.network(
-                    imageUrl!,
-                    width: 80,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.0),
+                    color: Colors.white,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.network(
+                      imageUrl!,
+                    ),
                   ),
                 )
               ],
@@ -58,7 +64,7 @@ class NewsCard extends StatelessWidget {
                           children: [
                             Text(
                               title!,
-                              style: const TextStyle(
+                              style: GoogleFonts.robotoSlab(
                                 color: Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
@@ -75,14 +81,37 @@ class NewsCard extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Text(
-                        source!,
-                        style: const TextStyle(
-                          color: Color(0xFF979797),
-                          fontSize: 13,
+                      RichText(
+                        text: TextSpan(
+                          children: [
+                            const WidgetSpan(
+                              child: Icon(
+                                Icons.travel_explore,
+                                size: 20,
+                                color: Color.fromARGB(255, 78, 76, 76),
+                              ),
+                            ),
+                            const WidgetSpan(
+                              child: SizedBox(width: 8),
+                            ),
+                            TextSpan(
+                              text: '$source',
+                              style: const TextStyle(
+                                  fontSize: 15,
+                                  color: Color.fromARGB(255, 78, 76, 76),
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ],
                         ),
                       ),
                     ],
+                  ),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  const Divider(
+                    height: 1,
+                    color: Color.fromARGB(255, 78, 76, 76),
                   ),
                 ],
               ),

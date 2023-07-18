@@ -3,6 +3,7 @@
 import 'package:akar_icons_flutter/akar_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:projectbesquare/register/onboarding.dart';
 import 'package:projectbesquare/register/signup.dart';
 import 'package:projectbesquare/views/home.dart';
@@ -151,15 +152,15 @@ class _LoginState extends State<Login> {
               padding: const EdgeInsets.only(left: 25.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     'Login',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    style: GoogleFonts.robotoSlab(
+                        fontSize: 40, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 10),
                   Text(
-                    'Starts your journey with us!',
-                    style: TextStyle(color: Color(0xFFBB0163)),
+                    'Journey across the cryptoverse now!',
+                    style: GoogleFonts.robotoSlab(color: const Color(0xFFBB0163)),
                   ),
                 ],
               ),

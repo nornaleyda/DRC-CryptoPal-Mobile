@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:projectbesquare/api/market_api.dart';
 import 'package:projectbesquare/body/news_body.dart';
@@ -66,6 +67,7 @@ class _CryptoNews extends State<CryptoNews> {
           ),
           centerTitle: true,
         ),
+        backgroundColor: const Color(0xFFF9FAFD),
         body: RefreshIndicator(
           color: const Color(0xFFBB0163),
           backgroundColor: const Color(0xFFF9FAFD),
@@ -78,30 +80,23 @@ class _CryptoNews extends State<CryptoNews> {
                 Padding(
                   padding: const EdgeInsets.only(top: 18.0, left: 12.0),
                   child: Column(
-                    children: const [
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       Text(
                         'News',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold),
+                        style: GoogleFonts.robotoSlab(
+                            fontSize: 40, fontWeight: FontWeight.bold),
                       ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0, left: 12.0),
-                  child: Column(
-                    children: const [
                       Text(
                         'Read our crypto updates!',
-                        style:
-                            TextStyle(fontSize: 15, color: Color(0xFFBB0163)),
+                        style: GoogleFonts.robotoSlab(
+                            fontSize: 15, color: const Color(0xFFBB0163)),
                       ),
                     ],
                   ),
                 ),
                 const SizedBox(
-                  height: 30.0,
+                  height: 20.0,
                 ),
                 _isLoading
                     ? Expanded(
@@ -135,11 +130,15 @@ class _CryptoNews extends State<CryptoNews> {
                                   ),
                                 );
                               },
-                              child: NewsCard(
-                                imageUrl: news.imageUrl,
-                                title: news.title,
-                                source: news.source,
-                                img: news.img,
+                              child: Card(
+                                color: const Color(0xFFF9FAFD),
+                                elevation: 0,
+                                child: NewsCard(
+                                  imageUrl: news.imageUrl,
+                                  title: news.title,
+                                  source: news.source,
+                                  img: news.img,
+                                ),
                               ),
                             );
                           },
@@ -155,7 +154,6 @@ class _CryptoNews extends State<CryptoNews> {
   }
 
   Future<void> fetchNews() async {
-    print('news called');
     final response = await apiManager.getNewsData();
 
     if (mounted) {
@@ -165,7 +163,6 @@ class _CryptoNews extends State<CryptoNews> {
             .toList();
       });
     }
-    print('news completed');
   }
 
   Future<void> _loadMoreData() async {

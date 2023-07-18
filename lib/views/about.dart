@@ -1,5 +1,6 @@
 import 'package:akar_icons_flutter/akar_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({Key? key}) : super(key: key);
@@ -28,13 +29,13 @@ class AboutPage extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               Text(
                 'Who are we',
-                style: TextStyle(
-                    fontSize: 30,
+                style: GoogleFonts.robotoSlab(
+                    fontSize: 40,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFFBB0163)),
+                    color: const Color(0xFFBB0163)),
               ),
             ],
           ),

@@ -2,6 +2,7 @@ import 'package:akar_icons_flutter/akar_icons_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:projectbesquare/cubit/bottom_navigation_cubit.dart.dart';
 import 'package:projectbesquare/register/onboarding.dart';
 import 'package:projectbesquare/views/about.dart';
@@ -34,14 +35,14 @@ class UserAccount extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  padding: EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.all(15.0),
                   decoration: BoxDecoration(
-                    color: Color(0xFFBB0163),
+                    color: const Color(0xFFBB0163),
                     borderRadius: BorderRadius.circular(25.0),
                   ),
                   child: Text(
                     ' $userEmail',
-                    style: const TextStyle(
+                    style: GoogleFonts.robotoSlab(
                         color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.bold),

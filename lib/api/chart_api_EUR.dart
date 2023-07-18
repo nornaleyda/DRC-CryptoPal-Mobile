@@ -77,66 +77,63 @@ class _ChartEURState extends State<ChartEUR> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(25.0),
-        ),
-        elevation: 4,
-        child: Container(
-          height: 400,
-          width: MediaQuery.of(context).size.width,
-          padding: const EdgeInsets.all(16.0),
-          child: StreamBuilder(
-            stream: channel.stream,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                final message = snapshot.data;
-                final decodedMessage = jsonDecode(message.toString());
-                final messageType = decodedMessage['TYPE'];
-                final currency = decodedMessage['TOSYMBOL'];
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25.0),
+      ),
+      elevation: 4,
+      child: Container(
+        height: 400,
+        width: MediaQuery.of(context).size.width,
+        padding: const EdgeInsets.all(10.0),
+        child: StreamBuilder(
+          stream: channel.stream,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final message = snapshot.data;
+              final decodedMessage = jsonDecode(message.toString());
+              final messageType = decodedMessage['TYPE'];
+              final currency = decodedMessage['TOSYMBOL'];
 
-                print("Currency selected: $currency");
+              print("Currency selected: $currency");
 
-                if (messageType == '2') {
-                  decodedMessage.forEach((key, value) {
-                    if (key == 'PRICE') {
-                      num price = decodedMessage['PRICE'];
-                      int lastUpdate = decodedMessage['LASTUPDATE'];
-                      updateChartData(price, lastUpdate);
-                    }
-                  });
-                }
+              if (messageType == '2') {
+                decodedMessage.forEach((key, value) {
+                  if (key == 'PRICE') {
+                    num price = decodedMessage['PRICE'];
+                    int lastUpdate = decodedMessage['LASTUPDATE'];
+                    updateChartData(price, lastUpdate);
+                  }
+                });
               }
+            }
 
-              return SfCartesianChart(
-                zoomPanBehavior: ZoomPanBehavior(
-                  enablePinching: true,
-                  enableDoubleTapZooming: true,
-                  enablePanning: true,
+            return SfCartesianChart(
+              zoomPanBehavior: ZoomPanBehavior(
+                enablePinching: true,
+                enableDoubleTapZooming: true,
+                enablePanning: true,
+              ),
+              primaryXAxis: CategoryAxis(
+                labelPlacement: LabelPlacement.onTicks,
+                labelRotation: 45,
+              ),
+              primaryYAxis: NumericAxis(
+                anchorRangeToVisiblePoints: false,
+                numberFormat: NumberFormat('#.5'),
+                labelAlignment: LabelAlignment.start,
+              ),
+              series: <LineSeries<DataPoint, String>>[
+                LineSeries<DataPoint, String>(
+                  dataSource: chartData,
+                  xValueMapper: (DataPoint data, _) => data.x,
+                  yValueMapper: (DataPoint data, _) => data.y,
+                  markerSettings: const MarkerSettings(isVisible: true),
+                  color: const Color(0xFFA155B9),
                 ),
-                primaryXAxis: CategoryAxis(
-                  labelPlacement: LabelPlacement.onTicks,
-                  labelRotation: 45,
-                ),
-                primaryYAxis: NumericAxis(
-                  anchorRangeToVisiblePoints: false,
-                  numberFormat: NumberFormat('#.5'),
-                  labelAlignment: LabelAlignment.start,
-                ),
-                series: <LineSeries<DataPoint, String>>[
-                  LineSeries<DataPoint, String>(
-                    dataSource: chartData,
-                    xValueMapper: (DataPoint data, _) => data.x,
-                    yValueMapper: (DataPoint data, _) => data.y,
-                    markerSettings: const MarkerSettings(isVisible: true),
-                    color: const Color(0xFFA155B9),
-                  ),
-                ],
-              );
-            },
-          ),
+              ],
+            );
+          },
         ),
       ),
     );
