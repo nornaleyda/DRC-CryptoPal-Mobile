@@ -75,7 +75,7 @@ class HomeCard extends StatelessWidget {
                           Text(
                             '\$${NumberFormat('#,##0.00').format(price!.toDouble())}',
                             style: const TextStyle(
-                              fontSize: 16,
+                              fontSize: 15,
                             ),
                           ),
                           Text(
@@ -84,7 +84,7 @@ class HomeCard extends StatelessWidget {
                               color: percent!.toDouble() > 0
                                   ? const Color(0xFF57992D)
                                   : Colors.red,
-                              fontSize: 16,
+                              fontSize: 15,
                             ),
                           ),
                         ],
