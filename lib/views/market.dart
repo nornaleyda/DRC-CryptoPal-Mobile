@@ -78,6 +78,10 @@ class _MarketPageState extends State<MarketPage> {
   Widget build(BuildContext context) {
     return BlocProvider<BottomNavigationBarCubit>(
       create: (context) => BottomNavigationBarCubit(2),
+      child: WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
       child: Scaffold(
         appBar: AppBar(
             automaticallyImplyLeading: false,
@@ -173,7 +177,7 @@ class _MarketPageState extends State<MarketPage> {
         ),
         bottomNavigationBar: const BottomNavigation(),
       ),
-    );
+    ));
   }
 
   Future<void> fetchCrypto() async {

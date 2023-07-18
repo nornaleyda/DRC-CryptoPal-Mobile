@@ -1,5 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
-
+import 'dart:async';
 import 'package:akar_icons_flutter/akar_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -25,6 +25,7 @@ class _LoginState extends State<Login> {
 
   @override
   void dispose() {
+    resetTimer?.cancel();
     passwordController.dispose();
     super.dispose();
   }
@@ -85,7 +86,35 @@ class _LoginState extends State<Login> {
     }
   }
 
+  bool isResettingPassword = false;
+  Timer? resetTimer;
+
   void resetPassword() async {
+    if (isResettingPassword) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25.0)),
+            title: const Text('Reset Password'),
+            content:
+                const Text('Please wait a few minutes before trying again.'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('OK',
+                    style: TextStyle(color: Color(0xFFBB0163))),
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
+
+    isResettingPassword = true;
+
     final email = widget.emailController.text.trim();
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
@@ -93,18 +122,26 @@ class _LoginState extends State<Login> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Password Reset'),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25.0)),
+            title: const Text('Reset Password'),
             content: const Text(
                 'A password reset link has been sent to your email.'),
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: const Text('OK'),
+                child: const Text('OK',
+                    style: TextStyle(color: Color(0xFFBB0163))),
               ),
             ],
           );
         },
       );
+
+      const waitDuration = Duration(minutes: 5);
+      resetTimer = Timer(waitDuration, () {
+        isResettingPassword = false;
+      });
     } on FirebaseAuthException catch (e) {
       setState(() {
         errorMessage = e.message;
@@ -160,7 +197,8 @@ class _LoginState extends State<Login> {
                   ),
                   Text(
                     'Journey across the cryptoverse now!',
-                    style: GoogleFonts.robotoSlab(color: const Color(0xFFBB0163)),
+                    style:
+                        GoogleFonts.robotoSlab(color: const Color(0xFFBB0163)),
                   ),
                 ],
               ),
