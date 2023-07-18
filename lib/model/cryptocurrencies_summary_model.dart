@@ -10,7 +10,6 @@ class AboutItemModel {
   });
 
   AboutItemModel.fromJson(Map<String, dynamic> json) {
-    print(json['Data']['SYMBOL']);
     symbol = json['Data']['SYMBOL'] ?? 'N/A';
     description = json['Data']['ASSET_DESCRIPTION_SNIPPET'] ?? 'N/A';
     website = json['Data']['WEBSITE_URL'] ?? 'N/A';

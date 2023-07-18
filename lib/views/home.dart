@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:projectbesquare/api/market_api.dart';
 import 'package:projectbesquare/body/market_body.dart';
@@ -62,26 +63,18 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.only(top: 18.0, left: 12.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
                         'Welcome',
                         textAlign: TextAlign.start,
-                        style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold),
+                        style: GoogleFonts.robotoSlab(
+                            fontSize: 40, fontWeight: FontWeight.bold),
                       ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0, left: 12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
                       Text(
                         'Check out todays Top 6 currency!',
                         textAlign: TextAlign.start,
-                        style:
-                            TextStyle(fontSize: 15, color: Color(0xFFBB0163)),
+                        style: GoogleFonts.robotoSlab(
+                            fontSize: 15, color: const Color(0xFFBB0163)),
                       ),
                     ],
                   ),
@@ -110,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                       )
                     : Container(
                         margin: const EdgeInsets.all(18.0),
-                        height: 520,
+                        height: 570,
                         child: Card(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0),
@@ -138,13 +131,16 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   );
                                 },
-                                child: HomeCard(
-                                  name: currency.name,
-                                  symbol: currency.symbol,
-                                  imageUrl: currency.imageUrl,
-                                  price: currency.price,
-                                  change: currency.change,
-                                  percent: currency.percent,
+                                child: Card(
+                                  elevation: 0,
+                                  child: HomeCard(
+                                    name: currency.name,
+                                    symbol: currency.symbol,
+                                    imageUrl: currency.imageUrl,
+                                    price: currency.price,
+                                    change: currency.change,
+                                    percent: currency.percent,
+                                  ),
                                 ),
                               );
                             },
@@ -162,7 +158,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> fetchCrypto() async {
-    print('fetchCrypto home called');
     final cryptoData = apiManager.getCryptoData(limit: 6);
     final response = await cryptoData;
 
@@ -173,7 +168,5 @@ class _HomePageState extends State<HomePage> {
             .toList();
       });
     }
-
-    print('fetchCrypto home completed');
   }
 }

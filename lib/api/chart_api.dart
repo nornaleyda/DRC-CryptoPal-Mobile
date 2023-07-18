@@ -42,7 +42,6 @@ class ChartState extends State<Chart> {
   }
 
   void subscribeToStream() {
-    print("Currency now: ${widget.currency}");
     final subRequest = {
       "action": "SubAdd",
       "subs": ["2~Coinbase~${widget.cryptocurrencyName}~${widget.currency}"]
@@ -53,7 +52,6 @@ class ChartState extends State<Chart> {
   }
 
   void unsubscribeToStream() {
-    print("Currency now: ${widget.currency}");
     final subRequest = {
       "action": "SubRemove",
       "subs": ["2~Coinbase~${widget.cryptocurrencyName}~${widget.currency}"]

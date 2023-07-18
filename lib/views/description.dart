@@ -23,7 +23,6 @@ class _CryptoAboutListState extends State<CryptoAboutList> {
   }
 
   Future<void> fetchAbout() async {
-    print('fetchAbout called');
     final response = await ApiAbout.fetchAbout(widget.symbol);
 
     if (mounted) {
@@ -36,7 +35,7 @@ class _CryptoAboutListState extends State<CryptoAboutList> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 400,
+      height: 280,
       child: Column(
         children: List.generate(
           about.length,

@@ -26,13 +26,13 @@ class FilterButtons extends StatelessWidget {
                 borderRadius: BorderRadius.circular(25.0),
                 side: const BorderSide(color: Color(0xFFBB0163)),
               ),
-              backgroundColor: isDescending ? Color(0xFFBB0163) : Colors.white,
-              foregroundColor: Color(0xFFBB0163),
+              backgroundColor: isDescending ? const Color(0xFFBB0163) : Colors.white,
+              foregroundColor: const Color(0xFFBB0163),
             ),
             child: Text(
               'Highest',
               style: TextStyle(
-                color: isDescending ? Colors.white : Color(0xFFBB0163),
+                color: isDescending ? Colors.white : const Color(0xFFBB0163),
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -45,13 +45,13 @@ class FilterButtons extends StatelessWidget {
                 borderRadius: BorderRadius.circular(25.0),
                 side: const BorderSide(color: Color(0xFFBB0163)),
               ),
-              backgroundColor: isDescending ? Colors.white : Color(0xFFBB0163),
-              foregroundColor: Color(0xFFBB0163), 
+              backgroundColor: isDescending ? Colors.white : const Color(0xFFBB0163),
+              foregroundColor: const Color(0xFFBB0163), 
             ),
             child: Text(
               'Lowest',
               style: TextStyle(
-                color: isDescending ? Color(0xFFBB0163) : Colors.white,
+                color: isDescending ? const Color(0xFFBB0163) : Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),

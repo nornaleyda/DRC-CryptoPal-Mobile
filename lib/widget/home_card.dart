@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class HomeCard extends StatelessWidget {
@@ -51,7 +52,7 @@ class HomeCard extends StatelessWidget {
                         children: [
                           Text(
                             name!,
-                            style: const TextStyle(
+                            style: GoogleFonts.robotoSlab(
                               color: Colors.black,
                               fontSize: 18,
                             ),
@@ -59,8 +60,8 @@ class HomeCard extends StatelessWidget {
                           Text(
                             symbol!,
                             style: const TextStyle(
-                              color: Color(0xFF979797),
-                              fontSize: 15,
+                              color: Color.fromARGB(255, 78, 76, 76),
+                              fontSize: 14,
                             ),
                           ),
                         ],
@@ -72,9 +73,9 @@ class HomeCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            NumberFormat('#,##0.00').format(price!.toDouble()),
+                            '\$${NumberFormat('#,##0.00').format(price!.toDouble())}',
                             style: const TextStyle(
-                              fontSize: 17,
+                              fontSize: 16,
                             ),
                           ),
                           Text(
@@ -83,7 +84,7 @@ class HomeCard extends StatelessWidget {
                               color: percent!.toDouble() > 0
                                   ? const Color(0xFF57992D)
                                   : Colors.red,
-                              fontSize: 17,
+                              fontSize: 16,
                             ),
                           ),
                         ],

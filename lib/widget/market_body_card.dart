@@ -1,5 +1,5 @@
-import 'package:akar_icons_flutter/akar_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:projectbesquare/api/chart_api_EUR.dart';
 import 'package:projectbesquare/api/chart_api_GBP.dart';
 import 'package:projectbesquare/api/chart_api_USD.dart';
@@ -7,7 +7,6 @@ import 'package:projectbesquare/views/description.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
-import 'package:projectbesquare/api/chart_api.dart';
 import 'package:projectbesquare/model/market_model.dart';
 import 'package:projectbesquare/provider/watchlist_provider.dart';
 
@@ -64,6 +63,8 @@ class _CryptoCardBodyState extends State<CryptoCardBody> {
 
     return SingleChildScrollView(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
         children: [
           Container(
             color: Colors.white,
@@ -105,9 +106,9 @@ class _CryptoCardBodyState extends State<CryptoCardBody> {
                                   ),
                                   Text(
                                     widget.name!,
-                                    style: const TextStyle(
+                                    style: GoogleFonts.robotoSlab(
                                       fontSize: 20,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ],
@@ -167,7 +168,7 @@ class _CryptoCardBodyState extends State<CryptoCardBody> {
                                   Text(
                                     NumberFormat('#,##0.00')
                                         .format(widget.price!.toDouble()),
-                                    style: const TextStyle(
+                                    style: GoogleFonts.robotoSlab(
                                       fontSize: 23,
                                     ),
                                   ),
@@ -183,7 +184,7 @@ class _CryptoCardBodyState extends State<CryptoCardBody> {
                                       style: TextStyle(color: Colors.grey)),
                                   Text(
                                     '${widget.change!.toDouble() < 0 ? '-' : '+'}${NumberFormat('#,##0.00').format(widget.change!.toDouble().abs())}',
-                                    style: TextStyle(
+                                    style: GoogleFonts.robotoSlab(
                                       color: widget.change!.toDouble() > 0
                                           ? const Color(0xFF57992D)
                                           : Colors.red,

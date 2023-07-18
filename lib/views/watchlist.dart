@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:projectbesquare/body/market_body.dart';
 
 import 'package:projectbesquare/cubit/bottom_navigation_cubit.dart.dart';
@@ -51,23 +52,17 @@ class _WatchListState extends State<WatchList> {
               Padding(
                 padding: const EdgeInsets.only(top: 18.0, left: 12.0),
                 child: Column(
-                  children: const [
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Text(
                       'Watchlist',
-                      textAlign: TextAlign.start,
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                      style: GoogleFonts.robotoSlab(
+                          fontSize: 40, fontWeight: FontWeight.bold),
                     ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0, left: 12.0),
-                child: Column(
-                  children: const [
                     Text(
                       'View your favorite coins here!',
-                      style: TextStyle(fontSize: 15, color: Color(0xFFBB0163)),
+                      style: GoogleFonts.robotoSlab(
+                          fontSize: 15, color: const Color(0xFFBB0163)),
                     ),
                   ],
                 ),
@@ -85,7 +80,7 @@ class _WatchListState extends State<WatchList> {
                         child: Padding(
                           padding: EdgeInsets.all(18.0),
                           child: Text(
-                            '- Add currency to watchlist -',
+                            '- Add cryptocurrency to watchlist -',
                             style: TextStyle(
                                 fontSize: 16,
                                 fontStyle: FontStyle.italic,
@@ -116,14 +111,17 @@ class _WatchListState extends State<WatchList> {
                               ),
                             );
                           },
-                          child: MarketCard(
-                            name: item.name,
-                            symbol: item.symbol,
-                            price: item.price,
-                            change: item.change,
-                            percent: item.percent,
-                            imageUrl: item.imageUrl,
-                            marketCap: item.marketCap,
+                          child: Card(
+                            elevation: 0,
+                            child: MarketCard(
+                              name: item.name,
+                              symbol: item.symbol,
+                              price: item.price,
+                              change: item.change,
+                              percent: item.percent,
+                              imageUrl: item.imageUrl,
+                              marketCap: item.marketCap,
+                            ),
                           ),
                         );
                       },

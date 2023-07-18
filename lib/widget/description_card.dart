@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DescriptionCard extends StatelessWidget {
@@ -16,7 +17,7 @@ class DescriptionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(18.0),
+      margin: const EdgeInsets.all(2.0),
       child: Card(
         color: Colors.white,
         shape: RoundedRectangleBorder(
@@ -29,10 +30,10 @@ class DescriptionCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'About',
-                style: TextStyle(
-                    color: Colors.grey,
+                style: GoogleFonts.robotoSlab(
+                    color: const Color.fromARGB(255, 78, 76, 76),
                     fontSize: 23.0,
                     fontWeight: FontWeight.bold),
               ),
@@ -56,7 +57,9 @@ class DescriptionCard extends StatelessWidget {
                     ),
                     backgroundColor: const Color(0xFFBB0163),
                   ),
-                  child: const Text('Visit Homepage'),
+                  child: const Text(
+                    'Visit Homepage',
+                  ),
                 ),
               ),
             ],

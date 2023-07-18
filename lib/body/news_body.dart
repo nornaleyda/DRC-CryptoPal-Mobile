@@ -18,20 +18,21 @@ class NewsBody extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(
             AkarIcons.chevron_left,
-            color: Colors.white, // Customize the color of the icon
+            color: Colors.white,
           ),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
       ),
+      backgroundColor: Colors.white,
       body: ListView(
         children: [
           NewsCardBody(
             title: news.title,
             source: news.source,
             image: news.imageUrl,
-            body: news.body,
+            body: news.body!,
             tags: news.tags,
           ),
         ],

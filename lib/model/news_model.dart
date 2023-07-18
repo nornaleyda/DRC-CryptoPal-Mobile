@@ -28,7 +28,9 @@ class NewsItemModel {
   }
 
   String _extractFirstThreeTags(String? tags) {
-    if (tags == null) return '';
+    if (tags == null || tags.trim().isEmpty) {
+      return 'N/A';
+    }
 
     final List<String> tagList = tags.split('|');
     final int endIndex = tagList.length > 3 ? 3 : tagList.length;
