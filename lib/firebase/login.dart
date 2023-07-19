@@ -1,95 +1,154 @@
+// ignore_for_file: use_build_context_synchronously
+import 'dart:async';
 import 'package:akar_icons_flutter/akar_icons_flutter.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projectbesquare/firebase/onboarding.dart';
+import 'package:projectbesquare/firebase/signup.dart';
+import 'package:projectbesquare/pages/home.dart';
 
-import 'package:projectbesquare/register/login.dart';
+class Login extends StatefulWidget {
+  final TextEditingController emailController;
 
-import 'onboarding.dart';
-
-class SignUp extends StatefulWidget {
-  SignUp({Key? key}) : super(key: key);
-  final emailController = TextEditingController();
+  const Login({Key? key, required this.emailController}) : super(key: key);
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<Login> createState() => _LoginState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _LoginState extends State<Login> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
-  bool isPasswordVisible = false;
-  bool isConfirmPasswordVisible = false;
-
   String? errorMessage;
+  bool isPasswordVisible = false;
 
-  bool isSignUpButtonEnabled() {
-    final email = emailController.text.trim();
-    final password = passwordController.text.trim();
-    final confirmPassword = confirmPasswordController.text.trim();
-    return email.isNotEmpty &&
-        password.isNotEmpty &&
-        password == confirmPassword;
+  @override
+  void dispose() {
+    resetTimer?.cancel();
+    passwordController.dispose();
+    super.dispose();
   }
 
-  void signUpWithEmailAndPassword() async {
-    final email = emailController.text.trim();
+  bool isLoginButtonEnabled() {
+    final email = widget.emailController.text.trim();
     final password = passwordController.text.trim();
-    final confirmPassword = confirmPasswordController.text.trim();
+    return email.isNotEmpty && password.isNotEmpty;
+  }
 
-    if (password != confirmPassword) {
-      setState(() {
-        errorMessage = "Passwords do not match.";
-      });
-      return;
-    }
-
+  void signInWithEmailAndPassword() async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final email = widget.emailController.text.trim();
+      final password = passwordController.text.trim();
+
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      User? user = FirebaseAuth.instance.currentUser;
-      await user?.sendEmailVerification();
+      User? user = userCredential.user;
 
-      // ignore: use_build_context_synchronously
+      if (user != null) {
+        if (user.emailVerified) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+          );
+        } else {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25.0)),
+                title: const Text('Email Verification Required'),
+                content:
+                    const Text('Please verify your email before logging in.'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: const Text(
+                      'OK',
+                      style: TextStyle(color: Color(0xFFBB0163)),
+                    ),
+                  ),
+                ],
+              );
+            },
+          );
+        }
+      }
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        errorMessage = e.message;
+      });
+    }
+  }
+
+  bool isResettingPassword = false;
+  Timer? resetTimer;
+
+  void resetPassword() async {
+    if (isResettingPassword) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(25.0)),
-            title: const Text(
-              'Success',
-              style: TextStyle(color: Colors.black),
-            ),
-            content: const Text(
-                'Registered successfully. Please check your email for verification.'),
+            title: const Text('Reset Password'),
+            content:
+                const Text('Please wait a few minutes before trying again.'),
             actions: [
               TextButton(
+                onPressed: () => Navigator.of(context).pop(),
                 child: const Text('OK',
                     style: TextStyle(color: Color(0xFFBB0163))),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Login(
-                        emailController: emailController,
-                      ),
-                    ),
-                  );
-                },
               ),
             ],
           );
         },
       );
+      return;
+    }
+
+    isResettingPassword = true;
+
+    final email = widget.emailController.text.trim();
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25.0)),
+            title: const Text('Reset Password'),
+            content: const Text(
+                'A password reset link has been sent to your email.'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('OK',
+                    style: TextStyle(color: Color(0xFFBB0163))),
+              ),
+            ],
+          );
+        },
+      );
+
+      const waitDuration = Duration(minutes: 5);
+      resetTimer = Timer(waitDuration, () {
+        isResettingPassword = false;
+      });
     } on FirebaseAuthException catch (e) {
       setState(() {
         errorMessage = e.message;
+      });
+    } catch (e) {
+      setState(() {
+        errorMessage = 'An error occurred while resetting your password.';
       });
     }
   }
@@ -132,13 +191,14 @@ class _SignUpState extends State<SignUp> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Create Account',
+                    'Login',
                     style: GoogleFonts.robotoSlab(
                         fontSize: 40, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    'Starts your journey with us!',
-                    style: GoogleFonts.robotoSlab(color: const Color(0xFFBB0163)),
+                    'Journey across the cryptoverse now!',
+                    style:
+                        GoogleFonts.robotoSlab(color: const Color(0xFFBB0163)),
                   ),
                 ],
               ),
@@ -149,7 +209,7 @@ class _SignUpState extends State<SignUp> {
                 width: MediaQuery.of(context).size.width * .8,
                 height: 50,
                 child: TextField(
-                  controller: emailController,
+                  controller: widget.emailController,
                   style: const TextStyle(
                     fontSize: 15,
                     color: Colors.black,
@@ -171,12 +231,14 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(
+              height: 20,
+            ),
             Center(
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * .8,
                 height: 50,
-                child: TextField(
+                child: TextFormField(
                   controller: passwordController,
                   obscureText: !isPasswordVisible,
                   style: const TextStyle(
@@ -196,63 +258,37 @@ class _SignUpState extends State<SignUp> {
                       borderRadius: BorderRadius.circular(15),
                       borderSide: const BorderSide(color: Colors.grey),
                     ),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        isPasswordVisible
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        color: Colors.grey,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          isPasswordVisible = !isPasswordVisible;
-                        });
-                      },
+                    suffixIcon: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            isPasswordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Colors.grey,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              isPasswordVisible = !isPasswordVisible;
+                            });
+                          },
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            Center(
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * .8,
-                height: 50,
-                child: TextField(
-                  controller: confirmPasswordController,
-                  obscureText: !isConfirmPasswordVisible,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    color: Colors.black,
-                  ),
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    labelText: 'Confirm password',
-                    labelStyle: const TextStyle(color: Colors.grey),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.grey),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.grey),
-                    ),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        isConfirmPasswordVisible
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        color: Colors.grey,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          isConfirmPasswordVisible = !isConfirmPasswordVisible;
-                        });
-                      },
-                    ),
+            Padding(
+              padding: const EdgeInsets.only(right: 30.0),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: resetPassword,
+                  child: const Text(
+                    'Forgot Password?',
+                    style: TextStyle(color: Color(0xFFBB0163)),
                   ),
                 ),
               ),
@@ -278,8 +314,8 @@ class _SignUpState extends State<SignUp> {
                 width: MediaQuery.of(context).size.width * .8,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: isSignUpButtonEnabled()
-                      ? signUpWithEmailAndPassword
+                  onPressed: isLoginButtonEnabled()
+                      ? signInWithEmailAndPassword
                       : null,
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -288,13 +324,12 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     backgroundColor: MaterialStateProperty.all<Color>(
-                      isSignUpButtonEnabled()
-                          ? const Color(0xFFBB0163)
-                          : const Color.fromARGB(41, 187, 1, 100),
-                    ),
+                        isLoginButtonEnabled()
+                            ? const Color(0xFFBB0163)
+                            : const Color.fromARGB(41, 187, 1, 100)),
                   ),
                   child: const Text(
-                    'Create account',
+                    'Log in',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -308,9 +343,7 @@ class _SignUpState extends State<SignUp> {
                     context,
                     PageRouteBuilder(
                       pageBuilder: (context, animation, secondaryAnimation) =>
-                          Login(
-                        emailController: emailController,
-                      ),
+                          SignUp(),
                       transitionsBuilder:
                           (context, animation, secondaryAnimation, child) {
                         return child;
@@ -320,11 +353,11 @@ class _SignUpState extends State<SignUp> {
                 },
                 child: RichText(
                   text: const TextSpan(
-                    text: 'Already have an account? ',
-                    style: TextStyle(color: Colors.black),
+                    text: 'Don\'t have an account? ',
+                    style: TextStyle(color: Colors.grey),
                     children: [
                       TextSpan(
-                        text: 'Log in',
+                        text: 'Create account',
                         style: TextStyle(
                           color: Color(0xFFBB0163),
                           fontWeight: FontWeight.bold,

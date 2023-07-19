@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:projectbesquare/api/market_api.dart';
-import 'package:projectbesquare/body/news_body.dart';
-import 'package:projectbesquare/cubit/bottom_navigation_cubit.dart.dart';
+import 'package:projectbesquare/pages/news_body.dart';
+import 'package:projectbesquare/cubit/bottom_navigation_cubit.dart';
 import 'package:projectbesquare/model/news_model.dart';
-import 'package:projectbesquare/widget/bottom_navigation.dart';
-import 'package:projectbesquare/widget/loading_bar.dart';
-import 'package:projectbesquare/widget/news_card.dart';
+import 'package:projectbesquare/component/bottom_navigation.dart';
+import 'package:projectbesquare/component/loading_bar.dart';
+import 'package:projectbesquare/component/news_card.dart';
 
 class CryptoNews extends StatefulWidget {
   const CryptoNews({Key? key}) : super(key: key);

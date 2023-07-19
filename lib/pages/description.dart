@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projectbesquare/api/market_api.dart';
-import 'package:projectbesquare/model/cryptocurrencies_summary_model.dart';
-import 'package:projectbesquare/widget/description_card.dart';
+import 'package:projectbesquare/model/description_model.dart';
+import 'package:projectbesquare/component/description_card.dart';
 
 class CryptoAboutList extends StatefulWidget {
   const CryptoAboutList({Key? key, required this.symbol}) : super(key: key);

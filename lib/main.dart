@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
-import 'package:projectbesquare/cubit/bottom_navigation_cubit.dart.dart';
+import 'package:projectbesquare/cubit/bottom_navigation_cubit.dart';
 import 'package:projectbesquare/firebase_options.dart';
-import 'package:projectbesquare/provider/watchlist_provider.dart';
-import 'package:projectbesquare/register/onboarding.dart';
-import 'package:projectbesquare/splash_screen.dart';
-import 'package:projectbesquare/views/home.dart';
+import 'package:projectbesquare/component/watchlist_provider.dart';
+import 'package:projectbesquare/firebase/onboarding.dart';
+import 'package:projectbesquare/pages/splash_screen.dart';
+import 'package:projectbesquare/pages/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

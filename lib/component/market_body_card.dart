@@ -3,13 +3,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:projectbesquare/api/chart_api_EUR.dart';
 import 'package:projectbesquare/api/chart_api_GBP.dart';
 import 'package:projectbesquare/api/chart_api_USD.dart';
-import 'package:projectbesquare/views/description.dart';
-import 'package:projectbesquare/widget/loading_bar.dart';
+import 'package:projectbesquare/pages/description.dart';
+import 'package:projectbesquare/component/loading_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
 import 'package:projectbesquare/model/market_model.dart';
-import 'package:projectbesquare/provider/watchlist_provider.dart';
+import 'package:projectbesquare/component/watchlist_provider.dart';
 
 class CryptoCardBody extends StatefulWidget {
   const CryptoCardBody({

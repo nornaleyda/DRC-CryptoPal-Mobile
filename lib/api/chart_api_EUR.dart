@@ -21,6 +21,7 @@ class _ChartEURState extends State<ChartEUR> {
   late final IOWebSocketChannel channel;
   List<DataPoint> chartData = [];
   bool isSubscribed = false;
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -106,33 +107,40 @@ class _ChartEURState extends State<ChartEUR> {
                   }
                 });
               }
+              isLoading = false;
             }
 
-            return SfCartesianChart(
-              zoomPanBehavior: ZoomPanBehavior(
-                enablePinching: true,
-                enableDoubleTapZooming: true,
-                enablePanning: true,
-              ),
-              primaryXAxis: CategoryAxis(
-                labelPlacement: LabelPlacement.onTicks,
-                labelRotation: 45,
-              ),
-              primaryYAxis: NumericAxis(
-                anchorRangeToVisiblePoints: false,
-                numberFormat: NumberFormat('#.5'),
-                labelAlignment: LabelAlignment.start,
-              ),
-              series: <LineSeries<DataPoint, String>>[
-                LineSeries<DataPoint, String>(
-                  dataSource: chartData,
-                  xValueMapper: (DataPoint data, _) => data.x,
-                  yValueMapper: (DataPoint data, _) => data.y,
-                  markerSettings: const MarkerSettings(isVisible: true),
-                  color: const Color(0xFFA155B9),
-                ),
-              ],
-            );
+            return isLoading
+                ? const Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.pink,
+                    ),
+                  )
+                : SfCartesianChart(
+                    zoomPanBehavior: ZoomPanBehavior(
+                      enablePinching: true,
+                      enableDoubleTapZooming: true,
+                      enablePanning: true,
+                    ),
+                    primaryXAxis: CategoryAxis(
+                      labelPlacement: LabelPlacement.onTicks,
+                      labelRotation: 45,
+                    ),
+                    primaryYAxis: NumericAxis(
+                      anchorRangeToVisiblePoints: false,
+                      numberFormat: NumberFormat('#.5'),
+                      labelAlignment: LabelAlignment.start,
+                    ),
+                    series: <LineSeries<DataPoint, String>>[
+                      LineSeries<DataPoint, String>(
+                        dataSource: chartData,
+                        xValueMapper: (DataPoint data, _) => data.x,
+                        yValueMapper: (DataPoint data, _) => data.y,
+                        markerSettings: const MarkerSettings(isVisible: true),
+                        color: const Color(0xFFA155B9),
+                      ),
+                    ],
+                  );
           },
         ),
       ),
