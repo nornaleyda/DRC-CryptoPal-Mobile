@@ -3,11 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:projectbesquare/cubit/bottom_navigation_cubit.dart.dart';
-import 'package:projectbesquare/register/onboarding.dart';
-import 'package:projectbesquare/views/about.dart';
-import 'package:projectbesquare/views/help.dart';
-import 'package:projectbesquare/widget/bottom_navigation.dart';
+import 'package:projectbesquare/cubit/bottom_navigation_cubit.dart';
+import 'package:projectbesquare/firebase/onboarding.dart';
+import 'package:projectbesquare/pages/about.dart';
+import 'package:projectbesquare/pages/help.dart';
+import 'package:projectbesquare/component/bottom_navigation.dart';
 
 class UserAccount extends StatelessWidget {
   UserAccount({Key? key}) : super(key: key);

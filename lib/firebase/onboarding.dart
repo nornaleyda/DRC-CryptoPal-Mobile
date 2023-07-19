@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:projectbesquare/register/login.dart';
-import 'package:projectbesquare/register/signup.dart';
+import 'package:projectbesquare/firebase/login.dart';
+import 'package:projectbesquare/firebase/signup.dart';
 
 class OnboardingPage extends StatelessWidget {
   OnboardingPage({Key? key, required TextEditingController emailController})

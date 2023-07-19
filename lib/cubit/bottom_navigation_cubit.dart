@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-import 'package:projectbesquare/views/home.dart';
-import 'package:projectbesquare/views/market.dart';
-import 'package:projectbesquare/views/news.dart';
-import 'package:projectbesquare/views/profile.dart';
-import 'package:projectbesquare/views/watchlist.dart';
+import 'package:projectbesquare/pages/home.dart';
+import 'package:projectbesquare/pages/market.dart';
+import 'package:projectbesquare/pages/news.dart';
+import 'package:projectbesquare/pages/profile.dart';
+import 'package:projectbesquare/pages/watchlist.dart';
 
 class BottomNavigationBarCubit extends Cubit<int> {
   BottomNavigationBarCubit(int initialIndex) : super(initialIndex);

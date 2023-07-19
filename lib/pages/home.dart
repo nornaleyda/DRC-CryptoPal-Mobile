@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:projectbesquare/api/market_api.dart';
-import 'package:projectbesquare/body/market_body.dart';
-import 'package:projectbesquare/cubit/bottom_navigation_cubit.dart.dart';
+import 'package:projectbesquare/pages/market_body.dart';
+import 'package:projectbesquare/cubit/bottom_navigation_cubit.dart';
 import 'package:projectbesquare/model/market_model.dart';
-import 'package:projectbesquare/widget/bottom_navigation.dart';
-import 'package:projectbesquare/widget/home_card.dart';
-import 'package:projectbesquare/widget/loading_bar.dart';
+import 'package:projectbesquare/component/bottom_navigation.dart';
+import 'package:projectbesquare/component/home_card.dart';
+import 'package:projectbesquare/component/loading_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
